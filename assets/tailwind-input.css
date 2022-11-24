@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+   * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: always;
+  }
+}
+
+@layer utilities {
+
+}
+
+@layer components {
+  .button {
+
+  }
+
+  .button:disabled,
+  .button[aria-disabled='true'],
+  .button.disabled {
+    cursor: not-allowed;
+  }
+
+
+
+  .text-link {
+    @apply focus-visible:ring-0 cursor-pointer decoration-2 duration-200 hover:custom-underline focus-visible:underline;
+  }
+}
+
+/*Typography*/
+
+@layer base {
+
+  a, button, input, textarea, select {
+    @apply focus-visible:ring
+  }
+
+  body {
+  }
+
+
+  a:focus-visible,  button:focus-visible,  input:focus-visible,  textarea:focus-visible,  select:focus-visible {
+    @apply ring-black;
+  }
+
+  .shopify-challenge__container {
+    @apply flex flex-col items-center justify-center space-y-4;
+  }
+  .shopify-challenge__container input[type=submit] {
+    @apply button flex mt-8 cursor-pointer;
+  }
+  .shopify-payment-button__button {
+    @apply button w-full;
+  }
+
+  /* Policy Pages */
+  .page__container,
+  .shopify-policy__container {
+    @apply px-5 py-10 md:pt-14 md:px-5 md:pb-20;
+    max-width: unset !important;
+  }
+
+  .shopify-policy__title,
+  .page__title {
+  }
+
+  .shopify-policy__title h1,
+  .page__title h1 {
+    @apply text-center;
+  }
+
+  .shopify-policy__body,
+  .page__body {
+    @apply mt-10;
+  }
+
+  .shopify-policy__body strong,
+  .page__body strong{
+  }
+
+  .shopify-policy__body a,
+  .page__body a {
+    @apply underline hover:no-underline;
+  }
+
+  .shopify-policy__body p, .shopify-policy__body ol, .shopify-policy__body table,
+  .page__body p, .page__body ol, .page__body table {
+    margin: 1.25em 0;
+  }
+
+  .shopify-policy__body h1,
+  .page__body h1 {
+  }
+
+  .shopify-policy__body h2,
+  .page__body h2 {
+    margin-top: 2em;
+  }
+
+  .shopify-policy__body h3,
+  .page__body h3 {
+    margin-top: 1.5em;
+  }
+
+  .shopify-policy__body h4,
+  .page__body h4 {
+    margin-top: 1.25em;
+  }
+
+
+  .shopify-policy__body h5,
+  .page__body h5 {
+    margin-top: 1.25em;
+  }
+
+
+  .shopify-policy__body h6,
+  .page__body h6 {
+    margin-top: 1.25em;
+  }
+
+  .shopify-policy__body ul,
+  .page__body ul {
+    margin: .5em 0;
+    margin-left: 1em;
+    list-style: disc outside;
+  }
+  .shopify-policy__body li,
+  .page__body li {
+    margin-top: .5em;
+  }
+
+
+  .shopify-policy__body blockquote,
+  .page__body blockquote {
+    margin: .5em 2rem;
+  }
+
+  .shopify-policy__body th:not(:first-child), .shopify-policy__body td:not(:first-child),
+  .page__body th:not(:first-child), .page__body td:not(:first-child)  {
+      padding-left: 1em;
+  }
+
+  .shopify-policy__body p + p,
+  .page__body p + p {
+    margin-top: 0.625em;
+  }
+
+  .shopify-policy__title, .shopify-policy__body,
+  .page__title, .page__body {
+    max-width: 500px;
+    @apply mx-auto;
+  }
+
+  .shopify-policy__body strong, .shopify-policy__body b,
+  .page__body strong, .page__body b {
+
+  }
+}

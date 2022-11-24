@@ -1,0 +1,16 @@
+<script>
+  (function() {
+    if (!window.loadedScripts) { window.loadedScripts = [];
+     }
+    if (window.loadedScripts.indexOf('{{ asset }}') > -1) { return;
+     }
+    var h = document.querySelector('head') || document.body;
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    {%- if onload -%}s.onload = {{ onload }};{%- endif -%}
+    s.src = "{{ asset | asset_url | escape }}";
+    h.appendChild(s);
+  })();
+  window.loadedScripts.push('{{ asset }}')
+</script>

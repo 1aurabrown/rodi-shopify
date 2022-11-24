@@ -1,0 +1,180 @@
+{% comment %}css-purge shopify-policy__container shopify-policy__title shopify-policy__body{% endcomment %}
+
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta name="facebook-domain-verification" content="oudula8zp9b42wrm0z6ibj7dc194go" />
+
+    {% if settings.gtm_id %}
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.gtm_id }}"></script>
+
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ settings.gtm_id }}');
+      </script>
+    {% endif %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% render 'preload-assets' %}
+    {{ 'tailwind-output.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'alpine@3.10.3.min.js' | asset_url }}" defer="defer"></script>
+    {{ content_for_header }}
+
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    if (Shopify.designMode) {
+      document.documentElement.classList.add('shopify-design-mode');
+    }
+    </script>
+  </head>
+
+  <body x-data="function() { return { previousWidth: window.innerWidth } }" @resize.window.debounce="if ( (previousWidth < 768 && window.innerWidth >= 768) || (previousWidth >= 768 && window.innerWidth < 768) && $store.tab.current != 'cart' ) $store.tab.close(); previousWidth = window.innerWidth" class="template-{{ template.name }}{% if template.suffix != blank %} template-{{ template.name }}--{{template.suffix }}{% endif %}" :class="{ scrolled: $store.scrolled }">
+
+    <!-- Backdrop-->
+     <div x-cloak
+      x-show="$store.tab.current"
+      class="z-20 fixed inset-0 w-full h-full bg-black/[.35] opacity-1"
+      x-transition:enter="transition-bg ease-in duration-200"
+      x-transition:enter-start="bg-black/0"
+      x-transition:enter-end="bg-black/[.35]"
+      x-transition:leave="transition-bg ease-out duration-200"
+      x-transition:leave-start="bg-black/[.35]"
+      x-transition:leave-end="bg-black/0"
+      @click="$store.tab.close()"></div>
+
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ "accessibility.skip_to_text" | t }}
+    </a>
+    {% section 'announcement-bar' %}
+    <div class="header-wrapper sticky top-0 z-30">
+      {% section 'header' %}
+      {% render 'cart-drawer' %}
+    </div>
+    <main id="MainContent" class="content-for-layout focus-none w-full overflow-hidden" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+        cartItemString: `{{ 'sections.header.cart_count' | t }}`
+      }
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+      }
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+      }
+    </script>
+
+    <script>
+
+      document.addEventListener('alpine:init', () => {
+       Alpine.data('klaviyo', (options = {}) => ({
+          email: '',
+          error: false, // Boolean - is there an error
+          errors: [], // Array of strings describing errors
+          source: options.source || 'web',
+          listId: options.listId || '',
+          success: false,
+          inFlight: false,
+          submitForm() {
+            this.error = false;
+            this.errors = []
+            this.success = false;
+            this.inFlight = true;
+            window.klaviyoSubscribe(this.listId, this.email, {"$fields": "$source", "$source": this.source })
+              .then(response => {
+                this.inFlight = false;
+                if (response.errors.length >= 1) {
+                  this.error = true;
+                  this.errors = response.errors
+                } else if (response.success) {
+                  this.success = true;
+                  var _learnq = window._learnq || [];
+                  _learnq.push(['identify', {
+                    '$email': this.email
+                  }]);
+                }
+              })
+              .catch(response => {
+                this.error = true
+              })
+          }
+        }))
+        Alpine.store('tab', {
+          current: null,
+          toggle(tab) {
+            tab == this.current ? this.close() : this.open(tab);
+          },
+          close() {
+            this.current = null;
+            releaseScroll()
+          },
+          open(tab) {
+            this.current = tab;
+            freezeScroll()
+          }
+        })
+
+        Alpine.store('scrolled', false)
+      })
+    </script>
+
+
+</body>
+</html>

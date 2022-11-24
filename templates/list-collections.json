@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-list-collections-banner",
+      "settings": {
+        "heading": "3 flavors, endless possibilities.",
+        "text": "Our chickpea protein crunch is the best way to upgrade all your favorite foods."
+      }
+    },
+    "main": {
+      "type": "main-list-collections",
+      "blocks": {
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "single-products"
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundle-products"
+          }
+        }
+      },
+      "block_order": [
+        "collection-1",
+        "collection-2"
+      ]
+    }
+  },
+  "order": [
+    "banner",
+    "main"
+  ]
+}

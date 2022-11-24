@@ -1,0 +1,37 @@
+{{ 'base.css' | asset_url | preload_tag: as: 'style' }}
+{{ 'tailwind-output.css' | asset_url | preload_tag: as: 'style' }}
+{{ "HW Left Bold.woff2" | asset_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+{{ "HW Left Medium.woff2" | asset_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+{{ "PTF-NORDIC-Rnd.woff" | asset_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
+
+<link rel="preconnect" href="https://pay.shopify.com">
+<link rel="preconnect" href="https://cdn.shopify.com">
+<link rel="dns-prefetch" href="https://klaviyo.com"> 
+
+<style>
+@font-face {
+  font-family: 'HW Left';
+  font-display:swap;
+  src: url('{{ "HW Left Bold.woff2" | asset_url }}')  format('woff2'),
+       url('{{ "HW Left Bold.woff" | asset_url }}') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HW Left';
+  font-display:swap;
+  src: url('{{ "HW Left Medium.woff2" | asset_url }}')  format('woff2'),
+       url('{{ "HW Left Medium.woff" | asset_url }}') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PTF Nordic Round';
+  font-display:swap;
+  src: url('{{ "PTF-NORDIC-Rnd.woff" | asset_url }}') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+</style>

@@ -1,0 +1,82 @@
+{% style %}
+.pdp-slider__inner {
+
+}
+.pdp-slider__inner .pdp-image {
+  filter: drop-shadow(0 0 20px rgba(0,0,0,.2));
+}
+
+{% endstyle %}
+
+{% render 'dynamic-script-tag', asset: 'embla-carousel.js', onload: "function() { document.dispatchEvent(new Event('emblaLoaded')); }" %}
+
+<pdp-slider id="MediaGallery-{{ section.id }}" role="region" aria-label="{{ 'products.product.media.gallery_viewer' | t }}" class="pdp-slider block overflow-hidden h-full block">
+  <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+  <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
+    {{ "accessibility.skip_to_product_info" | t }}
+  </a>
+  <div class="pdp-slider__inner h-full relative">
+    <div {% if product.media.size > 1 %} data-slider {% endif %} class="w-full h-full" loop="true" align="center" id="GalleryViewer-{{ section.id }}">
+      <ul class="h-full flex embla__container" role="list">
+        {%- for media in product.media -%}
+          <li id="Slide-{{ section.id }}-{{ media.id }}"
+            data-media-position="{{ forloop.index0 }}"
+            class="min-w-full h-full embla__slide">
+            <div class="relative mx-auto w-full h-full">
+              <div class="absolute inset-0 w-full h-full pdp-image">
+                {%- capture sizes -%}
+                  {{ 77 | times: media.aspect_ratio | ceil }}vw, (min-width: 768px) {{ 80 | times: media.aspect_ratio | ceil }}vh, (min-width: 1280px) 460px
+                {%- endcapture -%}
+                {% liquid 
+                  if media.alt contains 'recipe'
+                    assign image_class = 'w-full h-full object-cover'
+                  else
+                    assign image_class = 'w-full h-full object-contain'
+                  endif
+                %}
+                {% render 'image', image: media,
+                  class: image_class,
+                  preload: true,
+                  sizes: sizes
+                %}
+
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    {% if product.media.size > 1 %}
+      <div class="absolute top-1/2 -translate-y-1/2 left-5 lg:left-14" loop="true" align="center" id="GalleryThumbnails-{{ section.id }}">
+
+        <ul id="Slider-Thumbnails-{{ section.id }}" class="flex flex-col embla__container items-center justify-center space-y-4">
+
+          {%- for media in product.media -%}
+             <li id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index0 }}"  data-target="{{ section.id }}-{{ media.id }}" data-media-position="{{ forloop.index0 }}">
+              <button
+                class="w-16 h-16 rounded-full flex items-center justify-center border-6 border-white/75 overflow-hidden"
+                aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: forloop.index0 }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: forloop.index0 }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: forloop.index0 }}{%- endif -%}"
+                {% if forloop.index0 == 1 %} aria-current="true"{% endif %}
+                aria-controls="GalleryViewer-{{ section.id }}"
+                aria-describedby="Thumbnail-{{ section.id }}-{{ forloop.index0 }}"
+                data-index={{ forloop.index0 }}
+              >
+
+                {{ media.preview_image | image_url: width: 192 | image_tag:
+                  width: 64,
+                  height: 64,
+                  class: 'object-contain w-full h-full',
+                  widths: '64, 128, 192',
+                  sizes: "64px",
+                  id: id
+                }}
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%
+    endif %}
+  </div>
+</pdp-slider>

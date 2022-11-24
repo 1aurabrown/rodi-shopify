@@ -1,0 +1,34 @@
+{{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+
+<div class="bg-pink-svg">
+  <ul role="list">
+    {%- for block in section.blocks -%}
+      {%- assign collection = block.settings.collection -%}
+      {%- if collection != blank -%}
+        <li>
+          {% render 'collection-grid', collection: block.settings.collection %}
+        </li>
+      {%- endif %}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-list-collections.name",
+  "class": "section",
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "label": "Collection",
+          "id": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,254 @@
+{% comment %}css-purge shopify-payment-button__button{% endcomment %}
+{% liquid 
+  if product.tags contains 'set'
+    assign is_set = true
+  else
+    assign is_set = false
+  endif
+%}
+
+<section id="MainProduct-{{ section.id }}" class="section-main-product section-{{ section.id }}" data-section="{{ section.id }}">
+  {{ 'component-quantity.css' | asset_url | stylesheet_tag }}
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rte.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+
+  {%- if product.media.size > 1 -%}
+    <script src="{{ 'component-pdp-slider.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+  <div class="section-main-product__inner md:grid md:grid-cols-2 md:min-h-[50vw]">
+    <div class="product__media-wrapper bg-light-blue" style="background-color: {{ product.metafields.colors.primary }};">
+      {% render 'pdp-slider' %}
+    </div>
+    <div class="flex flex-col items-center justify-center px-5 py-10 md:px-14 {% if is_set %} bg-gold {% else %} bg-lavender {% endif %}">
+      <div id="ProductInfo-{{ section.id }}" class="product__info-container w-full max-w-[24rem] mx-auto">
+        {% comment %} {%- assign product_form_id = 'product-form-' | append: section.id -%} {% endcomment %}
+
+        {% assign product_form_id = 'add-to-cart-' | append: product.handle | append: '-' | append: collection.handle | append: '-' | append: section.id %}
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+          {%- when 'title' -%}
+            <div class="product__title my-4" {{ block.shopify_attributes }}>
+              <h1 class="h5 lg:h4">
+                {{ product.title | escape }} <span class="h5-b lg:h4-b">{{ product.metafields.descriptors.subtitle | escape }}</span>
+              <h1>
+            </div>
+          {%- when 'price' -%}
+            <div class="no-js-hidden h5 my-4" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price', product: product, use_variant: true -%}
+            </div>
+            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+              <div class="product__tax caption rte">
+                {%- if shop.taxes_included -%}
+                  {{ 'products.product.include_taxes' | t }}
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            <div {{ block.shopify_attributes }} class="my-4">
+              {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+              {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                {{ form | payment_terms }}
+              {%- endform -%}
+            </div>
+          {%- when 'description' -%}
+            <div>{{ product.description }}</div>
+          {%- when 'custom_liquid' -%}
+            {{ block.settings.custom_liquid }}
+          {%- when 'quantity_selector' -%}
+            <div class="product-form__input product-form__quantity my-4" {{ block.shopify_attributes }}>
+              <quantity-input class="quantity bg-white rounded-full p-1 w-full text-body-xl">
+                <button class="quantity__button no-js-hidden button flex-0 p-0 w-8 h-8" name="minus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                  {% render 'icon-minus' %}
+                </button>
+
+                <input class="quantity__input flex-1 h5"
+                  type="number"
+                  name="quantity"
+                  aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
+                  id="Quantity-{{ section.id }}"
+                  min="1"
+                  value="1"
+                  form="{{ product_form_id }}"
+                >
+
+                <button class="quantity__button no-js-hidden button flex-0 p-0 w-8 h-8" name="plus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                  {% render 'icon-plus' %}
+                </button>
+              </quantity-input>
+            </div>
+
+          {%- when 'buy_buttons' -%}
+            {%- liquid
+              assign target = product.selected_or_first_available_variant
+              assign price = target.price | default: 1999
+              assign money_price = price | money
+              if settings.currency_code_enabled
+                assign money_price = price | money_with_currency
+              endif
+
+              if target == product and product.price_varies
+                assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+              endif
+            -%}
+
+            <div {{ block.shopify_attributes }}>
+              <product-form class="product-form">
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                    <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                    <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                    <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                    <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                  </svg>
+                  <span class="product-form__error-message"></span>
+                </div>
+
+                {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+                  <div class="product-form__buttons space-y-3 ">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="js-go-cart-add-to-cart product-form__submit button button--on-lavender w-full {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                      {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                    >
+
+                        {%- if product.selected_or_first_available_variant.available -%}
+                          {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+
+                    </button>
+                    {%- if block.settings.show_dynamic_checkout -%}
+                      {{ form | payment_button }}
+                    {%- endif -%}
+                  </div>
+                {%- endform -%}
+              </product-form>
+            </div>
+          {%- endcase -%}
+        {%- endfor -%}
+
+      </div>
+    </div>
+  </div>
+
+
+  {%- liquid
+    if product.selected_or_first_available_variant.featured_media
+      assign seo_media = product.selected_or_first_available_variant.featured_media
+    else
+      assign seo_media = product.featured_media
+    endif
+  -%}
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      {% if seo_media -%}
+        "image": [
+          {{ seo_media | image_url: width: seo_media.preview_image.width | prepend: "https:" | json }}
+        ],
+      {%- endif %}
+      "description": {{ product.description | strip_html | json }},
+      {% if product.selected_or_first_available_variant.sku != blank -%}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      {%- if product.metafields.reviews.rating.value != blank -%}
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "{{ product.metafields.reviews.rating.value | json }}",
+          "reviewCount": "{{ product.metafields.reviews.rating_count.value | json }}|"
+        },
+      {%- endif -%}
+      "brand": {
+        "@type": "Brand",
+        "name": {{ product.vendor | json }}
+      },
+      "offers": [
+        {%- for variant in product.variants -%}
+          {
+            "@type" : "Offer",
+            {%- if variant.sku != blank -%}
+              "sku": {{ variant.sku | json }},
+            {%- endif -%}
+            "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "price" : {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency" : {{ cart.currency.iso_code | json }},
+            "url" : {{ request.origin | append: variant.url | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+      "type": "quantity_selector",
+      "name": "t:sections.main-product.blocks.quantity_selector.name",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "t:sections.main-product.blocks.description.name",
+      "limit": 1
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Note when uploading product images: recipe images should be assigned an alt tag 'recipe', rice pile images should be assigned an alt tag 'pile' in order to identify them in the code and display them a little differently from packaging shots. The description comes directly from the product's description. Nutritional Info (single products), Ingredients, and Bundle Contents (bundle products) come from product metafields."
+    }
+  ]
+}
+{% endschema %}

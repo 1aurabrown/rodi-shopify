@@ -1,0 +1,153 @@
+{% assign svg_string = '<p class="relative mt-2"><svg class="absolute right-full -translate-x-3 top-0" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M15.6075 15.3167C15.5614 15.4551 15.5153 15.5935 15.4692 15.6857C14.2243 20.1147 9.79824 21.0835 6.47869 18.8229C5.74101 18.3154 5.04944 17.6234 4.49618 16.8852C3.29745 15.2244 2.19093 13.4713 1.03831 11.7643C0.0240002 10.2419 -0.298735 8.53489 0.300629 6.78178C0.853888 5.12093 1.08441 3.41396 0.946098 1.66084C0.853889 0.461345 1.31494 0 2.55977 0C5.46438 0.0922691 8.4151 0.138404 11.2736 0.461346C15.9302 1.01496 18.2354 3.22942 19.342 7.7506C19.6647 9.13464 19.803 10.5648 19.9874 11.995C20.0335 12.3641 19.9413 12.7793 19.8952 13.1483C19.6186 14.9937 17.59 16.5162 15.6075 15.3167ZM10.2593 3.55236C10.7664 4.10597 11.0892 4.52119 11.458 4.89026C12.2879 5.62842 12.9795 6.45884 13.3022 7.51993C13.625 8.67329 13.9016 9.78052 14.1782 10.9339C14.2704 11.3952 14.4087 11.7643 14.962 11.7182C15.4692 11.672 15.6075 11.2568 15.5614 10.7955C15.5614 10.6571 15.5153 10.5187 15.5153 10.3803C14.9159 7.4738 13.2561 5.30547 10.8126 3.69076C10.6281 3.64463 10.5359 3.64463 10.2593 3.55236Z" fill="currentColor"/></svg>' %}
+
+<div class="bg-blue text-white">
+  <div class="pb-10 pt-14 px-5 md:px-14 md:py-23 mx-auto max-w-screen-2xl collapsible-content collapsible-none-layout isolate md:flex flex-row items-center">
+
+        <div class="md:pr-11 md:w-1/2">
+          <div class="w-full pb-[100%] relative">
+              {% render 'image', image: section.settings.image,
+                class: 'bg-pink object-cover w-full h-full absolute inset-0',
+                width: 200,
+                sizes: '100vw, (min-width: 768px) 50vw',
+              %}
+          </div>
+        </div>
+
+        <div class="md:w-1/2 md:pl-6 mt-8 md:mt-0 text-lime">
+          <div style="text-align: center;">
+            {%- if section.settings.heading != blank -%}
+              <h2 class="h4 lg:h3 xl:h2 mx-auto max-w-lg heading-custom-bold">{{ section.settings.heading }}</h2>
+            {%- else -%}
+              <h2 class="visually-hidden">{{ 'accessibility.collapsible_content_title' | t }}</h2>
+            {% endif %}
+          </div>
+
+          {% capture initial_tab %}
+          {% if section.settings.open_first_collapsible_row %} 1 {% else %} 0 {% endif %}
+          {% endcapture %}
+          <div class="mx-auto max-w-lg space-y-5 mt-8 md:mt-6" x-data="{
+              currentTab: {{ initial_tab }}
+            }">
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>
+                <div x-init="$nextTick(() => {contentHeight = $refs.content.scrollHeight + 'px'})" @resize.window.debounce="$nextTick(() => {contentHeight = $refs.content.scrollHeight + 'px'})"
+                  x-data="{
+                    index: {{ forloop.index }},
+                    contentHeight: 'auto',
+                    get isOpen(){
+                      return this.index == this.currentTab
+                    },
+                    toggle() {
+                      this.currentTab == this.index ? this.currentTab = 0 : this.currentTab = this.index
+                    }
+                  }"
+                  class="bg-green transition-color duration-200 ease-linear rounded-[2rem] text-center"
+                  :class="{'bg-green' : !isOpen, 'bg-lime text-green': isOpen}">
+
+                  <button class="hover:bg-lime hover:text-green rounded-[2rem] px-20 duration-200 ease-linear transition-all w-full h-17 cursor-pointer relative" :class="{ 'focus-visible:ring-green' : isOpen, 'focus-visible:ring-lime' : !isOpen }" @click="toggle(index)">
+                    <h3 class="body-md-b lg:body-lg-b">
+                      {{ block.settings.heading }}
+                    </h3>
+                    <div class="absolute top-[9px] left-[9px] w-[50px] h-[50px] transition-all duration-200 ease-linear" :class="isOpen ? 'rotate-0' : 'rotate-180'">
+                      {% render 'icon-arrow-round-transparent' %}
+                    </div>
+                  </button>
+
+
+                  <div x-cloak x-bind:style='`height: ${isOpen ? contentHeight : "0px"}`' class="duration-200 ease-linear transition-all overflow-hidden relative body-md-b lg:body-lg text-left max-w-[30ch] px-12  mx-auto" role="region" aria-labelledby="Summary-{{ block.id }}-{{ section.id }}">
+
+                    {% liquid
+                      assign block_content = block.settings.row_content | split: '<p>' | join: svg_string
+                    %}
+                    <div x-ref="content" class="collapsible-content__content pt-1 pb-6">{{ block_content }}</div>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <div class="text-center block mx-auto"><a title="{{ section.settings.button_label }}" class="button" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.collapsible_content.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:sections.collapsible_content.settings.heading.label",
+      "default": "<p>Collapsible content</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_collapsible_row",
+      "default": false,
+      "label": "Open first collabsible row"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Button label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collapsible_row",
+      "name": "Collabsible Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Collapsible row",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "row_content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.collapsible_content.presets.name",
+      "blocks": [
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

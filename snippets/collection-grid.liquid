@@ -1,0 +1,19 @@
+{% style %}
+  .template-collection .collection-grid {
+    min-height: var(--screen-less-header);
+  }
+{% endstyle %}
+
+{% liquid
+  assign title = title | default: collection.title
+  assign products = products | default: collection.products
+%}
+
+<div class="collection-grid">
+  <h3 class="py-7 px-5 md:pt-10 md:pb-9 md:px-14 body-lg-b md:h4">{{ title }}</h3>
+  <ul class="grid grid-cols-2 md:grid-cols-4">
+    {% for product in products %}
+      {%- render 'product-card', product: product, el: 'li' -%}
+    {% endfor %}
+  </ul>
+</div>
