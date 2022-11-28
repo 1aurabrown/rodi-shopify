@@ -2,26 +2,28 @@
 
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 
-<footer class="section-footer footer">
+<footer class="">
 
-  <div class="">
+  <!-- Top -->
+
+  <div class="md:pt-17 md:pb-14 bg-black/10">
 
     <!-- Newsletter -->
     {%- if section.settings.newsletter_enable and section.settings.newsletter_list_id -%}
-      <div class="">
+      <div class="flex flex-col items-center justify-center">
         {%- if section.settings.newsletter_heading != blank -%}
           <h2 class="">{{ section.settings.newsletter_heading | escape }}</h2>
         {%- endif -%}
 
-        <div id="footer-klaviyo" class="relative"
+        <div id="footer-klaviyo" class="relative mt-8"
           x-data='klaviyo({ listId: {{ section.settings.newsletter_list_id | json }}, source: "footer" })'>
 
-          <form @submit.prevent="submitForm" class="">
+          <form @submit.prevent="submitForm" class="relative">
             <input
               type="email"
               name="email"
               x-model="email"
-              class=""
+              class="border-b border-black py-1 pr-8 focus-visible:border-b-2 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-black bg-transparent"
               aria-required="true"
               autocorrect="off"
               autocapitalize="off"
@@ -32,7 +34,7 @@
               placeholder="{{ section.settings.newsletter_placeholder }}"
               required>
 
-            <button :disabled='inFlight' type="submit" class="animate-arrow"aria-label="{{ 'newsletter.button_label' | t }}">
+            <button :disabled='inFlight' type="submit" class="animate-arrow absolute right-0 top-1/2 -translate-y-1/2" aria-label="{{ 'newsletter.button_label' | t }}">
               {% render 'icon-arrow' %}
             </button>
 
@@ -57,102 +59,97 @@
       </div>
     {%- endif -%}
 
-    <!-- Blocks -->
-    <div class="">
-      {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
 
-          {%- if block.settings.menu != blank -%}
-            <ul class="" {{ block.shopify_attributes }}>
-              {%- for link in block.settings.menu.links -%}
-                <li>
-                  <a href="{{ link.url }}" class="text-link">
-                    {{ link.title }}
-                  </a>
-                </li>
-              {%- endfor -%}
-            </ul>
-          {%- endif -%}
+    <!-- Social -->
+    {%- if section.settings.show_social -%}
+      <ul class="space-x-3 ">
+        {%- if settings.social_pinterest_link != blank -%}
+          <li>
+            <a href="{{ settings.social_pinterest_link }}" class="text-link" >
+              {{ 'general.social.links.pinterest' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}
+          <li>
+            <a href="{{ settings.social_instagram_link }}" class="text-link" >
+              {{ 'general.social.links.instagram' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}
+          <li>
+            <a href="{{ settings.social_tiktok_link }}" class="text-link" >
+              {{ 'general.social.links.tiktok' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}
+          <li>
+            <a href="{{ settings.social_facebook_link }}" class="text-link" >
+              {{ 'general.social.links.facebook' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_twitter_link != blank -%}
+          <li>
+            <a href="{{ settings.social_twitter_link }}" class="text-link" >
+              {{ 'general.social.links.twitter' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_tumblr_link != blank -%}
+          <li>
+            <a href="{{ settings.social_tumblr_link }}" class="text-link" >
+              {{ 'general.social.links.tumblr' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_snapchat_link != blank -%}
+          <li>
+            <a href="{{ settings.social_snapchat_link }}" class="text-link" >
+              {{ 'general.social.links.snapchat' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}
+          <li>
+            <a href="{{ settings.social_youtube_link }}" class="text-link" >
+              {{ 'general.social.links.youtube' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if settings.social_vimeo_link != blank -%}
+          <li>
+            <a href="{{ settings.social_vimeo_link }}" class="text-link" >
+              {{ 'general.social.links.vimeo' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
 
+  </div>
+
+  <!-- Bottom -->
+  <div class="flex justify-between md:p-5">
+
+    {%- if section.settings.menu != blank -%}
+      <ul class="space-x-3 list-none">
+        {%- for link in section.settings.menu.links -%}
+          <li class="inline-block">
+            <a href="{{ link.url }}" class="text-link">
+              {{ link.title }}
+            </a>
+          </li>
         {%- endfor -%}
-      {%- endif -%}
+      </ul>
+    {%- endif -%}
 
-      <!-- Social -->
-      {%- if section.settings.show_social -%}
-        <ul class="md:flex-1 space-y-3 " {{ block.shopify_attributes }}>
-          {%- if settings.social_pinterest_link != blank -%}
-            <li>
-              <a href="{{ settings.social_pinterest_link }}" class="text-link" >
-                {{ 'general.social.links.pinterest' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_instagram_link != blank -%}
-            <li>
-              <a href="{{ settings.social_instagram_link }}" class="text-link" >
-                {{ 'general.social.links.instagram' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_tiktok_link != blank -%}
-            <li>
-              <a href="{{ settings.social_tiktok_link }}" class="text-link" >
-                {{ 'general.social.links.tiktok' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_facebook_link != blank -%}
-            <li>
-              <a href="{{ settings.social_facebook_link }}" class="text-link" >
-                {{ 'general.social.links.facebook' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_twitter_link != blank -%}
-            <li>
-              <a href="{{ settings.social_twitter_link }}" class="text-link" >
-                {{ 'general.social.links.twitter' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_tumblr_link != blank -%}
-            <li>
-              <a href="{{ settings.social_tumblr_link }}" class="text-link" >
-                {{ 'general.social.links.tumblr' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_snapchat_link != blank -%}
-            <li>
-              <a href="{{ settings.social_snapchat_link }}" class="text-link" >
-                {{ 'general.social.links.snapchat' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_youtube_link != blank -%}
-            <li>
-              <a href="{{ settings.social_youtube_link }}" class="text-link" >
-                {{ 'general.social.links.youtube' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-          {%- if settings.social_vimeo_link != blank -%}
-            <li>
-              <a href="{{ settings.social_vimeo_link }}" class="text-link" >
-                {{ 'general.social.links.vimeo' | t }}
-              </a>
-            </li>
-          {%- endif -%}
-        </ul>
-      {%- endif -%}
+    <div>Copyright {{ 'now' | date: "%Y" }}&nbsp;<a href={{ routes.root_url }} class="text-link">{{ shop.name }}</a></div>
 
-    </div>
   </div>
 
-
-  <div class="">
-    Copyright {{ 'now' | date: "%Y" }}&nbsp;<a href={{ routes.root_url }} class="text-link">{{ shop.name }}</a>
-  </div>
 </footer>
 
 {% comment %}theme-check-enable UndefinedObject{% endcomment %}
@@ -161,22 +158,6 @@
 {% schema %}
 {
   "name": "t:sections.footer.name",
-  "max_blocks": 3,
-  "blocks": [
-    {
-      "type": "link_list",
-      "name": "t:sections.footer.blocks.link_list.name",
-      "settings": [
-        {
-          "type": "link_list",
-          "id": "menu",
-          "default": "footer",
-          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
-          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
-        }
-      ]
-    }
-  ],
   "settings": [
     {
       "type": "header",
@@ -198,13 +179,13 @@
     {
       "type": "text",
       "id": "newsletter_heading",
-      "default": "Emails that make you hungry",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "label": "t:sections.footer.settings.newsletter_heading.label"
     },
     {
       "type": "textarea",
       "id": "newsletter_success",
-      "default": "Welcome to our kitchen.",
+      "default": "Lorem ipsum dolor sit amet.",
       "label": "Newsletter Success Message"
     },
     {
@@ -216,7 +197,6 @@
     {
       "type": "text",
       "id": "newsletter_list_id",
-      "default": "UrhHdA",
       "label": "Klaviyo List ID"
     },
     {
@@ -227,16 +207,15 @@
     {
       "type": "checkbox",
       "id": "show_social",
-      "default": false,
+      "default": true,
       "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "Menu"
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

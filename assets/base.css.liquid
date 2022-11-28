@@ -43,50 +43,11 @@ body {
   grid-template-columns: 100%;
   min-height: 100%;
   margin: 0;
-  font-size: 1rem;
 }
 
-.bg-lavender-svg {
-  background-image: url({{ 'bg-lavender.svg' | asset_url }});
-}
-
-.bg-pink-svg {
-  background-image: url({{ 'bg-pink.svg' | asset_url }});
-}
-
-.bg-violet-svg {
-  background-image: url({{ 'bg-violet.svg' | asset_url }});
-}
-
-.bg-red-svg {
-  background-image: url({{ 'bg-red.svg' | asset_url }});
-}
 
 .shopify-challenge__container {
   min-height: calc(100vh - var(--header-height) - var(--announcement-bar-height));
-}
-
-.rte-width {
-  max-width: 82rem;
-  margin: 0 auto 2rem;
-}
-
-.list-unstyled {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.visually-hidden {
-  position: absolute !important;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  word-wrap: normal !important;
 }
 
 .skip-to-content-link:focus {
@@ -181,22 +142,7 @@ details > * {
   --duration-long: 500ms;
 }
 
-.underlined-link,
-.customer a {
-  text-underline-offset: 0.2rem;
-  text-decoration-thickness: 0.1rem;
-  transition: text-decoration-thickness ease 100ms, color ease 100ms;
-}
-
-.underlined-link:hover,
-.customer a:hover,
-.underlined-link:focus-visible,
-.customer a:focus-visible {
-  text-decoration-thickness: 0.2rem;
-}
-
 .icon-arrow {
-  width: 2.25rem;
   display: inline-block;
 }
 
@@ -258,74 +204,6 @@ summary::-webkit-details-marker {
     z-index: 4;
   }
 
-}
-
-/* base-focus */
-/*
-  Focus ring - default (with offset)
-*/
-
-*:focus {
-  outline: 0;
-  box-shadow: none;
-}
-
-*:focus-visible {
-  outline-offset: 0.3rem;
-}
-
-/* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
-.focused,
-.no-js *:focus {
-  outline-offset: 0.3rem;
-}
-
-/* Negate the fallback side-effect for browsers that support :focus-visible */
-.no-js *:focus:not(:focus-visible) {
-  outline: 0;
-  box-shadow: none;
-}
-
-/*
-  Focus ring - inset
-*/
-
-.focus-inset:focus-visible {
-  outline-offset: -0.2rem;
-}
-
-.focused.focus-inset,
-.no-js .focus-inset:focus {
-  outline-offset: -0.2rem;
-}
-
-.no-js .focus-inset:focus:not(:focus-visible) {
-  outline: 0;
-  box-shadow: none;
-}
-
-/*
-  Focus ring - none
-*/
-
-/* Dangerous for a11y - Use with care */
-.focus-none {
-  box-shadow: none !important;
-  outline: 0 !important;
-}
-
-.focus-offset:focus-visible {
-  outline-offset: 1rem;
-}
-
-.focus-offset.focused,
-.no-js .focus-offset:focus {
-  outline-offset: 1rem;
-}
-
-.no-js .focus-offset:focus:not(:focus-visible) {
-  outline: 0;
-  box-shadow: none;
 }
 
 /* component-media */
@@ -395,123 +273,6 @@ deferred-media {
   display: block;
 }
 
-/* component-form */
-input, textarea, select {
-  text-rendering: geometricPrecision;
-}
-
-.field__input,
-.select__select,
-.customer .field input,
-.customer select {
-  -webkit-appearance: none;
-  appearance: none;
-  font-size: 1.6rem;
-  width: 100%;
-  box-sizing: border-box;
-  height: 4.5rem;
-  position: relative;
-  border: 0;
-}
-
-.field:before,
-.select:before,
-.customer .field:before,
-.customer select:before,
-.localization-form__select:before {
-  pointer-events: none;
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.field:after,
-.select:after,
-.customer .field:after,
-.customer select:after,
-.localization-form__select:after {
-  pointer-events: none;
-  content: '';
-  position: absolute;
-  border: 0.1rem solid transparent;
-  z-index: 1;
-}
-
-
-.field:hover.field:after,
-.select:hover.select:after,
-.select__select:hover.select__select:after,
-.customer .field:hover.field:after,
-.customer select:hover.select:after,
-.localization-form__select:hover.localization-form__select:after {
-  outline: 0;
-}
-
-.field__input:focus-visible,
-.select__select:focus-visible,
-.customer .field input:focus-visible,
-.customer select:focus-visible,
-.localization-form__select:focus-visible.localization-form__select:after {
-  outline: 0;
-}
-
-.field__input:focus,
-.select__select:focus,
-.customer .field input:focus,
-.customer select:focus,
-.localization-form__select:focus.localization-form__select:after {
-  outline: 0;
-}
-
-.localization-form__select:focus {
-  outline: 0;
-  box-shadow: none;
-}
-
-.text-area,
-.select {
-  display: flex;
-  position: relative;
-  width: 100%;
-}
-
-/* Select */
-
-.select .icon-caret,
-.customer select + svg {
-  height: 0.6rem;
-  pointer-events: none;
-  position: absolute;
-  top: calc(50% - 0.2rem);
-}
-
-.select__select,
-.customer select {
-  cursor: pointer;
-  line-height: 1.6;
-  padding: 0 2rem;
-}
-
-/* Text area */
-
-.text-area {
-  min-height: 10rem;
-  resize: none;
-}
-
-input[type='checkbox'] {
-  display: inline-block;
-  width: auto;
-  margin-right: 0.5rem;
-}
-
-.customer .field .form__message svg {
-  align-self: start;
-}
 
 /* component-modal */
 .modal__toggle {
@@ -685,30 +446,3 @@ input[type='checkbox'] {
   border-left: none;
   border-right: none;
 }
-
-
-/* Junip Customizations */
-
-
-.junip-product-review-empty .junip-separator {
-  display: none;
-}
-
-.junip-product-summary-star svg,
-.junip-star svg {
-}
-
-.junip-product-summary-star,
-.junip-star {
-}
-
-.junip-product-summary-star-ratings-container {
-  align-items: stretch;
-}
-
-body .junip-product-review {
-  background-color: #FFE1F1;
-  display: block;
-}
-
-

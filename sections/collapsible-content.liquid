@@ -18,7 +18,7 @@
             {%- if section.settings.heading != blank -%}
               <h2 class="h4 lg:h3 xl:h2 mx-auto max-w-lg heading-custom-bold">{{ section.settings.heading }}</h2>
             {%- else -%}
-              <h2 class="visually-hidden">{{ 'accessibility.collapsible_content_title' | t }}</h2>
+              <h2 class="sr-only">{{ 'accessibility.collapsible_content_title' | t }}</h2>
             {% endif %}
           </div>
 
