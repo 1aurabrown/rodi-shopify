@@ -1,34 +1,25 @@
 <link rel="stylesheet" href="{{ 'section-header.css.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 
-<header class="header h-header p-5 z-20 absolute top-0 w-full left-0 right-0 flex justify-between items-end">
+<header class="header h-header p-5 z-20absolute top-0 w-full left-0 right-0 flex justify-start items-end">
 
   {%- if request.page_type == 'index' -%}
     <h1 class="text-center">
   {%- endif -%}
-      <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="">
-        {% if section.settings.logo %}
-          {% render 'image', image: section.settings.logo,
-            class: 'w-25 md:w-27'
-            sizes: '100px, (min-width: 768px) 148px',
-          %}
-        {% else %}
-          {{ shop.name }}
-        {% endif %}
+      <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="block py-thin">
+        {% render 'logo.svg' %}
       </a>
   {%- if request.page_type == 'index' -%}
     </h1>
   {%- endif -%}
 
-  <div>
-
-
+  <div class="ml-8">
       <nav>
-        <ul class="flex space-x-4 justify-end" role="list">
+        <ul class="flex space-x-7 justify-end" role="list">
           {%- if section.settings.menu != blank -%}
             {%- for link in section.settings.menu.links -%}
               <li>
-                <a title="{{ link.title }}" href="{{ link.url }}" class="text-link custom-uppercase"{% if link.current %} aria-current="page"{% endif %}>
+                <a title="{{ link.title }}" href="{{ link.url }}" class="text-link uppercase"{% if link.current %} aria-current="page"{% endif %}>
                   <span>{{ link.title | escape }}</span>
                 </a>
               </li>
@@ -36,7 +27,7 @@
           {%- endif -%}
           {%- if shop.customer_accounts_enabled -%}
             <li>
-              <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="text-link custom-uppercase{% if section.settings.menu != blank %} hidden md:inline{% endif %}">
+              <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="text-link uppercase{% if section.settings.menu != blank %} hidden md:inline{% endif %}">
               {% render 'icon-account' %}
                 <span class="sr-only">
                   {%- liquid

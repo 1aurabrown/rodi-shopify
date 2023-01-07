@@ -1,48 +1,90 @@
 {% liquid
-  assign alt = alt | default: image.alt | escape
-  assign class = class | default: ''
-  assign class = class | append: ' bg-no-repeat bg-center motion-reduce'
-
-  assign widths = widths | default: '180, 360, 450, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, ' | append: image.width
-  assign fit = fit | default: 'contain'
-  assign placeholder_width =  180
-  assign width = width | default: image.width
-  assign height = height | default: image.height
-
-  if fit == 'contain'
-    assign class = class | append: ' object-contain bg-contain'
-  elsif fit == 'cover'
-    assign class = class | append: ' object-cover bg-cover'
-  endif
-
-  if preload
-    assign loading = 'eager'
+  if product.tags contains 'set'
+    assign is_set = true
   else
-    assign loading = 'lazy'
+    assign is_set = false
   endif
 %}
 
-{% comment %}
-  If image is marked as preload (above the fold) load low-res image placeholder as background image. We don't do this on other images (which will be lazy-loaded) to reduce network requests.
-{% endcomment %}
+{% style %}
 
-{%- if preload -%}
-  {%- capture style -%}
-    background-image: url('{{ image | image_url: width: placeholder_width }}');
-  {%- endcapture -%}
-  {%- assign onload = 'this.style.removeProperty("background-image");' -%}
-{%- endif -%}
+  .section-ingredients-contents__product:hover img {
+    transform: scale(1.1);
+  }
 
-{{ image | image_url: width: image.width | image_tag:
-  loading: loading,
-  preload: preload,
-  id: id,
-  style: style,
-  class: class,
-  sizes: sizes,
-  widths: widths,
-  width: width,
-  height: height,
-  onload: onload,
-  alt: alt
-}}
+  .section-ingredients-contents__ingredient:hover .section-ingredients-contents__ingredient__text p {
+    opacity: 1;
+  }
+
+    .section-ingredients-contents__ingredient:hover img {
+    transform: scale(1.1);
+  }
+{% endstyle %}
+
+<section class="{% if is_set %} bg-lavender-svg {% else %} bg-pink-svg {% endif %}section-ingredients-contents py-14 px-5 md:p-14 lg:p-25 bg-cream text-center">
+  <div class="mx-auto">
+    <h3 class="max-w-sm md:max-w-2xl mx-auto h4 lg:h2">{{ section.settings.heading | newline_to_br }}</h3>
+    <p class="max-w-md lg:max-w-2xl mx-auto body-md lg:body-lg mt-3 md:mt-5">{{ section.settings.text | newline_to_br }}</p>
+  </div>
+
+
+    <ul class="max-w-sm md:max-w-screen-lg mx-auto flex flex-col md:px-0 lg:space-x-8 md:flex-row items-center md:items-start justify-center">
+
+    {% for index in (1..4) %}
+      {% liquid
+        assign image_key = 'image_' | append: index
+        assign title_key = 'title_' | append: index
+        assign text_key = 'text_' | append: index
+        assign image = product.metafields.ingredients[image_key]
+        assign title = product.metafields.ingredients[title_key]
+        assign text = product.metafields.ingredients[text_key]
+      %}
+
+      {% if image and title != blank %}
+        <li class="max-w-[240px] mx-auto md:mx-0 flex-1 section-ingredients-contents__ingredient mt-4 md:mt-10">
+          <div class="px-5 w-full">
+            <div>
+              <div class="relative pb-[100%]">
+                {% if image %}
+                  {% render 'image', image: image.value,
+                    class: 'transition-scale duration-200 scale-100 absolute inset-0 w-full h-full object-contain',
+                    alt: title,
+                    sizes: '200px, (min-width: 768px) 25vw',
+                  %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="section-ingredients-contents__ingredient__text">
+            <h4 class="h5">{{ title }}</h4>
+            {% if text %}<p class="transition-opacity transition-200 md:opacity-0 mt-4">{{ text }}</p>{% endif %}
+          </div>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
+{% schema %}
+  {
+    "name": "Ingredients / Contents",
+    "settings": [
+      {
+        "label": "Heading",
+        "id": "heading",
+        "type": "textarea",
+        "default": "Real Ingredients,\nHappy Belly, Happy Planet. "
+      },
+      {
+        "label": "Text",
+        "id": "text",
+        "type": "textarea",
+        "default": "We use real, responsible ingredients you can pronounce and leave the fancy stuff to our chefs, who blend them into the perfect flavorful crunch."
+      },
+      {
+        "type": "paragraph",
+        "content": "Ingredients (for single products) and bundle contents (for bundles) displayed in this module are set in the product's metafields. The product page will display bundle contents if this metafield is defined for the product, otherwise it will show ingredients."
+      }
+    ]
+  }
+{% endschema %}

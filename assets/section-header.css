@@ -7,7 +7,7 @@
 
 @media screen and (min-width: 750px) {
   :root {
-    --header-height: 110px;
+    --header-height: 90px;
     --announcement-bar-height: 40px; /* Default to prevent empty value before being set with JS */
   }
 

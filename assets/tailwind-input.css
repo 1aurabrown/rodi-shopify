@@ -11,7 +11,9 @@
 }
 
 @layer utilities {
-
+  .uppercase {
+    @apply text-uppercase;
+  }
 }
 
 @layer components {
@@ -31,9 +33,6 @@
     @apply focus-visible:ring-0 cursor-pointer hover:underline focus-visible:underline;
   }
 
-  .custom-uppercase {
-    @apply uppercase text-uppercase;
-  }
 }
 
 /*Typography*/

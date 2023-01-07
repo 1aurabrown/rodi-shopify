@@ -18,12 +18,12 @@
         <div id="footer-klaviyo" class="relative mt-8"
           x-data='klaviyo({ listId: {{ section.settings.newsletter_list_id | json }}, source: "footer" })'>
 
-          <form @submit.prevent="submitForm" class="relative">
+          <form @submit.prevent="submitForm" class="relative w-100 border-b border-black">
             <input
               type="email"
               name="email"
               x-model="email"
-              class="border-b border-black py-1 pr-8 focus-visible:border-b-2 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-black bg-transparent"
+              class="w-full py-1 pr-8 placeholder:text-black bg-transparent"
               aria-required="true"
               autocorrect="off"
               autocapitalize="off"
@@ -135,7 +135,7 @@
   <div class="flex justify-between md:p-5">
 
     {%- if section.settings.menu != blank -%}
-      <ul class="space-x-3 list-none">
+      <ul class="space-x-4 list-none">
         {%- for link in section.settings.menu.links -%}
           <li class="inline-block">
             <a href="{{ link.url }}" class="text-link">
@@ -173,7 +173,7 @@
     {
       "type": "text",
       "id": "newsletter_placeholder",
-      "default": "Your Email, Please",
+      "default": "Your email",
       "label": "Newsletter Placeholder"
     },
     {

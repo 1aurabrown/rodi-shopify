@@ -74,32 +74,17 @@ module.exports = {
     fontSize: {
       paragraph: ["0.8125rem", { lineHeight: "1.6em" }],
       default: ["0.8125rem", { lineHeight: "initial" }],
-      uppercase: ["0.8125rem", { lineHeight: "initial", letterSpacing: "-0.02em" }],
+      uppercase: ["0.8125rem", { lineHeight: "initial", letterSpacing: "0.02em" }],
     },
     fontFamily: {
       figtree: ['Figtree', 'sans-serif']
     },
-    letterSpacing: {
-      3: "-0.03rem",
-      2: "-0.02rem",
-      1: "-0.01rem",
-      none: "0"
-    },
     lineHeight: {
-      body: "1.4",
-      medium: "1.1",
-      heading: "1",
-      tight: ".9"
+      body: "1.6em",
+      auto: "initial"
     },
     extend: {
-      spacing: spacing,
-      borderWidth: {
-        '6': '6px'
-      },
-      gridTemplateColumns: {
-        // Simple 15 column grid
-        '15': 'repeat(15, minmax(0, 1fr))'
-      }
+      spacing: spacing
     }
   }
 }
