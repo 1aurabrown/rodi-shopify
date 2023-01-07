@@ -14,13 +14,6 @@
     align-items: center;
     flex-direction: row;
   }
-
-  .cart-contents {
-      background-image: url({{ 'bg-pink.svg' | asset_url }});
-  }
-  .cart-contents.is-empty {
-    background-image: url({{ 'bg-lavender.svg' | asset_url }});
-  }
 {% endstyle %}
 
 
@@ -304,7 +297,7 @@
         <!-- CTAs -->
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <noscript>
-            <button type="submit" class="cart__update-button button button--secondary button--on-lavender" form="CartContents-Form">
+            <button type="submit" class="cart__update-button button  button--on-lavender" form="CartContents-Form">
               {{ 'sections.cart.update' | t }}
             </button>
           </noscript>

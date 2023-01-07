@@ -926,6 +926,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.mx-50 {
+  margin-left: 12.5rem;
+  margin-right: 12.5rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -1088,6 +1093,10 @@ body {
 
 .w-100 {
   width: 25rem;
+}
+
+.w-\[100vh\] {
+  width: 100vh;
 }
 
 .min-w-full {
@@ -1378,6 +1387,22 @@ body {
   background-color: transparent;
 }
 
+.bg-contain {
+  background-size: contain;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1386,6 +1411,11 @@ body {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.object-fill {
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .p-1 {
@@ -1748,6 +1778,10 @@ body {
     display: grid;
   }
 
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:max-h-\[900px\] {
     max-height: 900px;
   }
@@ -1927,6 +1961,26 @@ body {
 
   .lg\:col-span-3 {
     grid-column: span 3 / span 3;
+  }
+
+  .lg\:mx-50 {
+    margin-left: 12.5rem;
+    margin-right: 12.5rem;
+  }
+
+  .lg\:mx-40 {
+    margin-left: 10rem;
+    margin-right: 10rem;
+  }
+
+  .lg\:mx-45 {
+    margin-left: 11.25rem;
+    margin-right: 11.25rem;
+  }
+
+  .lg\:mx-47 {
+    margin-left: 11.75rem;
+    margin-right: 11.75rem;
   }
 
   .lg\:mt-0 {
