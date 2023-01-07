@@ -1,0 +1,233 @@
+{{ 'component-featured-products-card.css' | asset_url | stylesheet_tag }}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+<script type="application/javascript">
+  loadDynamicScriptTag("https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js", function() { document.dispatchEvent(new Event('swiperLoaded')); })
+  loadDynamicScriptTag("{{ 'product-form.js' | asset_url }}")
+</script>
+
+{% assign collection = section.settings.collection %}
+
+{% assign aspect_ratio = collection.products[0].featured_image.aspect_ratio %}
+
+<featured-collection>
+  <section class="py-35"  id="FeaturedProducts-{{ section.id }}" data-section="{{ section.id }}">
+
+    <div class="" >
+      <div class="">
+        <div class="px-5 lg:px-25 flex justify-between">
+          <h2 class="uppercase">{{ section.settings.heading }}</h2>
+          {% if collection %}<a class="text-link" href="{{ collection.url }}">Shop All</a>{% endif %}
+        </div>
+
+        <div class="mt-9 ">
+          <div class="collection-swiper relative z-[1] overflow-hidden px-5 lg:px-25 ">
+            <ul class="flex swiper-wrapper">
+              {%- for product in collection.products -%}
+              {% liquid
+                assign description = product.metaields.descriptors.subtitle
+                assign title = product.title
+              %}
+                <li class="w-1/6 collection-swiper-slide">
+                  {% render 'product-card',
+                    product: product,
+                    collection: collection,
+                    show_rating: section.settings.show_rating,
+                    show_quick_add: section.settings.enable_quick_add,
+                    section_id: section.id
+                  %}
+                </li>
+              {%- else -%}
+                {%- for i in (1..8) -%}
+                  <li class="w-1/6 collection-swiper-slide">
+                    {% render 'featured-products-card' %}
+                  </li>
+                {%- endfor -%}
+              {%- endfor -%}
+            </ul>
+            <div class="collection-prev w-10 h-10 flex items-center justify-center">{% render 'arrow.svg', class: 'rotate-180 w-2 lg:w-6' %}</div>
+            <div class="collection-next w-10 h-10 flex items-center justify-center">{% render 'arrow.svg', class: 'w-2 lg:w-6' %}</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</featured-collection>
+
+{% style %}
+  featured-collection {
+    --swiper-navigation-color: #333;
+    --swiper-theme-color: #333;
+    --swiper-navigation-size: 35px;
+  }
+  .collection-prev {
+    left: 10px;
+    transform: translate(-50%, -50%);
+  }
+
+  .collection-next {
+    right: 10px;
+    transform: translate(50%, -50%);
+  }
+
+  .collection-prev,
+  .collection-next {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    margin-top: calc((100% - (2 * 20px)) / 1.25 / 2 );
+  }
+
+  @media screen and (min-width: 640px) {
+    .collection-prev,
+    .collection-next {
+      margin-top: calc((100% - (3 * 20px)) / 2.25 / 2 );
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .collection-prev,
+    .collection-next {
+      margin-top: calc((100% - (4 * 20px)) / 3.25 / 2 )
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .collection-prev {
+      left: 30px;
+    }
+
+    .collection-next {
+      right: 30px;
+    }
+    .collection-prev,
+    .collection-next {
+      margin-top: calc((100% - (3 * 40px + 2 * 100px)) / 4 / 2 )
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    .collection-prev,
+    .collection-next {
+      margin-top: calc((100% - (4 * 40px + 2 * 100px)) / 5 / 2 )
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .collection-prev,
+    .collection-next {
+      margin-top: calc((100% - (5 * 40px + 2 * 100px)) / 6 / 2 )
+    }
+  }
+  .collection-swiper-slide {
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+  }
+{% endstyle %}
+
+{% javascript %}
+
+if (!customElements.get('featured-collection')) {
+  class FeaturedCollection extends HTMLElement {
+    constructor() {
+      super();
+      this.swiperEl = this.querySelector('.collection-swiper')
+      this.options = {
+        spaceBetween: 20,
+        slidesPerView: 1.25,
+        loop: false,
+        simulateTouch: true,
+        slideClass: 'collection-swiper-slide',
+        navigation: {
+          nextEl: '.collection-next',
+          prevEl: '.collection-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2.25,
+            spaceBetween: 20
+          },
+          768: {
+            slidesPerView: 3.25,
+            spaceBetween: 20
+          },
+          1024: {
+            spaceBetween: 40,
+            slidesPerView: 4
+          },
+          1280: {
+            spaceBetween: 40,
+            slidesPerView: 5
+          },
+          1440: {
+            spaceBetween: 40,
+            slidesPerView: 6
+          }
+        }
+      }
+    }
+    create() {
+      this.swiper = new Swiper(this.swiperEl, this.options)
+    }
+
+    connectedCallback() {
+      if (typeof(Swiper) != 'undefined') {
+        this.create()
+      } else {
+        document.addEventListener('swiperLoaded', () => {
+          this.create()
+        })
+      }
+    }
+
+    disconnectedCallback() {
+      if (this.swiper) {
+        this.swiper.destroy();
+      }
+    }
+
+  }
+  customElements.define('featured-collection', FeaturedCollection);
+}
+
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+
+      "type": "text",
+      "id": "heading",
+      "default": "Collection 001",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "label": "t:sections.featured-collection.settings.collection.label",
+      "id": "collection",
+      "type": "collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "default": true,
+      "label": "t:sections.featured-collection.settings.enable_quick_buy.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header_mobile.content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-collection.presets.name"
+    }
+  ]
+}
+{% endschema %}

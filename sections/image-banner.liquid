@@ -1,11 +1,12 @@
 <section class="">
   <div class="">
     {% if section.settings.image %}
-      <div class="h-[100vh] lg:mx-47 {% if section.settings.mobile_image %} hidden md:block {% endif %}">
+      <div class="md:mx-47 {% if section.settings.mobile_image %} hidden md:block {% endif %}">
         {% render 'image',
           image: section.settings.image,
           preload: true,
-          class: 'w-full h-full md:ml-auto relative z-10',
+          use_padding: false,
+          class: 'w-full h-full max-h-[100vh] md:ml-auto relative z-10',
           fit: 'cover',
           sizes: '100vh',
         %}
@@ -14,11 +15,12 @@
     {% endif %}
 
     {% if section.settings.mobile_image %}
-      <div class="w-full h-[100vh] {% if section.settings.image %} md:hidden {% endif %}">
+      <div class="w-full {% if section.settings.image %} md:hidden {% endif %}">
         {% render 'image',
           image: section.settings.mobile_image,
           preload: true,
-          class: 'w-full h-full md:ml-auto relative z-10',
+          use_padding: false,
+          class: 'w-full h-full max-h-[100vh] md:ml-auto relative z-10',
           fit: 'cover',
           sizes: '100vw',
         %}

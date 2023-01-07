@@ -25,6 +25,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
 
     {% render 'preload-assets' %}
+    {% render 'load-dynamic-script-tag' %}
     {{ 'tailwind-output.css' | asset_url | stylesheet_tag }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
 

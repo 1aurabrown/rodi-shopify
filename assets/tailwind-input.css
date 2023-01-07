@@ -30,7 +30,7 @@
 
 
   .text-link {
-    @apply focus-visible:ring-0 cursor-pointer hover:underline focus-visible:underline;
+    @apply cursor-pointer hover:underline focus-visible:underline;
   }
 
 }
@@ -38,13 +38,12 @@
 /*Typography*/
 
 @layer base {
-
   a, button, input, textarea, select {
-    @apply outline-none focus-visible:ring-1 focus-visible:ring-offset-2 focus-visible:ring-black;
+    @apply outline-black outline-offset-2;
   }
 
   html {
-    @apply underline-offset-4;
+    @apply underline-offset-2;
   }
 
   body {
