@@ -906,11 +906,6 @@ body {
   margin-bottom: 1rem;
 }
 
-.mx-5 {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -1015,6 +1010,10 @@ body {
   height: 1.75rem;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .h-header {
   height: var(--header-height);
 }
@@ -1029,10 +1028,6 @@ body {
 
 .h-\[100vh\] {
   height: 100vh;
-}
-
-.h-10 {
-  height: 2.5rem;
 }
 
 .max-h-\[100vh\] {
@@ -1059,6 +1054,14 @@ body {
   width: 16.666667%;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
+.w-2 {
+  width: 0.5rem;
+}
+
 .w-100 {
   width: 25rem;
 }
@@ -1069,18 +1072,6 @@ body {
 
 .w-5 {
   width: 1.25rem;
-}
-
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-3 {
-  width: 0.75rem;
-}
-
-.w-2 {
-  width: 0.5rem;
 }
 
 .min-w-full {
@@ -1604,28 +1595,8 @@ body {
     display: none;
   }
 
-  .md\:h-15 {
-    height: 3.75rem;
-  }
-
   .md\:min-h-\[50vw\] {
     min-height: 50vw;
-  }
-
-  .md\:w-15 {
-    width: 3.75rem;
-  }
-
-  .md\:w-9 {
-    width: 2.25rem;
-  }
-
-  .md\:w-8 {
-    width: 2rem;
-  }
-
-  .md\:w-6 {
-    width: 1.5rem;
   }
 
   .md\:max-w-screen-md {
@@ -1711,11 +1682,6 @@ body {
 
   .lg\:col-span-3 {
     grid-column: span 3 / span 3;
-  }
-
-  .lg\:mx-25 {
-    margin-left: 6.25rem;
-    margin-right: 6.25rem;
   }
 
   .lg\:block {
