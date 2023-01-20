@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 
-<header class="header h-header p-5 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-white{% endif %} flex justify-start items-end">
+<header class="header h-header px-5 py-4 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-white{% endif %} flex justify-start items-end">
 
   {%- if request.page_type == 'index' -%}
     <h1 class="text-center">
   {%- endif -%}
-      <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="block py-thin">
+      <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="block mb-thin">
         {% render 'logo.svg' %}
       </a>
   {%- if request.page_type == 'index' -%}
