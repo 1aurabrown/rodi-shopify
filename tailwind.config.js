@@ -6,6 +6,7 @@ const spacing = {
   'announcement': 'var(--announcement-bar-height)',
   'header': 'var(--header-height)',
   'screen-less-header': 'var(--screen-less-header)',
+  'screen-less-announcement': 'var(--screen-less-announcement)',
   // General spacing
   // Add more granular measurements as needed
   'thin': '.125rem',
@@ -63,76 +64,27 @@ module.exports = {
   content: ["./**/*.{liquid,svg,js}"],
   mode: 'jit',
   plugins: [],
-  safelist: [{ pattern: /junip/ }],
   theme: {
     colors: {
       'transparent': 'transparent',
-      'black': '#000000',
       'white': '#ffff',
-      'current': 'currentColor',
-      'blue': '#0400AA',
-      'light-blue': '#8CC0F4',
-      'gold': '#FFC022',
-      'red': '#FF0013',
-      'orange': '#FF8B0D',
-      'pink':'#FFE1F1',
-      'lavender': '#E7C7F6',
-      'violet': '#9028CF',
-      'green': '#037719',
-      'lime': '#CFE503',
-      'product-primary': '#8CC0F4',
-      'product-secondary': '#FFC022',
+      'black': "#333333",
+      'current': 'currentColor'
     },
     fontSize: {
-      h1: ["3.875rem", {lineHeight: "1.1", letterSpacing: '-0.03rem', fontWeight: '700'}], // 62
-      h2: ["3rem", {lineHeight: "1.1", letterSpacing: '-0.02rem', fontWeight: '700'}], // 48
-      h3: ["2.5rem", {lineHeight: "1.1", letterSpacing: '-0.02rem', fontWeight: '700'}], // 40
-      h4: ["2rem", {lineHeight: "1.1", letterSpacing: '-0.02rem', fontWeight: '700'}], // 32
-      h5: ["1.5rem", {lineHeight: "1.1", letterSpacing: '-0.02rem', fontWeight: '700'}],// 24
-      h6: ["1.25rem", {lineHeight: "1.1", letterSpacing: '-0.02rem', fontWeight: '700'}],// 20
-      h7: ["1rem", {lineHeight: "1.1", letterSpacing: '-0.01rem', fontWeight: '700'}],// 16
-
-      "h2-emphasis": ["2.8125rem", {lineHeight: "1", letterSpacing: '-0.03rem', fontWeight: 'normal'}],
-      "h4-emphasis": ["2rem", {lineHeight: "1", letterSpacing: '-0.02rem', fontWeight: 'normal'}],
-      "h5-emphasis": ["1.5rem", {lineHeight: "1", letterSpacing: '-0.02rem', fontWeight: 'normal'}],
-
-      button: ["2.8125rem", {lineHeight: "1", letterSpacing: '0',}], // 45
-
-      "body-lg-emphasized": ["1.25rem", {lineHeight: "1.4", fontWeight: '700', letterSpacing: '-0.02rem'}], // 20
-      "body-lg": ["1.25rem", {lineHeight: "1.4", fontWeight: 'normal', letterSpacing: '-0.01rem'}], // 20
-
-      "body-md-emphasized": ["1rem", {lineHeight: "1.4", fontWeight: '700', letterSpacing: '-0.01rem'}], //16
-      "body-md": ["1rem", {lineHeight: "1.4", fontWeight: 'normal',  letterSpacing: '0'}], //16
-
-      "body-sm-emphasized": ["0.875rem", {lineHeight: "1.4", fontWeight: '700', letterSpacing: '-0.01rem'}], //14
-      "body-sm": ["0.875rem", {lineHeight: "1.4", fontWeight: 'normal', letterSpacing: '0'}], //16
-
+      paragraph: ["0.8125rem", { lineHeight: "1.6em" }],
+      default: ["0.8125rem", { lineHeight: "initial" }],
+      uppercase: ["0.8125rem", { lineHeight: "initial", letterSpacing: "0.02em" }],
     },
     fontFamily: {
-      nordic: ['PTF Nordic Round', 'sans-serif'],
-      hw: ['HW Left', 'sans-serif'],
-    },
-    letterSpacing: {
-      3: "-0.03rem",
-      2: "-0.02rem",
-      1: "-0.01rem",
-      none: "0"
+      figtree: ['Figtree', 'sans-serif']
     },
     lineHeight: {
-      body: "1.4",
-      medium: "1.1",
-      heading: "1",
-      tight: ".9"
+      body: "1.6em",
+      auto: "initial"
     },
     extend: {
-      spacing: spacing,
-      borderWidth: {
-        '6': '6px'
-      },
-      gridTemplateColumns: {
-        // Simple 15 column grid
-        '15': 'repeat(15, minmax(0, 1fr))'
-      }
+      spacing: spacing
     }
   }
 }

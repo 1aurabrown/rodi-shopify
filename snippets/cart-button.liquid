@@ -1,31 +1,7 @@
-{% if template.name == 'cart' %}
+<a href="{{ routes.cart_url }}" class="text-link uppercase" role="button" >
+  <span id="cart-icon-bubble" class="text-center h4-b md:h2-b" >
+    Cart
+  </span>
+  <span class="sr-only">{{ 'templates.cart.cart' | t }}</span>
+</a>
 
-  <a href="{{ routes.collections_url }}" class="w-23 md:w-40 button button--small button--primary" role="button" >
-    <div id="cart-icon-bubble" class="text-center h4-b md:h2-b" >
-      <span>X</span>
-    </div>
-
-    <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-  </a>
-
-{% else %}
-
-  <a
-  @keydown.space.prevent=""
-  @keyup.space.prevent.stop="$store.tab.toggle('cart')"
-  @click.prevent.stop="$store.tab.toggle('cart')"
-  href="{{ routes.cart_url }}"
-  class="header__icon header__icon--cart link focus-inset w-23 md:w-40 button button--small md:button--large button--primary"
-  aria-haspopup="dialog"
-  role="button"
-  >
-
-    <!-- Use ID cart-icon-bubble to hook into dynamically rendered section -->
-    <div id="cart-icon-bubble" class="" >
-      <span x-text="$store.tab.current == 'cart' ? 'X' : 'Cart'">Cart</span>
-    </div>
-
-    <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-  </a>
-
-{% endif %}

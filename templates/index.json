@@ -1,1 +1,22 @@
-{}
+{
+  "sections": {
+    "image-banner": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/1J1A9506.jpg",
+        "mobile_image": "shopify:\/\/shop_images\/1J1A9576.jpg"
+      }
+    },
+    "b5aea1c8-c4ad-41e3-b5ac-e7f95c6efcd6": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "frontpage",
+        "enable_quick_add": true
+      }
+    }
+  },
+  "order": [
+    "image-banner",
+    "b5aea1c8-c4ad-41e3-b5ac-e7f95c6efcd6"
+  ]
+}

@@ -120,14 +120,14 @@ h2,
 .button:hover {
 }
 
-.button--secondary {
+. {
   background-color: transparent;
 }
 
-.button--secondary::selection {
+.::selection {
 }
 
-.button--secondary:hover {
+.:hover {
 }
 
 .gift-card {
@@ -326,10 +326,10 @@ h2,
 .button:focus {
 }
 
-.button--secondary:focus-visible {
+.:focus-visible {
 }
 
-.button--secondary:focus {
+.:focus {
 }
 
 .form__message {

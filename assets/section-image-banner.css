@@ -202,7 +202,7 @@
     box-shadow: none;
   }
 
-  .banner:not(.banner--mobile-bottom) .button--secondary {
+  .banner:not(.banner--mobile-bottom) . {
     --color-button: 255, 255, 255;
     --color-button-text: 255, 255, 255;
     --alpha-button-background: 0;
@@ -327,7 +327,7 @@
     box-shadow: none;
   }
 
-  .banner--desktop-transparent .button--secondary {
+  .banner--desktop-transparent . {
     --color-button: 255, 255, 255;
     --color-button-text: 255, 255, 255;
     --alpha-button-background: 0;

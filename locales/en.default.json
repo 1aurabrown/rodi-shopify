@@ -217,7 +217,7 @@
     },
     "404": {
       "title": "Oops... 404",
-      "subtext": "404"
+      "subtext": "The page you requested does not exist."
     }
   },
   "sections": {

@@ -25,6 +25,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
 
     {% render 'preload-assets' %}
+    {% render 'load-dynamic-script-tag' %}
     {{ 'tailwind-output.css' | asset_url | stylesheet_tag }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
 
@@ -74,7 +75,7 @@
       x-transition:leave-end="bg-black/0"
       @click="$store.tab.close()"></div>
 
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+    <a class="skip-to-content-link button sr-only" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
     {% section 'announcement-bar' %}

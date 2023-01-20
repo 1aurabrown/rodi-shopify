@@ -11,12 +11,14 @@
 }
 
 @layer utilities {
-
+  .uppercase {
+    @apply text-uppercase;
+  }
 }
 
 @layer components {
   .button {
-
+    @apply border-black border px-4 py-2;
   }
 
   .button:disabled,
@@ -28,24 +30,24 @@
 
 
   .text-link {
-    @apply focus-visible:ring-0 cursor-pointer decoration-2 duration-200 hover:custom-underline focus-visible:underline;
+    @apply cursor-pointer hover:underline focus-visible:underline;
   }
+
 }
 
 /*Typography*/
 
 @layer base {
-
   a, button, input, textarea, select {
-    @apply focus-visible:ring
+    @apply outline-black outline-offset-2;
+  }
+
+  html {
+    @apply underline-offset-2;
   }
 
   body {
-  }
-
-
-  a:focus-visible,  button:focus-visible,  input:focus-visible,  textarea:focus-visible,  select:focus-visible {
-    @apply ring-black;
+    @apply text-default font-figtree;
   }
 
   .shopify-challenge__container {

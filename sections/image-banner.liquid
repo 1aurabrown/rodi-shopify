@@ -1,27 +1,33 @@
-<section class="bg-pink-svg">
-  <class="md:min-h-screen-less-header md:max-h-[900px] max-w-screen-2xl mx-auto md:flex md:items-center md:justify-between {{ section.settings.layout }}">
-    <div class="pt-8 h-auto md:pr-[3.4%] md:pt-[3.125%] md:pb-[2.78%] md:w-[55%] relative">
-      {% render 'image',
-        image: section.settings.image,
-        preload: true,
-        class: 'w-full h-full md:ml-auto relative z-10',
-        fit: 'contain',
-        sizes: '100vw, (min-width: 768px) 50vw, (min-width: 1360px) 680px',
-      %}
-    </div>
+<section class="">
+  <div class="">
+    {% if section.settings.image %}
+      <div class="md:mx-47 {% if section.settings.mobile_image %} hidden md:block {% endif %}">
+        {% render 'image',
+          image: section.settings.image,
+          preload: true,
+          use_padding: false,
+          class: 'w-full h-full max-h-[100vh] md:ml-auto relative z-10',
+          fit: 'cover',
+          sizes: '100vh',
+        %}
+      </div>
+    {% else %}
+    {% endif %}
 
-    <div class="p-5 pb-9 md:pl-14 md:w-[32rem]">
+    {% if section.settings.mobile_image %}
+      <div class="w-full {% if section.settings.image %} md:hidden {% endif %}">
+        {% render 'image',
+          image: section.settings.mobile_image,
+          preload: true,
+          use_padding: false,
+          class: 'w-full h-full max-h-[100vh] md:ml-auto relative z-10',
+          fit: 'cover',
+          sizes: '100vw',
+        %}
+      </div>
+    {% else %}
+    {% endif %}
 
-      <h1 class="h3 md:h2 xl:h1">
-        {{ section.settings.heading | newline_to_br }}
-      </h1>
-
-      <p class="body-lg mt-3 md:mt-4">
-        {{ section.settings.text }}
-      </p>
-
-      <a class="button button--on-lavender button--secondary mt-6 md:mt-8" {% if section.settings.url %} href='{{ section.settings.url }}' {% else %} href='#' {% endif %}><span>{{ section.settings.cta_text }}</span></a>
-    </div>
   </div>
 </section>
 
@@ -36,43 +42,9 @@
       "type": "image_picker"
     },
     {
-      "label": "Heading",
-      "id": "heading",
-      "type": "textarea",
-      "default": "for that good gut feeling"
-    },
-    {
-      "label": "Text",
-      "id": "text",
-      "type": "textarea",
-      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-    },
-    {
-      "label": "CTA Text",
-      "id": "cta_text",
-      "type": "text",
-      "default": "Shop the set"
-    },
-    {
-      "label": "CTA URL",
-      "id": "url",
-      "type": "url"
-    },
-    {
-      "label": "Desktop Layout",
-      "id": "layout",
-      "type": "select",
-      "options": [
-        {
-          "value": "flex-row-reverse",
-          "label": "Image Right"
-        },
-        {
-          "value": "flex-row",
-          "label": "Image Left"
-        }
-      ],
-      "default": "flex-row"
+      "label": "Mobile Image",
+      "id": "mobile_image",
+      "type": "image_picker"
     }
   ],
   "presets": [
