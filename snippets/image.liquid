@@ -11,7 +11,6 @@
     assign width = width | default: image.width
     assign height = height | default: image.height
 
-
     if fit == 'contain'
       assign class = class | append: ' object-contain bg-contain'
     elsif fit == 'cover'
@@ -40,10 +39,9 @@
     {%- assign onload = 'this.style.removeProperty("background-image");' -%}
   {%- endif -%}
 
-
   {% if use_padding != false %}
     <div class="relative">
-      <div style="padding-bottom: {{ image.aspect_ratio | times: 100.00 | append: '%'}} ">
+      <div style="padding-bottom: {{ 1.00 | divided_by: image.aspect_ratio | times: 100.00 | append: '%'}} ">
   {% endif %}
 
       {{ image | image_url: width: image.width | image_tag:

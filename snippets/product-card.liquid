@@ -1,10 +1,10 @@
-<article>
+<article class="{{ class }}">
 	<div class="relative">
 		{% render 'image',
 			image: product.featured_image,
 	    preload: true,
 	    fit: 'cover',
-	    sizes: '100vh',
+	    sizes: sizes,
 	    use_padding: true
 	  %}
 	  <a class="absolute inset-0 z-10 block" tabindex="-1" aria-hidden="true" title="{{ product.title }}" href="{{ product.url | within: collection }}"></a>

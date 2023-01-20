@@ -1,4 +1,4 @@
-<section class="">
+<section>
 	{% paginate collection.products by 48 %}
 		{% render 'collection-grid', title: collection.title, products: collection.products %}
 		{% render 'pagination' %}
