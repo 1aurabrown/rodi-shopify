@@ -891,6 +891,10 @@ body {
   z-index: -1;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -904,6 +908,16 @@ body {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-35 {
+  margin-top: 8.75rem;
+  margin-bottom: 8.75rem;
+}
+
+.my-9 {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
 }
 
 .mt-5 {
@@ -1150,6 +1164,10 @@ body {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1184,6 +1202,15 @@ body {
 
 .gap-3 {
   gap: 0.75rem;
+}
+
+.gap-x-2 {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+
+.gap-y-14 {
+  row-gap: 3.5rem;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1288,10 +1315,6 @@ body {
   background-color: #ffff;
 }
 
-.bg-black\/10 {
-  background-color: rgb(51 51 51 / 0.1);
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -1373,9 +1396,9 @@ body {
   padding-bottom: 2rem;
 }
 
-.py-7 {
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
+.py-9 {
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
 }
 
 .pt-12 {
@@ -1538,6 +1561,14 @@ body {
 }
 
 @media (min-width: 768px) {
+  .md\:col-start-2 {
+    grid-column-start: 2;
+  }
+
+  .md\:col-end-13 {
+    grid-column-end: 13;
+  }
+
   .md\:mx-47 {
     margin-left: 11.75rem;
     margin-right: 11.75rem;
@@ -1575,6 +1606,10 @@ body {
     margin-left: 0.5rem;
   }
 
+  .md\:mt-17 {
+    margin-top: 4.25rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -1609,6 +1644,10 @@ body {
 
   .md\:flex-1 {
     flex: 1 1 0%;
+  }
+
+  .md\:grid-flow-dense {
+    grid-auto-flow: dense;
   }
 
   .md\:grid-cols-2 {
@@ -1661,14 +1700,6 @@ body {
   .md\:pb-10 {
     padding-bottom: 2.5rem;
   }
-
-  .md\:pt-10 {
-    padding-top: 2.5rem;
-  }
-
-  .md\:pb-9 {
-    padding-bottom: 2.25rem;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -1682,6 +1713,26 @@ body {
 
   .lg\:col-span-3 {
     grid-column: span 3 / span 3;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .lg\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .lg\:col-start-9 {
+    grid-column-start: 9;
+  }
+
+  .lg\:col-end-13 {
+    grid-column-end: 13;
+  }
+
+  .lg\:row-span-2 {
+    grid-row: span 2 / span 2;
   }
 
   .lg\:block {
@@ -1706,6 +1757,14 @@ body {
 
   .lg\:max-w-lg {
     max-width: 32rem;
+  }
+
+  .lg\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .lg\:px-25 {
