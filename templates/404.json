@@ -2,9 +2,13 @@
   "sections": {
     "main": {
       "type": "main-404"
+    },
+    "featured-collection": {
+      "type": "featured-collection"
     }
   },
   "order": [
-    "main"
+    "main",
+    "featured-collection"
   ]
 }

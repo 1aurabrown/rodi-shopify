@@ -54,6 +54,10 @@
     @apply font-semibold;
   }
 
+  main {
+    @apply min-h-screen-less-header
+  }
+
   .shopify-challenge__container {
     @apply flex flex-col items-center justify-center space-y-4;
   }
