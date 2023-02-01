@@ -499,47 +499,49 @@ strong, b {
 /* Policy Pages */
 
 .page__container,
-  .shopify-policy__container {
+  body .shopify-policy__container {
+  max-width: none;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
 
 @media (min-width: 768px) {
   .page__container,
-  .shopify-policy__container {
+  body .shopify-policy__container {
     display: flex;
     align-items: flex-start;
   }
 
   .page__container > :not([hidden]) ~ :not([hidden]),
-  .shopify-policy__container > :not([hidden]) ~ :not([hidden]) {
+  body .shopify-policy__container > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.25rem * var(--tw-space-x-reverse));
     margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
   }
 }
 
-.shopify-policy__title, .shopify-policy__body,
+body .shopify-policy__title, body .shopify-policy__body,
   .page__title, .page__body {
   max-width: none;
 }
 
 @media (min-width: 768px) {
-  .shopify-policy__title, .shopify-policy__body,
+  body .shopify-policy__title, body .shopify-policy__body,
   .page__title, .page__body {
     width: 50%;
     padding-top: 2.5rem;
   }
 }
 
-.shopify-policy__title,
+body .shopify-policy__title,
   .page__title {
   margin-top: 2.5rem;
   margin-bottom: 3.75rem;
+  text-align: left;
 }
 
 @media (min-width: 768px) {
-  .shopify-policy__title,
+  body .shopify-policy__title,
   .page__title {
     position: sticky;
     top: var(--header-height);
@@ -548,61 +550,61 @@ strong, b {
   }
 }
 
-.shopify-policy__title h1,
+body .shopify-policy__title h1,
   .page__title h1 {
   text-transform: uppercase;
   letter-spacing: 0.025em;
 }
 
 @media (min-width: 768px) {
-  .shopify-policy__body,
+  body .shopify-policy__body,
   .page__body {
     margin-top: 0rem;
     max-width: 65ch;
   }
 
-  .shopify-policy__body > :first-child,
+  body .shopify-policy__body > :first-child,
   .page__body > :first-child {
     margin-top: 0rem;
   }
 }
 
-.shopify-policy__body a,
+body .shopify-policy__body a,
   .page__body a {
   text-decoration-line: underline;
 }
 
-.shopify-policy__body a:hover,
+body .shopify-policy__body a:hover,
   .page__body a:hover {
   text-decoration-line: none;
 }
 
-.shopify-policy__body p, .shopify-policy__body ol, .shopify-policy__body table,
+body .shopify-policy__body p, body .shopify-policy__body ol, body .shopify-policy__body table,
   .page__body p, .page__body ol, .page__body table {
   margin: 1.25em 0;
 }
 
-.shopify-policy__body h1,
+body .shopify-policy__body h1,
   .page__body h1 {
   text-transform: uppercase;
   letter-spacing: 0.025em;
   margin-top: 3em;
 }
 
-.shopify-policy__body h2,
+body .shopify-policy__body h2,
   .page__body h2 {
   text-transform: uppercase;
   letter-spacing: 0.025em;
   margin-top: 2em;
 }
 
-.shopify-policy__body h3,
+body .shopify-policy__body h3,
   .page__body h3 {
   text-decoration-line: underline;
   margin-top: 1.5em;
 }
 
-.shopify-policy__body h4,
+body .shopify-policy__body h4,
   .page__body h4 {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -610,7 +612,7 @@ strong, b {
   margin-top: 2em;
 }
 
-.shopify-policy__body h5,
+body .shopify-policy__body h5,
   .page__body h5 {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -618,36 +620,36 @@ strong, b {
   margin-top: 2em;
 }
 
-.shopify-policy__body h6,
+body .shopify-policy__body h6,
   .page__body h6 {
   font-size: 0.75rem;
   text-decoration-line: underline;
   margin-top: 2em;
 }
 
-.shopify-policy__body ul,
+body .shopify-policy__body ul,
   .page__body ul {
   margin: .5em 0;
   margin-left: 1em;
   list-style: disc outside;
 }
 
-.shopify-policy__body li,
+body .shopify-policy__body li,
   .page__body li {
   margin-top: .5em;
 }
 
-.shopify-policy__body blockquote,
+body .shopify-policy__body blockquote,
   .page__body blockquote {
   margin: .5em 2rem;
 }
 
-.shopify-policy__body th:not(:first-child), .shopify-policy__body td:not(:first-child),
+body .shopify-policy__body th:not(:first-child), body .shopify-policy__body td:not(:first-child),
   .page__body th:not(:first-child), .page__body td:not(:first-child)  {
   padding-left: 1em;
 }
 
-.shopify-policy__body p + p,
+body .shopify-policy__body p + p,
   .page__body p + p {
   margin-top: 0.625em;
 }
@@ -943,14 +945,14 @@ strong, b {
   margin-bottom: 2.25rem;
 }
 
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .my-15 {
   margin-top: 3.75rem;
   margin-bottom: 3.75rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .mt-5 {
