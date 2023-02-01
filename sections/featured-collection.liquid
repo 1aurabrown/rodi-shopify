@@ -20,7 +20,7 @@
   <section id="FeaturedProducts-{{ section.id }}" data-section="{{ section.id }}">
 
     <div class="my-9 px-5 lg:px-25 flex justify-between">
-      <h2 class="uppercase">{{ section.settings.heading }}</h2>
+      <h2 class="uppercase">{{ section.settings.heading | default: collection.title }}</h2>
       {% if collection %}<a class="text-link" href="{{ collection.url }}">Shop All</a>{% endif %}
     </div>
 
@@ -44,7 +44,7 @@
           {%- else -%}
             {%- for i in (1..8) -%}
               <li class="w-1/6 swiper-slide">
-                {% render 'featured-products-card' %}
+                {% render 'product-card' %}
               </li>
             {%- endfor -%}
           {%- endfor -%}
@@ -67,7 +67,7 @@
 
       "type": "text",
       "id": "heading",
-      "default": "Collection 001",
+      "default": "Featured Collection",
       "label": "t:sections.featured-collection.settings.title.label"
     },
     {
