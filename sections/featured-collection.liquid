@@ -1,11 +1,15 @@
 {{ 'component-featured-products-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-featured-collection.css' | asset_url | stylesheet_tag }}
+
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
 />
+
 <script type="application/javascript">
   loadDynamicScriptTag("https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js", function() { document.dispatchEvent(new Event('swiperLoaded')); })
   loadDynamicScriptTag("{{ 'product-form.js' | asset_url }}")
+  loadDynamicScriptTag("{{ 'component-featured-collection.js' | asset_url }}")
 </script>
 
 {% assign collection = section.settings.collection %}
@@ -52,138 +56,8 @@
   </section>
 </featured-collection>
 
-{% style %}
-  featured-collection {
-    --swiper-navigation-color: #333;
-    --swiper-theme-color: #333;
-    --swiper-navigation-size: 35px;
-  }
-  .collection-prev {
-    left: 10px;
-    transform: translate(-50%, -50%);
-  }
-
-  .collection-next {
-    right: 10px;
-    transform: translate(50%, -50%);
-  }
-
-  .collection-prev,
-  .collection-next {
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    margin-top: calc((100% - (2 * 20px)) / 1.25 / 2 );
-  }
-
-  @media screen and (min-width: 640px) {
-    .collection-prev,
-    .collection-next {
-      margin-top: calc((100% - (3 * 20px)) / 2.25 / 2 );
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    .collection-prev,
-    .collection-next {
-      margin-top: calc((100% - (4 * 20px)) / 3.25 / 2 )
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .collection-prev {
-      left: 30px;
-    }
-
-    .collection-next {
-      right: 30px;
-    }
-    .collection-prev,
-    .collection-next {
-      margin-top: calc((100% - (3 * 40px + 2 * 100px)) / 4 / 2 )
-    }
-  }
-  @media screen and (min-width: 1280px) {
-    .collection-prev,
-    .collection-next {
-      margin-top: calc((100% - (4 * 40px + 2 * 100px)) / 5 / 2 )
-    }
-  }
-  @media screen and (min-width: 1440px) {
-    .collection-prev,
-    .collection-next {
-      margin-top: calc((100% - (5 * 40px + 2 * 100px)) / 6 / 2 )
-    }
-  }
-{% endstyle %}
-
-{% javascript %}
-
-if (!customElements.get('featured-collection')) {
-  class FeaturedCollection extends HTMLElement {
-    constructor() {
-      super();
-      this.swiperEl = this.querySelector('.collection-swiper')
-      this.options = {
-        spaceBetween: 20,
-        slidesPerView: 1.25,
-        loop: false,
-        simulateTouch: true,
-        navigation: {
-          nextEl: '.collection-next',
-          prevEl: '.collection-prev',
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2.25,
-            spaceBetween: 20
-          },
-          768: {
-            slidesPerView: 3.25,
-            spaceBetween: 20
-          },
-          1024: {
-            spaceBetween: 40,
-            slidesPerView: 4
-          },
-          1280: {
-            spaceBetween: 40,
-            slidesPerView: 5
-          },
-          1440: {
-            spaceBetween: 40,
-            slidesPerView: 6
-          }
-        }
-      }
-    }
-    create() {
-      this.swiper = new Swiper(this.swiperEl, this.options)
-    }
-
-    connectedCallback() {
-      if (typeof(Swiper) != 'undefined') {
-        this.create()
-      } else {
-        document.addEventListener('swiperLoaded', () => {
-          this.create()
-        })
-      }
-    }
-
-    disconnectedCallback() {
-      if (this.swiper) {
-        this.swiper.destroy();
-      }
-    }
-
-  }
-  customElements.define('featured-collection', FeaturedCollection);
-}
-
-{% endjavascript %}
-
 {% schema %}
+
 {
   "name": "Featured Collection",
   "tag": "section",
@@ -218,4 +92,5 @@ if (!customElements.get('featured-collection')) {
     }
   ]
 }
+
 {% endschema %}

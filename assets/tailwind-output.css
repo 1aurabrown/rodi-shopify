@@ -437,7 +437,12 @@ html {
 body {
   font-family: Figtree, sans-serif;
   font-size: 0.8125rem;
-  line-height: initial;
+  line-height: normal;
+  letter-spacing: 0em;
+}
+
+strong, b {
+  font-weight: 600;
 }
 
 .shopify-challenge__container {
@@ -497,41 +502,69 @@ body {
   .shopify-policy__container {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 
 @media (min-width: 768px) {
   .page__container,
   .shopify-policy__container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 3.5rem;
-    padding-bottom: 5rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .page__container > :not([hidden]) ~ :not([hidden]),
+  .shopify-policy__container > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
   }
 }
 
-.page__container,
-  .shopify-policy__container {
-  max-width: unset !important;
+.shopify-policy__title, .shopify-policy__body,
+  .page__title, .page__body {
+  max-width: none;
+}
+
+@media (min-width: 768px) {
+  .shopify-policy__title, .shopify-policy__body,
+  .page__title, .page__body {
+    width: 50%;
+    padding-top: 2.5rem;
+  }
 }
 
 .shopify-policy__title,
   .page__title {
+  margin-top: 2.5rem;
+  margin-bottom: 3.75rem;
+}
+
+@media (min-width: 768px) {
+  .shopify-policy__title,
+  .page__title {
+    position: sticky;
+    top: var(--header-height);
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
 }
 
 .shopify-policy__title h1,
   .page__title h1 {
-  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
-.shopify-policy__body,
+@media (min-width: 768px) {
+  .shopify-policy__body,
   .page__body {
-  margin-top: 2.5rem;
-}
+    margin-top: 0rem;
+    max-width: 65ch;
+  }
 
-.shopify-policy__body strong,
-  .page__body strong{
+  .shopify-policy__body > :first-child,
+  .page__body > :first-child {
+    margin-top: 0rem;
+  }
 }
 
 .shopify-policy__body a,
@@ -551,31 +584,45 @@ body {
 
 .shopify-policy__body h1,
   .page__body h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  margin-top: 3em;
 }
 
 .shopify-policy__body h2,
   .page__body h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
   margin-top: 2em;
 }
 
 .shopify-policy__body h3,
   .page__body h3 {
+  text-decoration-line: underline;
   margin-top: 1.5em;
 }
 
 .shopify-policy__body h4,
   .page__body h4 {
-  margin-top: 1.25em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  margin-top: 2em;
 }
 
 .shopify-policy__body h5,
   .page__body h5 {
-  margin-top: 1.25em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  margin-top: 2em;
 }
 
 .shopify-policy__body h6,
   .page__body h6 {
-  margin-top: 1.25em;
+  font-size: 0.75rem;
+  text-decoration-line: underline;
+  margin-top: 2em;
 }
 
 .shopify-policy__body ul,
@@ -603,17 +650,6 @@ body {
 .shopify-policy__body p + p,
   .page__body p + p {
   margin-top: 0.625em;
-}
-
-.shopify-policy__title, .shopify-policy__body,
-  .page__title, .page__body {
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.shopify-policy__body strong, .shopify-policy__body b,
-  .page__body strong, .page__body b {
 }
 
 *, ::before, ::after {
@@ -912,6 +948,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.my-15 {
+  margin-top: 3.75rem;
+  margin-bottom: 3.75rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -944,6 +985,10 @@ body {
   margin-top: 2rem;
 }
 
+.mb-thin {
+  margin-bottom: .125rem;
+}
+
 .ml-8 {
   margin-left: 2rem;
 }
@@ -966,10 +1011,6 @@ body {
 
 .mr-1 {
   margin-right: 0.25rem;
-}
-
-.mb-thin {
-  margin-bottom: .125rem;
 }
 
 .block {
@@ -1351,11 +1392,6 @@ body {
   padding-bottom: 2rem;
 }
 
-.py-9 {
-  padding-top: 2.25rem;
-  padding-bottom: 2.25rem;
-}
-
 .pt-12 {
   padding-top: 3rem;
 }
@@ -1388,6 +1424,14 @@ body {
   padding-top: var(--header-height);
 }
 
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
+.pb-9 {
+  padding-bottom: 2.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1398,11 +1442,6 @@ body {
 
 .align-middle {
   vertical-align: middle;
-}
-
-.text-paragraph {
-  font-size: 0.8125rem;
-  line-height: 1.6em;
 }
 
 .uppercase {
@@ -1478,9 +1517,7 @@ body {
 }
 
 .uppercase {
-  font-size: 0.8125rem;
-  line-height: initial;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.025em;
 }
 
 /*Typography*/
@@ -1576,6 +1613,10 @@ body {
     display: none;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
   .md\:max-w-screen-md {
     max-width: 768px;
   }
@@ -1665,12 +1706,20 @@ body {
     grid-row: span 2 / span 2;
   }
 
+  .lg\:mt-25 {
+    margin-top: 6.25rem;
+  }
+
   .lg\:block {
     display: block;
   }
 
   .lg\:w-6 {
     width: 1.5rem;
+  }
+
+  .lg\:w-2\/3 {
+    width: 66.666667%;
   }
 
   .lg\:max-w-screen-lg {
@@ -1698,6 +1747,10 @@ body {
 @media (min-width: 1280px) {
   .xl\:ml-24 {
     margin-left: 6rem;
+  }
+
+  .xl\:mt-35 {
+    margin-top: 8.75rem;
   }
 
   .xl\:max-w-2xl {

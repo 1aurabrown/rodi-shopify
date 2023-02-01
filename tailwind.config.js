@@ -72,16 +72,19 @@ module.exports = {
       'current': 'currentColor'
     },
     fontSize: {
-      paragraph: ["0.8125rem", { lineHeight: "1.6em" }],
-      default: ["0.8125rem", { lineHeight: "initial" }],
-      uppercase: ["0.8125rem", { lineHeight: "initial", letterSpacing: "0.02em" }],
+      base: "0.8125rem",
+      sm: "0.75rem"
     },
     fontFamily: {
       figtree: ['Figtree', 'sans-serif']
     },
+    tracking: {
+      wide: "0.02em",
+      normal: "normal",
+    },
     lineHeight: {
       body: "1.6em",
-      auto: "initial"
+      normal: "normal"
     },
     extend: {
       spacing: spacing
