@@ -2,7 +2,7 @@
 
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 
-<footer class="md:pt-17">
+<footer class="px-5 pt-10 md:pt-17">
 
   <!-- Top -->
 
@@ -10,15 +10,15 @@
 
     <!-- Newsletter -->
     {%- if section.settings.newsletter_enable and section.settings.newsletter_list_id -%}
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col md:items-center justify-center">
         {%- if section.settings.newsletter_heading != blank -%}
           <h2 class="">{{ section.settings.newsletter_heading | escape }}</h2>
         {%- endif -%}
 
-        <div id="footer-klaviyo" class="relative mt-8"
+        <div id="footer-klaviyo" class="w-full max-w-[25rem] relative mt-8"
           x-data='klaviyo({ listId: {{ section.settings.newsletter_list_id | json }}, source: "footer" })'>
 
-          <form @submit.prevent="submitForm" class="relative w-100 border-b border-black">
+          <form @submit.prevent="submitForm" class="relative w-full border-b border-black">
             <input
               type="email"
               name="email"
@@ -132,12 +132,12 @@
   </div>
 
   <!-- Bottom -->
-  <div class="flex justify-between md:p-5">
+  <div class="flex items-end justify-between py-5">
 
     {%- if section.settings.menu != blank -%}
-      <ul class="space-x-4 list-none">
+      <ul class="leading-body md:space-x-4 list-none">
         {%- for link in section.settings.menu.links -%}
-          <li class="inline-block">
+          <li class="md:inline-block">
             <a href="{{ link.url }}" class="text-link">
               {{ link.title }}
             </a>
@@ -146,7 +146,7 @@
       </ul>
     {%- endif -%}
 
-    <div>Copyright {{ 'now' | date: "%Y" }}&nbsp;<a href={{ routes.root_url }} class="text-link">{{ shop.name }}</a></div>
+    <div class="text-sm">&copy; {{ 'now' | date: "%Y" }}&nbsp;<a href={{ routes.root_url }} class="text-link">{{ shop.name }}</a></div>
 
   </div>
 
