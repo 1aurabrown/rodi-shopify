@@ -87,8 +87,10 @@ module.exports = {
       normal: "normal"
     },
     extend: {
-      spacing: spacing
+      spacing: spacing,
+      minHeight: spacing,
+      maxHeight: spacing
     }
-  }
+  },
 }
 

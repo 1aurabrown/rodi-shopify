@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 
-<header class="header h-header px-5 py-4 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-white{% endif %} flex justify-start items-end">
+<header class="header h-header px-5 py-4 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-white{% endif %} flex justify-between sm:justify-start items-end">
 
   {%- if request.page_type == 'index' -%}
-    <h1 class="text-center">
+    <h1>
   {%- endif -%}
       <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="block mb-thin">
-        {% render 'logo.svg' %}
+        {% render 'logo.svg', class: 'w-20 sm:w-[9.375rem]' %}
       </a>
   {%- if request.page_type == 'index' -%}
     </h1>
@@ -15,7 +15,7 @@
 
   <div class="ml-8">
       <nav>
-        <ul class="flex space-x-7 justify-end" role="list">
+        <ul class="flex text-sm sm:text-base space-x-5 sm:space-x-7 justify-end" role="list">
           {%- if section.settings.menu != blank -%}
             {%- for link in section.settings.menu.links -%}
               <li>

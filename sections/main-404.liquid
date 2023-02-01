@@ -1,13 +1,15 @@
-<div class="h-screen-less-announcement text-center flex flex-col justify-center items-center">
+<div class="h-screen-less-header text-center flex flex-col my-15 md:my-25 lg:my-35 items-center">
   <h1 class="uppercase">
     {{ section.settings.heading }}
   </h1>
-  <p class="text-paragraph mt-3">
+  <p class="text-paragraph mt-9">
     {{ section.settings.body | newline_to_br }}
   </p>
-  <a href="{{ routes.collections_url }}" class="text-link block mt-5 md:mt-15">
+  <p class="mt-6">
+    <a href="{{ routes.collections_url }}" class="underline hover:no-underline">
     {{ section.settings.cta }}
-  </a>
+    </a>
+  </p>
 </div>
 
 
@@ -21,7 +23,7 @@
       "id": "heading",
       "label": "Heading",
       "type": "text",
-      "default": "Oops!"
+      "default": "404 Page not found"
     },
     {
       "id": "body",
