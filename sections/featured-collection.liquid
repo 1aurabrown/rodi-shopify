@@ -27,7 +27,7 @@
             assign description = product.metaields.descriptors.subtitle
             assign title = product.title
           %}
-            <li class="w-1/6 collection-swiper-slide">
+            <li class="w-1/6 swiper-slide">
               {% render 'product-card',
                 product: product,
                 collection: collection,
@@ -39,7 +39,7 @@
             </li>
           {%- else -%}
             {%- for i in (1..8) -%}
-              <li class="w-1/6 collection-swiper-slide">
+              <li class="w-1/6 swiper-slide">
                 {% render 'featured-products-card' %}
               </li>
             {%- endfor -%}
@@ -115,12 +115,6 @@
       margin-top: calc((100% - (5 * 40px + 2 * 100px)) / 6 / 2 )
     }
   }
-  .collection-swiper-slide {
-    flex-shrink: 0;
-    height: 100%;
-    position: relative;
-    transition-property: transform;
-  }
 {% endstyle %}
 
 {% javascript %}
@@ -135,7 +129,6 @@ if (!customElements.get('featured-collection')) {
         slidesPerView: 1.25,
         loop: false,
         simulateTouch: true,
-        slideClass: 'collection-swiper-slide',
         navigation: {
           nextEl: '.collection-next',
           prevEl: '.collection-prev',

@@ -1,11 +1,4 @@
 {% comment %}css-purge shopify-payment-button__button{% endcomment %}
-{% liquid 
-  if product.tags contains 'set'
-    assign is_set = true
-  else
-    assign is_set = false
-  endif
-%}
 
 <section id="MainProduct-{{ section.id }}" class="section-main-product section-{{ section.id }}" data-section="{{ section.id }}">
   {{ 'component-quantity.css' | asset_url | stylesheet_tag }}
@@ -14,17 +7,13 @@
   {{ 'component-rte.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 
-  {%- if product.media.size > 1 -%}
-    <script src="{{ 'component-pdp-slider.js' | asset_url }}" defer="defer"></script>
-  {%- endif -%}
-
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-  <div class="section-main-product__inner md:grid md:grid-cols-2 md:min-h-[50vw]">
-    <div class="product__media-wrapper bg-light-blue" style="background-color: {{ product.metafields.colors.primary }};">
+  <div class="section-main-product__inner md:grid md:grid-cols-8">
+    <div class="product__media-wrapper md:col-span-5">
       {% render 'pdp-slider' %}
     </div>
-    <div class="flex flex-col items-center justify-center px-5 py-10 md:px-14 {% if is_set %} bg-gold {% else %} bg-lavender {% endif %}">
+    <div class="md:col-span-3">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container w-full max-w-[24rem] mx-auto">
         {% comment %} {%- assign product_form_id = 'product-form-' | append: section.id -%} {% endcomment %}
 
@@ -242,12 +231,6 @@
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
-    }
-  ],
-  "settings": [
-    {
-      "type": "paragraph",
-      "content": "Note when uploading product images: recipe images should be assigned an alt tag 'recipe', rice pile images should be assigned an alt tag 'pile' in order to identify them in the code and display them a little differently from packaging shots. The description comes directly from the product's description. Nutritional Info (single products), Ingredients, and Bundle Contents (bundle products) come from product metafields."
     }
   ]
 }
