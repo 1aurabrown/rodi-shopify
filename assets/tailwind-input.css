@@ -8,17 +8,33 @@
     -moz-osx-font-smoothing: grayscale;
     font-smooth: always;
   }
+
+  *:focus {
+    @apply outline-0 ring-1 ring-black ring-offset-1;
+  }
+
+  *:focus:not(:focus-visible) {
+    @apply outline-0 ring-0;
+  }
+
+  *:focus-visible {
+    @apply outline-0 ring-1 ring-black ring-offset-1;
+  }
 }
 
 @layer utilities {
   .uppercase {
     @apply tracking-wide;
   }
+
+  .visually-hidden {
+    @apply sr-only
+  }
 }
 
 @layer components {
   .button {
-    @apply border-black border px-4 py-2;
+    @apply border-black border px-4 py-2 flex items-center justify-center uppercase h-10 w-full;
   }
 
   .button:disabled,
@@ -64,8 +80,12 @@
   .shopify-challenge__container input[type=submit] {
     @apply button flex mt-8 cursor-pointer;
   }
-  .shopify-payment-button__button {
-    @apply button w-full;
+  .shopify-payment-button__button, .shopify-payment-button__button .shopify-cleanslate {
+    @apply h-10 w-full p-0;
+  }
+
+  .shopify-payment-button__more-options {
+    @apply text-link;
   }
 
   /* Policy Pages */
