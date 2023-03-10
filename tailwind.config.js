@@ -2,7 +2,7 @@
 const spacing = {
   // Theme-specific spacing
   // Add here
-
+  'padding-sm': '1.5rem',
   'announcement': 'var(--announcement-bar-height)',
   'header': 'var(--header-height)',
   'screen-less-header': 'var(--screen-less-header)',
@@ -61,15 +61,21 @@ for (let i = 0; i < 101; i++) {
 
 
 module.exports = {
-  content: ["./**/*.{liquid,svg,js}"],
-  mode: 'jit',
+  content: [
+    "./assets/*.{js, css, svg}",
+    "./**/*.liquid"
+  ],
   plugins: [],
   theme: {
     colors: {
       'transparent': 'transparent',
-      'white': '#ffff',
-      'black': "#333333",
-      'current': 'currentColor'
+      'white': '#FDFBF9',
+      'black': "#212121",
+      'current': 'currentColor',
+      'red': '#b3322c',
+      // 'button': '#b3322c',
+      'button': '#b3322c',
+      'button-secondary': '#C4D1E2'
     },
     fontSize: {
       base: "0.8125rem",
@@ -78,8 +84,8 @@ module.exports = {
     fontFamily: {
       figtree: ['Figtree', 'sans-serif']
     },
-    tracking: {
-      wide: "0.02em",
+    letterSpacing: {
+      wide: "0.04em",
       normal: "normal",
     },
     lineHeight: {
@@ -87,9 +93,16 @@ module.exports = {
       normal: "normal"
     },
     extend: {
+      screens: {
+        'hoverable': { 'raw': '(hover: hover)' }
+      },
       spacing: spacing,
       minHeight: spacing,
-      maxHeight: spacing
+      maxHeight: spacing,
+      gridTemplateColumns: {
+        // Complex site-specific column configuration
+        'pdp': 'minmax(0, 5fr), minmax(0, 3fr)'
+      }
     }
   },
 }

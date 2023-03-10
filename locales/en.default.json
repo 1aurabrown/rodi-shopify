@@ -115,7 +115,7 @@
       "inventory_low_stock": "Low stock",
       "inventory_low_stock_show_count": "Low stock: {{ quantity }} left",
       "inventory_out_of_stock": "Out of stock",
-      "inventory_out_of_stock_continue_selling": "In stock",
+      "inventory_out_of_stock_continue_selling": "Preorder",
       "sku": "SKU",
       "on_sale": "Sale",
       "product_variants": "Product variants",
@@ -261,12 +261,12 @@
       }
     },
     "cart": {
-      "title": "Cart",
+      "title": "Your cart",
       "caption": "Cart items",
       "remove_title": "Remove {{ title }}",
       "subtotal": "Subtotal",
       "new_subtotal": "New subtotal",
-      "note": "Order special instructions",
+      "note": "Additional instructions",
       "checkout": "Check out",
       "empty": "Your cart is empty",
       "cart_error": "There was an error while updating your cart. Please try again.",

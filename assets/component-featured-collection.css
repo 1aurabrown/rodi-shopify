@@ -4,59 +4,61 @@ featured-collection {
   --swiper-navigation-size: 35px;
 }
 .collection-prev {
-  left: 10px;
-  transform: translate(-50%, -50%);
+  left: 0;
 }
 
 .collection-next {
-  right: 10px;
-  transform: translate(50%, -50%);
+  right: 0;
 }
 
 .collection-prev,
 .collection-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 2;
   position: absolute;
   top: 0;
-  margin-top: calc((100% - (2 * 20px)) / 1.25 / 2 );
+  --padding: 20px;
+  padding-top: calc((100% - 160px))
 }
 
 @media screen and (min-width: 640px) {
   .collection-prev,
   .collection-next {
-    margin-top: calc((100% - (3 * 20px)) / 2.25 / 2 );
+    padding-top: calc((100% - 180px) / 3)
   }
 }
 
 @media screen and (min-width: 768px) {
   .collection-prev,
   .collection-next {
-    margin-top: calc((100% - (4 * 20px)) / 3.25 / 2 )
+    padding-top: calc((100% - 200px) / 4)
   }
 }
 
 @media screen and (min-width: 1024px) {
   .collection-prev {
-    left: 30px;
+    left: 0;
   }
 
   .collection-next {
-    right: 30px;
+    right: 0;
   }
   .collection-prev,
   .collection-next {
-    margin-top: calc((100% - (3 * 40px + 2 * 100px)) / 4 / 2 )
+    padding-top: calc((100% - 320px ) / 5)
   }
 }
 @media screen and (min-width: 1280px) {
   .collection-prev,
   .collection-next {
-    margin-top: calc((100% - (4 * 40px + 2 * 100px)) / 5 / 2 )
+    padding-top: calc((100% - 320px ) / 5)
   }
 }
 @media screen and (min-width: 1440px) {
   .collection-prev,
   .collection-next {
-    margin-top: calc((100% - (5 * 40px + 2 * 100px)) / 6 / 2 )
+    padding-top: calc((100% - 360px ) / 6)
   }
 }

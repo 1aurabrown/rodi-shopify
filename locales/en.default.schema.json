@@ -1007,9 +1007,6 @@
     "header": {
       "name": "Header",
       "settings": {
-        "logo_header": {
-          "content": "Logo"
-        },
         "logo_help": {
           "content": "Edit your logo in [theme settings](/editor?context=theme&category=logo)."
         },
@@ -1039,6 +1036,9 @@
           },
           "options__2": {
             "label": "Mega menu"
+          },
+          "options__3": {
+            "label": "Drawer"
           }
         },
         "show_line_separator": {
@@ -1058,6 +1058,24 @@
           "options__4": {
             "label": "Always, reduce logo size"
           }
+        },
+        "header__3": {
+          "content": "Country/region selector"
+        },
+        "header__4": {
+          "info": "To add a country/region, go to your [market settings.](/admin/settings/markets)"
+        },
+        "enable_country_selector": {
+          "label": "Enable country/region selector"
+        },
+        "header__5": {
+          "content": "Language selector"
+        },
+        "header__6": {
+          "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+        },
+        "enable_language_selector": {
+          "label": "Enable language selector"
         },
         "margin_bottom": {
           "label": "Bottom margin"
@@ -2840,10 +2858,27 @@
         "cover_image": {
           "label": "Cover image"
         },
+        "video": {
+          "label": "Video"
+        },
+        "enable_video_looping": {
+          "label": "Play video on loop"
+        },
+        "header__1": {
+          "content": "Shopify-hosted video"
+        },
+        "header__2": {
+          "content": "Or embed video from URL"
+        },
+        "header__3": {
+          "content": "Style"
+        },
+        "paragraph": {
+          "content": "Shows when no Shopify-hosted video is selected."
+        },
         "video_url": {
           "label": "URL",
-          "placeholder": "Use a YouTube or Vimeo URL",
-          "info": "Video plays in the page."
+          "info": "Use a YouTube or Vimeo URL"
         },
         "description": {
           "label": "Video alt text",

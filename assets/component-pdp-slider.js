@@ -9,12 +9,28 @@ if (!customElements.get('pdp-slider')) {
         centeredSlides: true,
         simulateTouch: true,
         slideClass: 'swiper-slide',
+        on: {
+          touchMove: function(swiper, event) {
+            updateCursor(event)
+          },
+          touchStart: function(swiper, event) {
+            clickCursor(event)
+          },
+          touchEnd: function(swiper, event) {
+            releaseCursor(event)
+          }
+        },
         breakpoints: {
           768: {
-            slidesPerView: 1.25
+            slidesPerView: 1.125,
+            centeredSlides: false,
+          },
+          1024: {
+            slidesPerView: 1,
+            centeredSlides: false,
           },
           1280: {
-            slidesPerView: 1
+            slidesPerView: 1,
           }
         }
       })

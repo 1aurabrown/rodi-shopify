@@ -1,6 +1,7 @@
 <a href="{{ routes.cart_url }}" class="text-link uppercase" role="button" >
+  Cart
   <span id="cart-icon-bubble" class="text-center h4-b md:h2-b" >
-    Cart
+    {% render 'cart-icon-bubble' %}
   </span>
   <span class="sr-only">{{ 'templates.cart.cart' | t }}</span>
 </a>

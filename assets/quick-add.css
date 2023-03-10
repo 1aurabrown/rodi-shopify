@@ -111,8 +111,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  padding: 1.2rem;
+    padding: 1.2rem;
   z-index: 5;
   width: 4rem;
   position: fixed;

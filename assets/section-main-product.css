@@ -9,37 +9,6 @@
     z-index: 2;
   }
 
-  .product--thumbnail .thumbnail-list {
-  }
-
-  .product__info-wrapper {
-  }
-
-  }
-
-  .product__media-container .slider-buttons {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .product--large:not(.product--no-media) .product__media-wrapper {
-    max-width: 65%;
-  }
-
-  .product--large:not(.product--no-media) .product__info-wrapper {
-    max-width: 35%;
-  }
-
-  .product--medium:not(.product--no-media) .product__media-wrapper,
-  .product--small:not(.product--no-media) .product__info-wrapper {
-    max-width: 55%;
-  }
-
-  .product--medium:not(.product--no-media) .product__info-wrapper,
-  .product--small:not(.product--no-media) .product__media-wrapper {
-    max-width: 45%;
-  }
 }
 
 /* Product form */
@@ -64,7 +33,7 @@
 /* Form Elements */
 .product-form__input {
   flex: 0 0 100%;
-  margin: 1.2rem 0;
+  margin: 1.2rem 0 0;
   max-width: 37rem;
   min-width: fit-content;
   border: none;
@@ -95,14 +64,12 @@ fieldset.product-form__input .form__label {
   display: inline-block;
   margin: 0.7rem 0.5rem 0.2rem 0;
   text-align: center;
-  cursor: pointer;
-  position: relative;
+    position: relative;
 }
 
-.product-form__input input[type='radio'] + label:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
+
+.product-form__input input[type='radio']:checked + label {
+  text-decoration: underline;
 }
 
 .product-form__submit[aria-disabled="true"] + .shopify-payment-button .shopify-payment-button__button[disabled],
@@ -124,6 +91,7 @@ fieldset.product-form__input .form__label {
   left: 0;
   overflow: auto;
   width: 100%;
+  background: rgba(0,0,0, 0.2);
   height: 100%;
 }
 
@@ -134,26 +102,21 @@ fieldset.product-form__input .form__label {
 }
 
 .product-popup-modal__content {
+  background-color: white;
   overflow: auto;
   height: 80%;
   margin: 0 auto;
   left: 50%;
-  transform: translateX(-50%);
-  margin-top: 5rem;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
   width: 92%;
   position: absolute;
-  top: 0;
-  border-style: solid;
+  max-width: 640px;
 }
 
 @media screen and (min-width: 750px) {
   .product-popup-modal__content {
-    margin-top: 10rem;
     width: 70%;
-  }
-
-  .product-media-modal__dialog .global-media-settings--no-shadow {
-    overflow: visible !important;
   }
 }
 
@@ -161,10 +124,22 @@ fieldset.product-form__input .form__label {
   max-width: 100%;
 }
 
+.product-popup-modal__content table {
+  max-width: fit-content;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.product-popup-modal__content table thead td {
+  text-decoration: underline;
+}
+.product-popup-modal__content table  td {
+  padding: 0.375rem 1.5rem 0.375rem 0;
+}
+
 @media screen and (max-width: 749px) {
   .product-popup-modal__content table {
     display: block;
-    max-width: fit-content;
     overflow-x: auto;
     white-space: nowrap;
     margin: 0;
@@ -174,23 +149,15 @@ fieldset.product-form__input .form__label {
 .product-popup-modal__opener {
   display: inline-block;
 }
-
-.product-popup-modal__button {
-  height: 4.4rem;
-  text-underline-offset: 0.2rem;
-  text-decoration-thickness: 0.1rem;
-}
-
-.product-popup-modal__button:hover {
-  text-decoration-thickness: 0.2rem;
-}
-
 .product-popup-modal__content-info {
+  margin: 3rem;
+}
+.product-popup-modal__content-info > h1 {
+  margin: 2rem 0 1rem;
 }
 
 .product-popup-modal__content-info > * {
   height: auto;
-  margin: 0 auto;
   max-width: 100%;
   width: 100%;
 }
@@ -202,29 +169,21 @@ fieldset.product-form__input .form__label {
 }
 
 .product-popup-modal__toggle {
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  position: sticky;
+    position: absolute;
   z-index: 2;
-  top: 1.5rem;
-  width: 4rem;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  padding: .5rem;
   margin: 0 0 0 auto;
-}
-
-.product-popup-modal__toggle:hover {
 }
 
 .product-popup-modal__toggle .icon {
   height: auto;
   margin: 0;
   width: 2.2rem;
-}
-
-@media screen and (max-width: 749px) {
-  .product__modal-opener {
-    width: 100%;
-  }
 }

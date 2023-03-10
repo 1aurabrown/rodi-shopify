@@ -801,7 +801,7 @@ class VariantSelects extends HTMLElement {
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
-    this.updatePickupAvailability();
+    // this.updatePickupAvailability();
     this.removeErrorMessage();
     this.updateVariantStatuses();
 
@@ -936,7 +936,7 @@ class VariantSelects extends HTMLElement {
         if (inventoryDestination) inventoryDestination.classList.toggle('visibility-hidden', inventorySource.innerText === '');
 
         const addButtonUpdated = html.getElementById(`ProductSubmitButton-${sectionId}`);
-        this.toggleAddButton(addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true, window.variantStrings.soldOut);
+        this.toggleAddButton(addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true, addButtonUpdated.innerText.trim());
 
         publish(PUB_SUB_EVENTS.variantChange, {data: {
           sectionId,
@@ -958,7 +958,7 @@ class VariantSelects extends HTMLElement {
       if (text) addButtonText.textContent = text;
     } else {
       addButton.removeAttribute('disabled');
-      addButtonText.textContent = window.variantStrings.addToCart;
+      if (text) addButtonText.textContent = text;
     }
 
     if (!modifyClass) return;

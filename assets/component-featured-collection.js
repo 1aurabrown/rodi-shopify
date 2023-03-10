@@ -1,30 +1,43 @@
 if (!customElements.get('featured-collection')) {
   class FeaturedCollection extends HTMLElement {
     constructor() {
-      console.log('constructor')
       super();
       this.swiperEl = this.querySelector('.collection-swiper')
       this.options = {
-        spaceBetween: 20,
-        slidesPerView: 1.25,
-        loop: false,
-        simulateTouch: true,
+        spaceBetween: 10,
+        slidesPerView: 1,
+        loop: true,
+        threshold: 10,
+        centeredSlides: false,
+        preventClicksPropagation: false,
         navigation: {
           nextEl: '.collection-next',
           prevEl: '.collection-prev',
         },
+        on: {
+          touchMove: function(swiper, event) {
+            updateCursor(event)
+          },
+          touchStart: function(swiper, event) {
+            clickCursor(event)
+          },
+          touchEnd: function(swiper, event) {
+            releaseCursor(event)
+          }
+        },
         breakpoints: {
           640: {
-            slidesPerView: 2.25,
-            spaceBetween: 20
+            spaceBetween: 10,
+            slidesPerView: 3,
+            centeredSlides: false,
           },
           768: {
-            slidesPerView: 3.25,
-            spaceBetween: 20
+            spaceBetween: 10,
+            slidesPerView: 4,
           },
           1024: {
             spaceBetween: 40,
-            slidesPerView: 4
+            slidesPerView: 5
           },
           1280: {
             spaceBetween: 40,
@@ -42,14 +55,10 @@ if (!customElements.get('featured-collection')) {
     }
 
     connectedCallback() {
-      console.log('connected')
       if (typeof(Swiper) != 'undefined') {
-        console.log('swiper is loaded')
         this.create()
       } else {
-        console.log('swiper is undefined')
         document.addEventListener('swiperLoaded', () => {
-          console.log('swiper is loaded later')
           this.create()
         })
       }
