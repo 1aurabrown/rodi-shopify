@@ -1,1 +1,7 @@
-<span x-text="$store.tab.current == 'cart' ? 'X' : 'Cart'">Cart</span>
+<span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+{%- if cart != empty -%}
+  {%- if cart.item_count < 100 -%}
+    <span class="cart-count-bubble" aria-hidden="true">({{ cart.item_count }})</span>
+  {%- endif -%}
+  <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+{%- endif -%}

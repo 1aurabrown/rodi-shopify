@@ -7,25 +7,25 @@
   loadDynamicScriptTag("{{ 'product-form.js' | asset_url }}")
 </script>
 
-{%- if product.media.size > 1 -%}
+{%- if product.images.size > 1 -%}
   <script src="{{ 'component-pdp-slider.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 <pdp-slider id="MediaGallery-{{ section.id }}" role="region" aria-label="{{ 'products.product.media.gallery_viewer' | t }}" class="overflow-hidden block">
   <div id="GalleryStatus-{{ section.id }}" class="sr-only" role="status"></div>
-  <a class="skip-to-content-link button sr-only" href="#ProductInfo-{{ section.id }}">
-    {{ "accessibility.skip_to_product_info" | t }}
-  </a>
-  <div {% if product.media.size > 1 %} data-slider {% endif %} class="pdp-swiper px-5 xl:px-45 pdp-slider " id="GalleryViewer-{{ section.id }}">
+  <div {% if product.media.size > 1 %} data-slider {% endif %} class="pdp-swiper px-padding-sm lg:px-20 pdp-slider " id="GalleryViewer-{{ section.id }}">
     <ul class="flex swiper-wrapper" role="list">
-      {%- for media in product.media -%}
-        <li  id="Slide-{{ section.id }}-{{ media.id }}" data-media-position="{{ forloop.index0 }}" class="swiper-slide w-full block">
-          {% render 'image', image: media,
-            class: image_class,
-            preload: true,
-            use_padding: true,
-            sizes: "100vw, (min-width: 768px) 50vw"
-          %}
+      {%- for image in product.images -%}
+        <li  id="Slide-{{ section.id }}-{{ image.id }}" data-media-position="{{ forloop.index0 }}" class="swiper-slide w-full block relative">
+          <div class="pb-[100%]">
+            {% render 'image', image: image,
+              class: 'absolute inset-0 w-full h-full',
+              use_padding: false,
+              preload: true,
+              fit: 'cover',
+              sizes: "100vw, (min-width: 768px) 50vw"
+            %}
+          </div>
         </li>
       {%- endfor -%}
     </ul>

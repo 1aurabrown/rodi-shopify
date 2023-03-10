@@ -4,8 +4,7 @@
 
 .disclosure__button {
   align-items: center;
-  cursor: pointer;
-  display: flex;
+    display: flex;
   height: 4rem;
   padding: 0 1.5rem 0 1.5rem;
   font-size: 1.3rem;

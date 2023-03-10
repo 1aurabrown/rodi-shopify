@@ -1,4 +1,47 @@
 {
   "current": {
+    "show_cart_note": true,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "Welcome to our store",
+              "color_scheme": "bg-blue",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "newsletter_enable": true,
+          "newsletter_placeholder": "Your email",
+          "newsletter_heading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "newsletter_success": "Lorem ipsum dolor sit amet.",
+          "newsletter_error": "There was an error, please try again.",
+          "newsletter_list_id": "",
+          "show_social": true,
+          "menu": "footer"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
   }
 }

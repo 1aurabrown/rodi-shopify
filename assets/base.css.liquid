@@ -51,8 +51,10 @@ body {
 }
 
 .skip-to-content-link:focus {
+  background-color: white;
   z-index: 9999;
-  position: inherit;
+  position: absolute;
+  left: 10px;
   overflow: auto;
   width: auto;
   height: auto;
@@ -64,11 +66,6 @@ table:not([class]) {
   border-collapse: collapse;
   border-style: hidden;
   /* draws the table border  */
-}
-
-table:not([class]) td,
-table:not([class]) th {
-  padding: 1em;
 }
 
 a:empty,
@@ -158,8 +155,7 @@ details > * {
 
 /* base-details-summary */
 summary {
-  cursor: pointer;
-  list-style: none;
+    list-style: none;
   position: relative;
 }
 
@@ -455,4 +451,9 @@ deferred-media {
   height: 100%;
   position: relative;
   transition-property: transform;
+}
+
+#cursor {
+  transition-property: background-color, border-color, transform;
+  transition-duration: 200ms;
 }

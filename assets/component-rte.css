@@ -16,11 +16,16 @@
   table-layout: fixed;
 }
 
-@media screen and (min-width: 750px) {
-  .rte table td {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-  }
+.rte table td {
+  padding-left: 0;
+  padding-right: 1.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  text-align: center;
+}
+
+.rte table thead td {
+  text-decoration: underline;
 }
 
 .rte img {
@@ -43,15 +48,6 @@
 .rte li:last-child {
   margin-bottom: 0;
 }
-
-.rte a {
-  text-decoration: underline;
-}
-
-.rte a:hover {
-  text-decoration-thickness: 2px;
-}
-
 .rte blockquote {
   display: inline-flex;
 }
