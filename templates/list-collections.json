@@ -12,7 +12,8 @@
         "collection-2": {
           "type": "collection",
           "settings": {
-            "collection": "all"
+            "collection": "all",
+            "show_image": true
           }
         }
       },

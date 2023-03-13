@@ -10,14 +10,14 @@
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 
-<cart-items class="px-padding-sm mt-10 max-w-screen-lg mr-auto {% if cart == empty %} is-empty{% endif %}">
+<cart-items class="padding-x py-10 max-w-screen-lg mb-25 lg:mb-35 {% if cart == empty %}is-empty mx-auto{% else %}mr-auto{% endif %}">
   <div class="title-wrapper-with-link">
     <h1 class="title uppercase">{{ 'sections.cart.title' | t }}</h1>
   </div>
 
   <div class="cart__warnings">
     <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-    <a href="{{ routes.all_products_collection_url }}" class="button">
+    <a href="{{ routes.all_products_collection_url }}" class="max-w-xs mx-auto text-link underline hover:no-underline">
       {{ 'general.continue_shopping' | t }}
     </a>
 

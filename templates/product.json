@@ -26,10 +26,16 @@
             "sizing_page": "sizing"
           }
         },
+        "inventory": {
+          "type": "inventory",
+          "settings": {
+            "show_preorder": true
+          }
+        },
         "0e537071-9aef-4e17-8465-bc367332db5d": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true
+            "show_dynamic_checkout": false
           }
         }
       },
@@ -38,6 +44,7 @@
         "79f1b88f-520b-4a38-a943-780dbec529db",
         "9b92fe32-3c10-4fd6-9402-90a2f23d95bf",
         "variant-picker",
+        "inventory",
         "0e537071-9aef-4e17-8465-bc367332db5d"
       ],
       "settings": {

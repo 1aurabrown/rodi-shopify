@@ -49,26 +49,24 @@
             if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
               assign check_against_inventory = false
             endif
+
             if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
               assign quantity_rule_soldout = true
-            elsif product.selected_or_first_available_variant.inventory_management == 'shopify' and product.selected_or_first_available_variant.inventory_policy == 'continue' and product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity
-              assign quantity_rule_preorder = true
             endif
           -%}
           <button
             id = "ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            class="product-form__submit button inline-flex items-center"
+            href="{{ collection.url }}"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
               disabled
             {% endif %}
           >
-            <span>
+            <span class="mr-1 uppercase">
               {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
-              {%- elsif quantity_rule_preorder -%}
-                {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
@@ -107,7 +105,7 @@
   {%- endif -%}
 
   {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-    <div class="product__tax caption rte text-center mt-4">
+    <div class="product__tax caption rte mt-4">
       <small>
         {%- if shop.taxes_included -%}
           {{ 'products.product.include_taxes' | t }}

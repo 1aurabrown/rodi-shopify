@@ -36,15 +36,15 @@ if (!customElements.get('featured-collection')) {
             slidesPerView: 4,
           },
           1024: {
-            spaceBetween: 40,
+            spaceBetween: 20,
             slidesPerView: 5
           },
           1280: {
-            spaceBetween: 40,
+            spaceBetween: 20,
             slidesPerView: 5
           },
           1440: {
-            spaceBetween: 40,
+            spaceBetween: 20,
             slidesPerView: 6
           }
         }

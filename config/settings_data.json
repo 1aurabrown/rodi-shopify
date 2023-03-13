@@ -31,12 +31,10 @@
         "settings": {
           "newsletter_enable": true,
           "newsletter_placeholder": "Your email",
-          "newsletter_heading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           "newsletter_success": "Lorem ipsum dolor sit amet.",
           "newsletter_error": "There was an error, please try again.",
           "newsletter_list_id": "",
-          "show_social": true,
-          "menu": "footer"
+          "show_social": false
         }
       }
     },

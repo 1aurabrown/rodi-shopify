@@ -19,19 +19,6 @@ if (!customElements.get('pdp-slider')) {
           touchEnd: function(swiper, event) {
             releaseCursor(event)
           }
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 1.125,
-            centeredSlides: false,
-          },
-          1024: {
-            slidesPerView: 1,
-            centeredSlides: false,
-          },
-          1280: {
-            slidesPerView: 1,
-          }
         }
       })
     }

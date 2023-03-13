@@ -1,6 +1,6 @@
 {{ 'component-rte.css' | asset_url | stylesheet_tag }}
 
-<div class="page">
+<div class="mb-25 lg:mb-35">
   <div class="page__container">
     <div class="page__title">
       <h1 class="main-page-title page-title">
@@ -10,14 +10,16 @@
       {% assign image = page.metafields.custom.image.value %}
 
       {% if image %}
-        {% render 'image', image: image, use_padding: true, sizes:"0vw, (min-width: 768px) 50vw, (min-width: 1024px) 33vw", wrapper_class: 'hidden md:block md:mt-15 lg:mt-25 xl:mt-35 md:w-3/4 lg:w-2/3' %}
+        <div class="hidden md:grid grid-cols-6 col-gap-gutter-sm md:mt-15 lg:mt-25 xl:mt-35 ">
+          {% render 'image', image: image, use_padding: true, sizes:"(min-width: 768px) 50vw, 0vw ", wrapper_class: 'col-span-5' %}
+        </div>
       {% endif %}
     </div>
     <div class="rte page__body">
       {{ page.content }}
       <div>
         {% if image %}
-          {% render 'image', image: image, use_padding: true, sizes:"100vw, (min-width: 768px) 0vw", wrapper_class: 'md:hidden w-full my-15' %}
+          {% render 'image', image: image, use_padding: true, sizes:"100vw (min-width: 768px), 0vw", wrapper_class: 'md:hidden w-full my-15' %}
         {% endif %}
       </div>
     </div>
@@ -28,6 +30,6 @@
 {
   "name": "t:sections.main-page.name",
   "tag": "section",
-  "class": "section"
+  "class": "page"
 }
 {% endschema %}

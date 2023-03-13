@@ -11,9 +11,9 @@
   <script src="{{ 'component-pdp-slider.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-<pdp-slider id="MediaGallery-{{ section.id }}" role="region" aria-label="{{ 'products.product.media.gallery_viewer' | t }}" class="overflow-hidden block">
+<pdp-slider id="MediaGallery-{{ section.id }}" role="region" aria-label="{{ 'products.product.media.gallery_viewer' | t }}" class="padding-x md:pr-0 block">
   <div id="GalleryStatus-{{ section.id }}" class="sr-only" role="status"></div>
-  <div {% if product.media.size > 1 %} data-slider {% endif %} class="pdp-swiper px-padding-sm lg:px-20 pdp-slider " id="GalleryViewer-{{ section.id }}">
+  <div {% if product.media.size > 1 %} data-slider {% endif %} class="pdp-swiper overflow-hidden pdp-slider " id="GalleryViewer-{{ section.id }}">
     <ul class="flex swiper-wrapper" role="list">
       {%- for image in product.images -%}
         <li  id="Slide-{{ section.id }}-{{ image.id }}" data-media-position="{{ forloop.index0 }}" class="swiper-slide w-full block relative">

@@ -16,12 +16,14 @@
 
 {% assign aspect_ratio = collection.products[0].featured_image.aspect_ratio %}
 
-<featured-collection class="block my-15 md:my-25 lg:my-35">
+<featured-collection class="block mb-25 lg:mb-35">
   <section id="FeaturedProducts-{{ section.id }}" data-section="{{ section.id }}">
 
-    <div class="mt-9 mb-6 md:mb-9 px-padding-sm lg:px-20 flex justify-between">
+    <div class="mt-9 mb-6 md:mb-9 padding-x flex justify-between">
       <h2 class="uppercase">{{ section.settings.heading | default: collection.title }}</h2>
-      {% if collection %}<a class="text-link" href="{{ collection.url }}">Shop All</a>{% endif %}
+      {% if collection %}
+        <a class="animate-arrow inline-flex items-center" href="{{ collection.url }}"><span class="mr-1">Shop All</span> {% render 'icon-arrow' %}</a>
+      {% endif %}
     </div>
 
       <div class="collection-swiper relative z-[1] overflow-hidden px-20">
@@ -31,7 +33,7 @@
             assign description = product.metaields.descriptors.subtitle
             assign title = product.title
           %}
-            <li class="w-1/6 swiper-slide">
+            <li class="w-1/6 swiper-slide pb-thin">
               {% render 'product-card',
                 product: product,
                 collection: collection,
@@ -49,8 +51,8 @@
             {%- endfor -%}
           {%- endfor -%}
         </ul>
-        <div class="collection-prev w-5 lg:w-15 flex items-center justify-center">{% render 'arrow.svg', class: 'absolute top-1/2 left-1 -translate-y-1/2 rotate-180 w-2 lg:w-6' %}</div>
-        <div class="collection-next w-5 lg:w-15 flex items-center justify-center">{% render 'arrow.svg', class: 'absolute top-1/2 right-1 -translate-y-1/2 w-2 lg:w-6' %}</div>
+        <div class="collection-prev focus-visible:ring-inset w-18 flex items-center justify-center">{% render 'icon-arrow-small', class: 'absolute top-1/2 left-padding-sm -translate-y-1/2 -rotate-180 w-2 lg:w-3' %}</div>
+        <div class="collection-next focus-visible:ring-inset w-18 flex items-center justify-center">{% render 'icon-arrow-small', class: 'absolute top-1/2 right-padding-sm -translate-y-1/2 w-2 lg:w-3' %}</div>
 
       </div>
   </section>

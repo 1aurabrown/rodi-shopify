@@ -1,4 +1,4 @@
-<section class="">
+<div class="mb-25 lg:mb-35">
   <div class="">
     {% if section.settings.image %}
       <div class="md:mx-47 {% if section.settings.mobile_image %} hidden md:block {% endif %}">
@@ -29,12 +29,13 @@
     {% endif %}
 
   </div>
-</section>
+</div>
 
 
 {% schema %}
 {
   "name": "Hero",
+  "tag": "section",
   "settings": [
     {
       "label": "Image",

@@ -2,7 +2,8 @@
 const spacing = {
   // Theme-specific spacing
   // Add here
-  'padding-sm': '1.5rem',
+  'padding-sm': '1.25rem',
+  'gutter-sm': '0.625rem',
   'announcement': 'var(--announcement-bar-height)',
   'header': 'var(--header-height)',
   'screen-less-header': 'var(--screen-less-header)',
@@ -73,9 +74,8 @@ module.exports = {
       'black': "#212121",
       'current': 'currentColor',
       'red': '#b3322c',
-      // 'button': '#b3322c',
-      'button': '#b3322c',
-      'button-secondary': '#C4D1E2'
+      'button': '#FDFBF9',
+      'button-secondary': '#212121'
     },
     fontSize: {
       base: "0.8125rem",
@@ -99,10 +99,6 @@ module.exports = {
       spacing: spacing,
       minHeight: spacing,
       maxHeight: spacing,
-      gridTemplateColumns: {
-        // Complex site-specific column configuration
-        'pdp': 'minmax(0, 5fr), minmax(0, 3fr)'
-      }
     }
   },
 }
