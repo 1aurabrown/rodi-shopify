@@ -5,8 +5,8 @@
         {% render 'image', image: collection.image, use_padding: true, sizes: "100vw, (min-width: 768px) 50vw" %}
       </div>
     {% endif %}
-    {% for product in collection.products, limit: limit %}
-      {%- render 'product-card', class:"lg:col-span-3", collection: collection, section: section, card_product: product -%}
+    {% for product in collection.products limit: limit %}
+      {%- render 'product-card', class: "lg:col-span-3", collection: collection, section: section, card_product: product -%}
     {% endfor %}
   </div>
 </div>

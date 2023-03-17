@@ -41,7 +41,7 @@
 
   {% if use_padding != false %}
     <div class="relative {{ wrapper_class }}">
-      <div class="keep-empty" style="padding-bottom: {{ 1.00 | divided_by: image.aspect_ratio | times: 100.00 | append: '%'}} ">
+      <div class="keep-empty" style="padding-bottom: {{ 1.00 | divided_by: image.aspect_ratio | times: 100.00 | append: '%' }} ">
   {% endif %}
 
       {{ image | image_url: width: image.width | image_tag:

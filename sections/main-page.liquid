@@ -11,7 +11,7 @@
 
       {% if image %}
         <div class="hidden md:grid grid-cols-6 col-gap-gutter-sm md:mt-15 lg:mt-25 xl:mt-35 ">
-          {% render 'image', image: image, use_padding: true, sizes:"(min-width: 768px) 50vw, 0vw ", wrapper_class: 'col-span-5' %}
+          {% render 'image', image: image, use_padding: true, sizes: "(min-width: 768px) 50vw, 0vw ", wrapper_class: 'col-span-5' %}
         </div>
       {% endif %}
     </div>
@@ -19,7 +19,7 @@
       {{ page.content }}
       <div>
         {% if image %}
-          {% render 'image', image: image, use_padding: true, sizes:"100vw (min-width: 768px), 0vw", wrapper_class: 'md:hidden w-full my-15' %}
+          {% render 'image', image: image, use_padding: true, sizes: "100vw (min-width: 768px), 0vw", wrapper_class: 'md:hidden w-full my-15' %}
         {% endif %}
       </div>
     </div>

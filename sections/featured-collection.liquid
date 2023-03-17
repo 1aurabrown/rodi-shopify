@@ -14,15 +14,15 @@
 
 {% assign collection = section.settings.collection %}
 
-{% assign aspect_ratio = collection.products[0].featured_image.aspect_ratio %}
+
 
 <featured-collection class="block mt-9 mb-25 lg:mb-35">
   <section id="FeaturedProducts-{{ section.id }}" data-section="{{ section.id }}">
 
     <div class="mb-6 md:mb-9 padding-x flex justify-between">
       {% if collection %}
-        <h2 class="uppercase"><a class="animate-arrow inline-flex items-center" title="{{ colleciton.title }}" href="{{ collection.url }}">{{ section.settings.heading | default: collection.title }}</a></h2>
-        <a class="animate-arrow inline-flex items-center" title="{{ colleciton.title }}" aria-hidden="true" href="{{ collection.url }}"><span class="mr-1">See All</span> {% render 'icon-arrow' %}</a>
+        <h2 class="uppercase"><a class="animate-arrow inline-flex items-center" title="{{ collection.title }}" href="{{ collection.url }}">{{ section.settings.heading | default: collection.title }}</a></h2>
+        <a class="animate-arrow inline-flex items-center" title="{{ collection.title }}" aria-hidden="true" href="{{ collection.url }}"><span class="mr-1">See All</span> {% render 'icon-arrow' %}</a>
       {% else %}
         <h2 class="uppercase">{{ section.settings.heading | default: collection.title }}</h2>
       {% endif %}
@@ -35,7 +35,6 @@
         <ul class="flex swiper-wrapper">
           {%- for collection_product in collection.products -%}
           {% liquid
-            assign title = collection_product.title
           %}
             <li class="w-1/6 swiper-slide pb-thin">
               {% render 'product-card',
@@ -60,13 +59,11 @@
 </featured-collection>
 
 {% schema %}
-
 {
   "name": "Featured Collection",
   "tag": "section",
   "settings": [
     {
-
       "type": "text",
       "id": "heading",
       "default": "Featured Collection",
@@ -94,5 +91,4 @@
     }
   ]
 }
-
 {% endschema %}

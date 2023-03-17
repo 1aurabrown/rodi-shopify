@@ -27,7 +27,7 @@
           <div class="flex justify-between">
             {% render 'product-variant-options', product: product, option: option, block: block %}
             {% if block.settings.sizing_page != blank %}
-              {% if option.name contains 'Size' or option.name contains 'size'  %}
+              {% if option.name contains 'Size' or option.name contains 'size' %}
                 {% render 'product-sizing-button', block: block %}
               {% endif %}
             {% endif %}
@@ -71,7 +71,7 @@
         </div>
 
         {% if block.settings.sizing_page != blank %}
-          {% if option.name contains 'Size' or option.name contains 'size'  %}
+          {% if option.name contains 'Size' or option.name contains 'size' %}
             {% render 'product-sizing-button', block: block %}
           {% endif %}
         {% endif %}
