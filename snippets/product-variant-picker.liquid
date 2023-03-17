@@ -13,7 +13,7 @@
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
-      class="no-js-hidden mt-9"
+      class="no-js-hidden my-6 flex items-end justify-start"
       data-section="{{ section.id }}"
       data-url="{{ product.url }}"
       {% if update_url == false %}
@@ -23,15 +23,18 @@
     >
       {%- for option in product.options_with_values -%}
         <fieldset class="js product-form__input">
-          <legend class="form__label uppercase">{{ option.name }}</legend>
-          {% render 'product-variant-options', product: product, option: option, block: block %}
+          <legend class="form__label">{{ option.name }}</legend>
+          <div class="flex justify-between">
+            {% render 'product-variant-options', product: product, option: option, block: block %}
+            {% if block.settings.sizing_page != blank %}
+              {% if option.name contains 'Size' or option.name contains 'size'  %}
+                {% render 'product-sizing-button', block: block %}
+              {% endif %}
+            {% endif %}
+          </div>
         </fieldset>
 
-        {% if block.settings.sizing_page != blank %}
-          {% if option.name contains 'Size' or option.name contains 'size'  %}
-            {% render 'product-sizing-button', block: block %}
-          {% endif %}
-        {% endif %}
+
 
       {%- endfor -%}
       <script type="application/json">

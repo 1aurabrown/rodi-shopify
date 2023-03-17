@@ -1,54 +1,55 @@
 <link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
+<div class="header-wrapper sticky top-0 z-30">
+  <header class="header h-header padding-x py-4 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-transparent{% endif %} flex justify-between sm:justify-start items-end">
 
-<header class="header h-header padding-x py-4 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-white{% endif %} flex justify-between sm:justify-start items-end">
+    {%- if request.page_type == 'index' -%}
+      <h1>
+    {%- endif -%}
+        <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="block ">
+          {% render 'logo.svg', class: 'w-20 sm:w-[9.375rem]' %}
+        </a>
+    {%- if request.page_type == 'index' -%}
+      </h1>
+    {%- endif -%}
 
-  {%- if request.page_type == 'index' -%}
-    <h1>
-  {%- endif -%}
-      <a href="{{ routes.root_url }}" title="{{ shop.name }}" class="block ">
-        {% render 'logo.svg', class: 'w-20 sm:w-[9.375rem]' %}
-      </a>
-  {%- if request.page_type == 'index' -%}
-    </h1>
-  {%- endif -%}
-
-  <div class="ml-8 -mb-thin">
-      <nav>
-        <ul class="flex text-sm sm:text-base space-x-5 sm:space-x-7 justify-end" role="list">
-          {%- if section.settings.menu != blank -%}
-            {%- for link in section.settings.menu.links -%}
+    <div class="ml-8 -mb-thin">
+        <nav>
+          <ul class="flex space-x-5 sm:space-x-7 justify-end" role="list">
+            {%- if section.settings.menu != blank -%}
+              {%- for link in section.settings.menu.links -%}
+                <li>
+                  <a title="{{ link.title }}" href="{{ link.url }}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
+                    <span>{{ link.title | escape }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if shop.customer_accounts_enabled -%}
               <li>
-                <a title="{{ link.title }}" href="{{ link.url }}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
-                  <span>{{ link.title | escape }}</span>
+                <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
+                {% render 'icon-account' %}
+                  <span class="sr-only">
+                    {%- liquid
+                      if customer
+                        echo 'customer.account_fallback' | t
+                      else
+                        echo 'customer.log_in' | t
+                      endif
+                    -%}
+                  </span>
                 </a>
               </li>
-            {%- endfor -%}
-          {%- endif -%}
-          {%- if shop.customer_accounts_enabled -%}
-            <li>
-              <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
-              {% render 'icon-account' %}
-                <span class="sr-only">
-                  {%- liquid
-                    if customer
-                      echo 'customer.account_fallback' | t
-                    else
-                      echo 'customer.log_in' | t
-                    endif
-                  -%}
-                </span>
-              </a>
-            </li>
-          {%- endif -%}
+            {%- endif -%}
 
-          <li>
-            {%- render "cart-button" -%}
-          </li>
-        </ul>
-      </nav>
-  </div>
-</header>
+            <li>
+              {%- render "cart-button" -%}
+            </li>
+          </ul>
+        </nav>
+    </div>
+  </header>
+</div>
 
 <script type="application/ld+json">
   {

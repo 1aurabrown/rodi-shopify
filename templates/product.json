@@ -29,7 +29,13 @@
         "inventory": {
           "type": "inventory",
           "settings": {
-            "show_preorder": true
+            "inventory_threshold": 10,
+            "show_inventory_quantity": false,
+            "preorder_text": "Ships in 5-6 weeks",
+            "show_in_stock": false,
+            "show_low_stock": false,
+            "show_preorder": true,
+            "show_out_of_stock": false
           }
         },
         "0e537071-9aef-4e17-8465-bc367332db5d": {
@@ -60,7 +66,8 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "frontpage",
+        "heading": "More Rodi",
+        "collection": "all",
         "enable_quick_add": true
       }
     }

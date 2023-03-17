@@ -26,8 +26,8 @@
     @apply focus;
   }
 
-  html {
-    @apply bg-white;
+  html, body {
+    @apply bg-white text-black;
   }
 
   input[type='radio']:focus + label {
@@ -179,12 +179,12 @@
 
   body .shopify-policy__title, body .shopify-policy__body,
   .page__title, .page__body {
-    @apply max-w-none md:pt-10;
+    @apply max-w-none md:pt-9;
   }
 
   body .shopify-policy__title,
   .page__title {
-    @apply md:sticky md:top-header mt-10 md:mt-0 mb-15 md:mb-0 text-left;
+    @apply md:sticky md:top-header pt-9 md:mt-0 mb-15 md:mb-0 text-left;
   }
 
   body .shopify-policy__title h1,

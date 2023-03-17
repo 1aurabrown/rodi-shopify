@@ -1,6 +1,17 @@
 {
   "current": {
+    "favicon": "shopify:\/\/shop_images\/Frame_5.png",
     "show_cart_note": true,
+    "checkout_logo_image": "shopify:\/\/shop_images\/RODI_LOGO_WHITE_BACKGROUND.jpg",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "transparent",
+    "checkout_sidebar_background_color": "#fdfbf9",
+    "checkout_heading_font": "Lato",
+    "checkout_body_font": "Lato",
+    "checkout_accent_color": "#212121",
+    "checkout_button_color": "#212121",
+    "checkout_error_color": "#b3322c",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",

@@ -23,6 +23,7 @@
   assign product_form_id = 'product-form-' | append: section.id
 -%}
 
+<div>
 {%- for value in option.values -%}
   {%- liquid
     assign option_disabled = true
@@ -59,7 +60,7 @@
         class="disabled"
       {% endif %}
     >
-    <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+    <label class="mt-1 mr-1" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
       {{ value -}}
       <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
     </label>
@@ -78,3 +79,5 @@
     </option>
   {%- endif -%}
 {%- endfor -%}
+
+</div>

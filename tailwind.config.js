@@ -89,7 +89,7 @@ module.exports = {
       normal: "normal",
     },
     lineHeight: {
-      body: "1.6em",
+      body: "1.7em",
       normal: "normal"
     },
     extend: {

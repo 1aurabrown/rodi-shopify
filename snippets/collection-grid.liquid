@@ -1,12 +1,12 @@
 <div class="collection-grid">
   <div class="grid grid-cols-1 md:grid-cols-2 md:grid-flow-dense lg:grid-cols-12 gap-x-gutter-sm gap-y-14">
     {% if show_image and collection.image %}
-      <div class='lg:col-span-5 lg:row-span-2 md:col-start-2 lg:col-start-8'>
+      <div class='lg:col-span-5 lg:row-span-2 md:col-start-2 lg:col-start-8 relative'>
         {% render 'image', image: collection.image, use_padding: true, sizes: "100vw, (min-width: 768px) 50vw" %}
       </div>
     {% endif %}
     {% for product in collection.products, limit: limit %}
-      {%- render 'product-card', class:"lg:col-span-3", collection: collection, section: section, product: product -%}
+      {%- render 'product-card', class:"lg:col-span-3", collection: collection, section: section, card_product: product -%}
     {% endfor %}
   </div>
 </div>

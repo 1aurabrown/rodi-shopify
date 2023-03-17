@@ -1,10 +1,13 @@
-<div class="padding-x">
-  <ul role="list">
+<div class="mt-9 mb-25 lg:mb-35 padding-x">
+  <ul role="list" class="space-y-25">
     {%- for block in section.blocks -%}
       {%- assign collection = block.settings.collection -%}
       {%- if collection != blank -%}
-        <li class="mb-25">
-          <h2 class="pt-10 pb-9 uppercase"><a href="{{ colleciton.url }}" title="{{ collection.title }}">{{ collection.title }}</a></h2>
+        <li>
+          <h2 class="mb-6 md:mb-9  uppercase">
+            <a class="animate-arrow inline-flex items-center" href="{{ collection.url }}">
+              <span class="mr-1">Shop All</span> {% render 'icon-arrow' %}</a>
+          </h2>
           {% render 'collection-grid', title: collection.title, collection: collection, limit: 4, show_image: block.settings.show_image %}
         </li>
       {%- endif %}
@@ -15,7 +18,7 @@
 {% schema %}
 {
   "name": "t:sections.main-list-collections.name",
-  "class": "section",
+  "tag": "section",
   "blocks": [
     {
       "name": "Collection",
