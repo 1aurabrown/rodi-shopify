@@ -1,22 +1,14 @@
-{{ 'component-product-card.css' | asset_url | stylesheet_tag }}
-
-<div class="">
-  <ul role="list" class="space-y-15">
+<div class="mt-9 mb-25 lg:mb-35 padding-x">
+  <ul role="list" class="space-y-25">
     {%- for block in section.blocks -%}
       {%- assign collection = block.settings.collection -%}
       {%- if collection != blank -%}
         <li>
-          <div class="collection-grid px-padding-sm">
-            <div class="flex justify-between pt-10 pb-9">
-              <h2 class="uppercase">{{ collection.title }}</h2>
-              {% if collection %}<a class="text-link" href="{{ collection.url }}">Shop All</a>{% endif %}
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-2 gap-y-14">
-              {% for product in collection.products limit: 4 %}
-                {%- render 'product-card', collection: collection, section: section, product: product -%}
-              {% endfor %}
-            </div>
-          </div>
+          <h2 class="mb-6 md:mb-9  uppercase">
+            <a class="animate-arrow inline-flex items-center" href="{{ collection.url }}">
+              <span class="mr-1">Shop All</span> {% render 'icon-arrow' %}</a>
+          </h2>
+          {% render 'collection-grid', title: collection.title, collection: collection, limit: 4, show_image: block.settings.show_image %}
         </li>
       {%- endif %}
     {%- endfor -%}
@@ -26,7 +18,7 @@
 {% schema %}
 {
   "name": "t:sections.main-list-collections.name",
-  "class": "section",
+  "tag": "section",
   "blocks": [
     {
       "name": "Collection",
@@ -36,6 +28,11 @@
           "type": "collection",
           "label": "Collection",
           "id": "collection"
+        },
+        {
+          "type": "checkbox",
+          "label": "Show Collection Image",
+          "id": "show_image"
         }
       ]
     }

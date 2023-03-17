@@ -47,18 +47,13 @@ featured-collection {
   }
   .collection-prev,
   .collection-next {
-    padding-top: calc((100% - 320px ) / 5)
+    padding-top: calc((100% - 240px ) / 5)
   }
 }
-@media screen and (min-width: 1280px) {
-  .collection-prev,
-  .collection-next {
-    padding-top: calc((100% - 320px ) / 5)
-  }
-}
+
 @media screen and (min-width: 1440px) {
   .collection-prev,
   .collection-next {
-    padding-top: calc((100% - 360px ) / 6)
+    padding-top: calc((100% - 260px ) / 6)
   }
 }

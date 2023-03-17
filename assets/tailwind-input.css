@@ -26,8 +26,8 @@
     @apply focus;
   }
 
-  html {
-    @apply bg-white;
+  html, body {
+    @apply bg-white text-black;
   }
 
   input[type='radio']:focus + label {
@@ -77,11 +77,15 @@
   .visually-hidden {
     @apply sr-only
   }
+
+  .padding-x {
+    @apply px-gutter-sm md:px-padding-sm;
+  }
 }
 
 @layer components {
   .button {
-    @apply relative text-white px-4 py-1 flex items-center uppercase h-8 w-full transition-colors;
+    @apply relative text-center text-black px-4 py-1 flex items-center justify-center uppercase h-7 w-full transition-colors duration-200;
   }
 
   .button:disabled,
@@ -94,27 +98,19 @@
   .button::before {
     content: '';
     z-index: -2;
-    transition-property: width;
-    @apply absolute inset-0 bg-button;
-  }
-
-  .button::after {
-    content: '';
-    z-index: -1;
-    transform-origin: 0 0;
-    @apply absolute inset-0 scale-x-0 bg-button-secondary transition-transform duration-300 ease-out;
+    @apply border-button-secondary border absolute transition-all duration-200 inset-0 bg-button;
   }
 
   .button:hover {
-    @apply text-black;
+    @apply text-white;
   }
 
-  .button:hover::after {
-    @apply scale-x-100;
+  .button:hover::before {
+    @apply -inset-x-1 md:-inset-x-3 bg-button-secondary border-white;
   }
 
   .text-link {
-    @apply focus-visible:underline focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0;
+    @apply hover:underline
   }
 
 }
@@ -178,17 +174,17 @@
   /* Policy Pages */
   .page__container,
   body .shopify-policy__container {
-    @apply md:flex md:items-start md:space-x-5 px-padding-sm max-w-none;
+    @apply md:grid grid-cols-2 gap-x-gutter-sm md:items-start padding-x max-w-none;
   }
 
   body .shopify-policy__title, body .shopify-policy__body,
   .page__title, .page__body {
-    @apply max-w-none md:w-1/2 md:pt-10;
+    @apply max-w-none md:pt-9;
   }
 
   body .shopify-policy__title,
   .page__title {
-    @apply md:sticky md:top-header mt-10 md:mt-0 mb-15 md:mb-0 text-left;
+    @apply md:sticky md:top-header pt-9 md:mt-0 mb-15 md:mb-0 text-left;
   }
 
   body .shopify-policy__title h1,
@@ -208,7 +204,7 @@
 
   body .shopify-policy__body a,
   .page__body a {
-    @apply underline hover:no-underline;
+    @apply text-link underline hover:no-underline;
   }
 
   body .shopify-policy__body p, body .shopify-policy__body ol, body .shopify-policy__body table,

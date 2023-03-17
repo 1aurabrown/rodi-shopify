@@ -1,9 +1,8 @@
 {% comment %}css-purge shopify-payment-button__button{% endcomment %}
 
-<section id="MainProduct-{{ section.id }}" class="section-main-product section-{{ section.id }} mb-15 md:mb-25 lg:mb-35" data-section="{{ section.id }}">
+<section id="MainProduct-{{ section.id }}" class="section-main-product section-{{ section.id }} mt-9 mb-25 lg:mb-35" data-section="{{ section.id }}">
   {{ 'component-quantity.css' | asset_url | stylesheet_tag }}
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-  {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-rte.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 
@@ -13,17 +12,23 @@
   <a class="skip-to-content-link sr-only" href="#ProductInfo-{{ section.id }}">
     {{ "accessibility.skip_to_product_info" | t }}
   </a>
+  {% unless collection %}
+    {% assign collection = collections['all'] %}
+  {% endunless %}
 
-  <div class="section-main-product__inner md:grid md:grid-cols-2 lg:grid-cols-pdp">
+  {% if collection %}
+    <h2 class="padding-x mb-6 uppercase"><a class="inline-flex items-center animate-arrow" href="{{ collection.url }}" title="{{ collection.title }}">{% render 'icon-arrow' class: 'rotate-180' %}<span class="ml-1">{{ collection.title }}</span></a></h2>
+  {% endif %}
+  <div class="section-main-product__inner md:grid md:grid-cols-2">
     <div class="product__media-wrapper">
       {% render 'pdp-slider' %}
     </div>
-    <div class="md:px-15 md:pt-10 xl:px-25 xl:pt-15">
+    <div class="md:px-15 xl:px-25">
       <product-info
         id="ProductInfo-{{ section.id }}"
         data-section="{{ section.id }}"
         data-url="{{ product.url }}"
-        class="block px-padding-sm md:px-0 mt-15 md:mt-0 product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+        class="sticky top-header block padding-x sm:max-w-sm mx-auto md:px-0 mt-15 md:mt-0 md:py-10 xl:py-15 product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
       >
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
@@ -56,9 +61,47 @@
                   {{ form | payment_terms }}
                 {%- endform -%}
               </div>
+            {%- when 'inventory' -%}
+              <p
+                class="product__inventory my-6 no-js-hidden{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+                {{ block.shopify_attributes }}
+                id="Inventory-{{ section.id }}"
+                role="status"
+              >
+                {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+                  {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+                    {%- if product.selected_or_first_available_variant.inventory_quantity <= block.settings.inventory_threshold -%}
+                      {%- if block.settings.show_low_stock -%}
+                        {%- if block.settings.show_inventory_quantity -%}
+                          {{- 'products.product.inventory_low_stock_show_count' | t: quantity: product.selected_or_first_available_variant.inventory_quantity -}}
+                        {%- else -%}
+                          {{- 'products.product.inventory_low_stock' | t -}}
+                        {%- endif -%}
+                      {% endif %}
+                    {%- else -%}
+                      {%- if block.settings.show_in_stock -%}
+                        {%- if block.settings.show_inventory_quantity -%}
+                          {{- 'products.product.inventory_in_stock_show_count' | t: quantity: product.selected_or_first_available_variant.inventory_quantity -}}
+                        {%- else -%}
+                            {{- 'products.product.inventory_in_stock' | t -}}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+                      {%- if block.settings.show_preorder -%}
+                        {% assign preorder_text = product.metafields.custom.pdp_preorder_text | default: block.settings.preorder_text %}
+                        {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}} {%- if preorder_text -%}: {{ preorder_text }}{%- endif -%}
+                      {%- endif -%}
+                    {%- else -%}
+                      {%- if block.settings.show_out_of_stock -%}{{- 'products.product.inventory_out_of_stock' | t -}}{%- endif -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endif -%}
+              </p>
             {%- when 'description' -%}
               {%- if product.description != blank -%}
-                <div class="product__description mt-9 rte quick-add-hidden" {{ block.shopify_attributes }}>
+                <div class="product__description mt-9 mb-6 rte quick-add-hidden" {{ block.shopify_attributes }}>
                   {{ product.description }}
                 </div>
               {%- endif -%}
@@ -472,7 +515,6 @@
 {
   "name": "t:sections.main-product.name",
   "tag": "section",
-  "class": "section",
   "blocks": [
     {
       "type": "@app"
@@ -523,7 +565,37 @@
           "type": "checkbox",
           "id": "show_inventory_quantity",
           "label": "t:sections.main-product.blocks.inventory.settings.show_inventory_quantity.label",
-          "default": true
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "preorder_text",
+          "label": "Default text for all preorder items.",
+          "default": "Ships in 5-6 weeks"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_in_stock",
+          "label": "Show In Stock Message",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_low_stock",
+          "label": "Show Low Stock Message",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_preorder",
+          "label": "Show Preorder Message",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_out_of_stock",
+          "label": "Show Out of Stock Message",
+          "default": false
         }
       ]
     },
@@ -556,14 +628,14 @@
         {
           "type": "text",
           "id": "sizing_text",
-          "label" : "Sizing Link Text",
+          "label": "Sizing Link Text",
           "info": "Sizing page content will be displayed in a modal popup.",
           "default": "Sizing"
         },
         {
           "type": "page",
           "id": "sizing_page",
-          "label" : "Sizing Page",
+          "label": "Sizing Page",
           "info": "Sizing page content will be displayed in a modal popup."
         }
       ]

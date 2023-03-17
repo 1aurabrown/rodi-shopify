@@ -11,6 +11,29 @@
 
 }
 
+/* Swiper */
+
+.pdp-prev, .pdp-next {
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  top: 0;
+  bottom: 0;
+  z-index: 20;
+}
+
+.pdp-prev {
+  left: 0;
+}
+
+.pdp-next {
+  right: 0;
+}
+
+.pdp-next svg {
+}
+
+
 /* Product form */
 
 .product-form {
@@ -33,8 +56,6 @@
 /* Form Elements */
 .product-form__input {
   flex: 0 0 100%;
-  margin: 1.2rem 0 0;
-  max-width: 37rem;
   min-width: fit-content;
   border: none;
 }
@@ -62,7 +83,6 @@ fieldset.product-form__input .form__label {
 
 .product-form__input input[type='radio'] + label {
   display: inline-block;
-  margin: 0.7rem 0.5rem 0.2rem 0;
   text-align: center;
     position: relative;
 }

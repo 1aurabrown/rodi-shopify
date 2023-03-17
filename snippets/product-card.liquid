@@ -1,9 +1,9 @@
 <article class="{{ class }} product-card">
-	{% if product %}
+	{% if card_product %}
 		<div class="relative product-card__image-wrapper">
 			<div class="relative overflow-hidden">
 				{% render 'image',
-					image: product.featured_image,
+					image: card_product.featured_image,
 			    preload: true,
 			    wrapper_class: 'product-card__image'
 			    fit: 'cover',
@@ -11,7 +11,7 @@
 			    use_padding: true
 			  %}
 
-			  {% for image in product.images %}
+			  {% for image in card_product.images %}
 					{% if image.alt contains 'hover' %}
 						{% render 'image',
 							image: image,
@@ -25,19 +25,19 @@
 				  {% endif %}
 			  {% endfor %}
 			</div>
-			<a class="absolute inset-0 z-10 block" tabindex="-1" aria-hidden="true" title="{{ product.title }}" href="{{ product.url | within: collection }}"></a>
+			<a class="absolute inset-0 z-10 block" tabindex="-1" aria-hidden="true" title="{{ card_product.title }}" href="{{ card_product.url | within: collection }}"></a>
 		</div>
 
 		<div class="relative">
-			<a class="absolute inset-0 z-10" title="{{ product.title }}" href="{{ product.url | within: collection }}"></a>
-			{% if product.metafields.descriptors.title %}
-				<h3 class="mt-4 uppercase product-card--title">{{ product.metafields.descriptors.title }}</h3>
-	    {% if product.metafields.descriptors.subtitle %}
-	       <p class="mt-1">{{ product.metafields.descriptors.subtitle }}</p>{% endif %}
+			<a class="absolute inset-0 z-10" title="{{ card_product.title }}" href="{{ card_product.url | within: collection }}"></a>
+			{% if card_product.metafields.descriptors.title %}
+				<h3 class="mt-4 uppercase product-card--title">{{ card_product.metafields.descriptors.title }}</h3>
+	    {% if card_product.metafields.descriptors.subtitle %}
+	       <p class="mt-1">{{ card_product.metafields.descriptors.subtitle }}</p>{% endif %}
 			{% else %}
-				<h3 class="mt-4 uppercase product-card--title">{{ product.title }}</h3>
+				<h3 class="mt-4 uppercase product-card--title">{{ card_product.title }}</h3>
 			{% endif %}
-			<p class="mt-4">{{ product.price | money_without_trailing_zeros }}</p>
+			<p class="mt-4">{% render 'price', product: card_product %}</p>
 		</div>
 	{% else %}
 

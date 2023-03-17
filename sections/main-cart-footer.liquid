@@ -3,7 +3,7 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
-<div class="px-padding-sm {% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
+<div class="padding-x {% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div>
     <div class="cart__footer md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5">
       <div>
@@ -20,7 +20,7 @@
         </cart-gift-wrap>
 
         {%- if settings.show_cart_note -%}
-          <cart-note class="block cart__note mt-10 md:mt-14">
+          <cart-note class="block cart__note mt-9 md:mt-14">
             <label for="Cart-note" class="uppercase">{{ 'sections.cart.note' | t }}</label>
             <textarea
               class="h-20 mt-3 bg-white border placeholder-black leading-body tracking-normal p-2 w-full"
@@ -31,7 +31,7 @@
         {%- endif -%}
       </div>
 
-      <div class="cart__blocks mt-10 md:mt-0 lg:col-end-4">
+      <div class="cart__blocks mt-9 md:mt-0 lg:col-end-4">
         {% for block in section.blocks %}
           {%- case block.type -%}
             {%- when '@app' -%}
@@ -144,7 +144,7 @@
       "limit": 1,
       "settings": [
         {
-          "type":"richtext",
+          "type": "richtext",
           "id": "text",
           "label": "Text"
         }

@@ -1,14 +1,19 @@
 if (!customElements.get('pdp-slider')) {
   class ProductSlider extends HTMLElement {
-    create() {
-      this.gallery = new Swiper(this.querySelector('.pdp-swiper'), {
+    constructor() {
+      super();
+      this.swiperEl = this.querySelector('.pdp-swiper')
+      this.options = {
         spaceBetween: 10,
         slidesPerView: 1,
         loop: true,
-        loopAdditionalSlides: 2,
-        centeredSlides: true,
-        simulateTouch: true,
-        slideClass: 'swiper-slide',
+        threshold: 10,
+        centeredSlides: false,
+        preventClicksPropagation: false,
+        navigation: {
+          nextEl: '.pdp-next',
+          prevEl: '.pdp-prev',
+        },
         on: {
           touchMove: function(swiper, event) {
             updateCursor(event)
@@ -19,21 +24,12 @@ if (!customElements.get('pdp-slider')) {
           touchEnd: function(swiper, event) {
             releaseCursor(event)
           }
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 1.125,
-            centeredSlides: false,
-          },
-          1024: {
-            slidesPerView: 1,
-            centeredSlides: false,
-          },
-          1280: {
-            slidesPerView: 1,
-          }
         }
-      })
+      }
+    }
+
+    create() {
+      this.swiper = new Swiper(this.swiperEl, this.options)
     }
 
     connectedCallback() {
@@ -47,8 +43,8 @@ if (!customElements.get('pdp-slider')) {
     }
 
     disconnectedCallback() {
-      if (this.gallery) {
-        this.gallery.destroy();
+      if (this.swiper) {
+        this.swiper.destroy();
       }
     }
 

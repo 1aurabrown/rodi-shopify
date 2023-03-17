@@ -10,14 +10,14 @@
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 
-<cart-items class="px-padding-sm mt-10 max-w-screen-lg mr-auto {% if cart == empty %} is-empty{% endif %}">
+<cart-items class="padding-x max-w-screen-lg mt-9 mb-25 lg:mb-35 {% if cart == empty %}is-empty mx-auto{% else %}mr-auto{% endif %}">
   <div class="title-wrapper-with-link">
     <h1 class="title uppercase">{{ 'sections.cart.title' | t }}</h1>
   </div>
 
   <div class="cart__warnings">
     <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-    <a href="{{ routes.all_products_collection_url }}" class="button">
+    <a href="{{ routes.all_products_collection_url }}" class="max-w-xs mx-auto text-link underline hover:no-underline">
       {{ 'general.continue_shopping' | t }}
     </a>
 
@@ -120,7 +120,7 @@
                     <div class="mt-4">
                       {% assign new_inventory_quantity = item.variant.inventory_quantity | minus: item.quantity %}
                       {%- if item.variant.inventory_management == 'shopify' and item.variant.quantity_rule.min > new_inventory_quantity and item.variant.inventory_policy == 'continue' -%}
-                          <p><span class="underline">{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</span>{% if item.product.metafields.custom.preorder_text %}: {{ item.product.metafields.custom.preorder_text }}{% endif %}</p>
+                          <p><span class="underline">{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</span>{% if item.product.metafields.custom.cart_preorder_text %}: {{ item.product.metafields.custom.cart_preorder_text }}{% endif %}</p>
 
                       {%- endif -%}
                     </div>

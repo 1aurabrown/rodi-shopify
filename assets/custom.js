@@ -80,22 +80,33 @@ addEventListener('DOMContentLoaded', (event) => {
   window.addEventListener('mousedown', clickCursor)
   window.addEventListener('mouseup', releaseCursor)
   window.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, input[type=radio] ~ label, input[type=checkbox] ~ label, [role=button], .text-link')) {
-      cursorEnter()
+    if (e.target.closest('a, button, input[type=radio] ~ label, input[type=checkbox] ~ label, [role=button], .button, .text-link')) {
+      cursorEnter(e)
     }
 
+    if (e.target.closest('.button') || e.target.closest('.bg-black')) {
+      cursor.classList.remove('border-black')
+      cursor.classList.add('border-white')
+    }
+
+
     if (e.target.closest('iframe')) {
-      cursorDisable()
+      cursorDisable(e)
     }
   })
 
   window.addEventListener('mouseout', (e) => {
-    if (e.target.closest('a, button, input[type=radio] ~ label, input[type=checkbox] ~ label, [role=button], .text-link')) {
-      cursorLeave()
+    if (e.target.closest('a, button, input[type=radio] ~ label, input[type=checkbox] ~ label, [role=button], .button, .text-link')) {
+      cursorLeave(e)
+    }
+
+    if (e.target.closest('.button') || e.target.closest('.bg-black')) {
+      cursor.classList.remove('border-white')
+      cursor.classList.add('border-black')
     }
 
     if (e.target.closest('iframe')) {
-      cursorEnable()
+      cursorEnable(e)
     }
   })
 })
