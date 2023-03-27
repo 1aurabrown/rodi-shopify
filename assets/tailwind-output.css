@@ -426,7 +426,8 @@ video {
   cursor: none;
 }
 
-button, [role=button] {
+button,
+  [role=button] {
   cursor: none;
 }
 
@@ -503,19 +504,14 @@ input[type='radio']:focus-visible + label {
 
 .product-card__image-wrapper .product-card__image:last-child:not(:first-child) {
   display: none;
+  z-index: 10;
+  display: block;
+  opacity: 0;
+  transition-duration: 300ms;
 }
 
-@media (hover: hover) {
-  .product-card__image-wrapper .product-card__image:last-child:not(:first-child) {
-    z-index: 10;
-    display: block;
-    opacity: 0;
-    transition-duration: 300ms;
-  }
-
-  .product-card__image-wrapper:hover .product-card__image:last-child:not(:first-child) {
-    opacity: 1;
-  }
+.product-card__image-wrapper:hover .product-card__image:last-child:not(:first-child) {
+  opacity: 1;
 }
 
 html {
@@ -685,7 +681,6 @@ main {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     display: grid;
-    align-items: flex-start;
   }
 }
 
@@ -703,7 +698,7 @@ body .shopify-policy__title, body .shopify-policy__body,
 
 body .shopify-policy__title,
   .page__title {
-  margin-bottom: 3.75rem;
+  margin-bottom: 2.25rem;
   padding-top: 2.25rem;
   text-align: left;
 }
@@ -731,95 +726,58 @@ body .shopify-policy__title h1,
     max-width: 65ch;
   }
 
-  body .shopify-policy__body > :first-child,
-  .page__body > :first-child {
+  body .shopify-policy__body > :first-child {
     margin-top: 0rem;
   }
 }
 
-body .shopify-policy__body a:hover,
-  .page__body a:hover {
+.rte a:hover {
   text-decoration-line: underline;
 }
 
-body .shopify-policy__body a,
-  .page__body a {
+.rte a {
   text-decoration-line: underline;
 }
 
-body .shopify-policy__body a:hover,
-  .page__body a:hover {
+.rte a:hover {
   text-decoration-line: none;
 }
 
-body .shopify-policy__body p, body .shopify-policy__body ol, body .shopify-policy__body table,
-  .page__body p, .page__body ol, .page__body table {
-  margin: 1.25em 0;
-}
-
-body .shopify-policy__body h1,
-  .page__body h1 {
+.rte h1 {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-top: 3em;
 }
 
-body .shopify-policy__body h2,
-  .page__body h2 {
+.rte h2 {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-top: 2em;
 }
 
-body .shopify-policy__body h3,
-  .page__body h3 {
+.rte h3 {
   text-decoration-line: underline;
   margin-top: 1.5em;
 }
 
-body .shopify-policy__body h4,
-  .page__body h4 {
+.rte h4 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-top: 2em;
 }
 
-body .shopify-policy__body h5,
-  .page__body h5 {
+.rte h5 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-top: 2em;
 }
 
-body .shopify-policy__body h6,
-  .page__body h6 {
+.rte h6 {
   font-size: 0.75rem;
   text-decoration-line: underline;
   margin-top: 2em;
-}
-
-body .shopify-policy__body ul,
-  .page__body ul {
-  margin: .5em 0;
-  margin-left: 1em;
-  list-style: disc outside;
-}
-
-body .shopify-policy__body li,
-  .page__body li {
-  margin-top: .5em;
-}
-
-body .shopify-policy__body blockquote,
-  .page__body blockquote {
-  margin: .5em 2rem;
-}
-
-body .shopify-policy__body p + p,
-  .page__body p + p {
-  margin-top: 0.625em;
 }
 
 *, ::before, ::after {
@@ -1208,13 +1166,26 @@ body .shopify-policy__body p + p,
   z-index: 1;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
 .col-span-5 {
   grid-column: span 5 / span 5;
+}
+
+.col-start-1 {
+  grid-column-start: 1;
 }
 
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .my-15 {
@@ -1278,6 +1249,10 @@ body .shopify-policy__body p + p,
 
 .mt-1 {
   margin-top: 0.25rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
 }
 
 .mt-15 {
@@ -1352,6 +1327,10 @@ body .shopify-policy__body p + p,
   height: 5rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .h-\[100vh\] {
   height: 100vh;
 }
@@ -1402,10 +1381,6 @@ body .shopify-policy__body p + p,
 
 .w-full {
   width: 100%;
-}
-
-.max-w-\[500px\] {
-  max-width: 500px;
 }
 
 .max-w-screen-lg {
@@ -1470,8 +1445,12 @@ body .shopify-policy__body p + p,
   list-style-type: none;
 }
 
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+.grid-flow-dense {
+  grid-auto-flow: dense;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-6 {
@@ -1515,8 +1494,8 @@ body .shopify-policy__body p + p,
        column-gap: 0.625rem;
 }
 
-.gap-y-14 {
-  row-gap: 3.5rem;
+.gap-y-10 {
+  row-gap: 2.5rem;
 }
 
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
@@ -1643,6 +1622,11 @@ body .shopify-policy__body p + p,
 
 .p-3 {
   padding: 0.75rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .px-20 {
@@ -1876,8 +1860,24 @@ body .shopify-policy__body p + p,
 }
 
 @media (min-width: 768px) {
-  .md\:col-start-2 {
-    grid-column-start: 2;
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .md\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
+
+  .md\:col-start-6 {
+    grid-column-start: 6;
+  }
+
+  .md\:row-span-2 {
+    grid-row: span 2 / span 2;
+  }
+
+  .md\:row-start-1 {
+    grid-row-start: 1;
   }
 
   .md\:mx-47 {
@@ -1891,10 +1891,6 @@ body .shopify-policy__body p + p,
 
   .md\:mb-9 {
     margin-bottom: 2.25rem;
-  }
-
-  .md\:ml-2 {
-    margin-left: 0.5rem;
   }
 
   .md\:ml-auto {
@@ -1915,10 +1911,6 @@ body .shopify-policy__body p + p,
 
   .md\:mt-15 {
     margin-top: 3.75rem;
-  }
-
-  .md\:mt-9 {
-    margin-top: 2.25rem;
   }
 
   .md\:block {
@@ -1949,8 +1941,8 @@ body .shopify-policy__body p + p,
     flex: 1 1 0%;
   }
 
-  .md\:grid-flow-dense {
-    grid-auto-flow: dense;
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .md\:grid-cols-2 {
@@ -2030,10 +2022,6 @@ body .shopify-policy__body p + p,
     grid-column-end: 4;
   }
 
-  .lg\:row-span-2 {
-    grid-row: span 2 / span 2;
-  }
-
   .lg\:mb-35 {
     margin-bottom: 8.75rem;
   }
@@ -2048,10 +2036,6 @@ body .shopify-policy__body p + p,
 
   .lg\:w-3 {
     width: 0.75rem;
-  }
-
-  .lg\:grid-cols-12 {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-3 {

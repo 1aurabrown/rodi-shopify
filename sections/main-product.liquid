@@ -17,7 +17,7 @@
   {% endunless %}
 
   {% if collection %}
-    <h2 class="padding-x mb-6 uppercase"><a class="inline-flex items-center animate-arrow" href="{{ collection.url }}" title="{{ collection.title }}">{% render 'icon-arrow' class: 'rotate-180' %}<span class="ml-1">{{ collection.title }}</span></a></h2>
+    <h2 class="padding-x mb-6 md:mb-9 uppercase"><a class="inline-flex items-center animate-arrow" href="{{ collection.url }}" title="{{ collection.title }}">{% render 'icon-arrow' class: 'rotate-180' %}<span class="ml-1">{{ collection.title }}</span></a></h2>
   {% endif %}
   <div class="section-main-product__inner md:grid md:grid-cols-2">
     <div class="product__media-wrapper">
@@ -394,7 +394,7 @@
         >
           {% render 'icon-close' %}
         </button>
-        <div class="product-popup-modal__content-info">
+        <div class="product-popup-modal__content-info rte">
           <h1 class="uppercase">{{ block.settings.page.title }}</h1>
           {{ block.settings.page.content }}
         </div>
@@ -420,7 +420,7 @@
         >
           {% render 'icon-close' %}
         </button>
-        <div class="product-popup-modal__content-info">
+        <div class="product-popup-modal__content-info rte">
           <h1 class="uppercase">{{ variant_block.settings.sizing_page.title }}</h1>
           {{ variant_block.settings.sizing_page.content }}
         </div>

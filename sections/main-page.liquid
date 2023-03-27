@@ -15,13 +15,12 @@
         </div>
       {% endif %}
     </div>
-    <div class="rte page__body">
-      {{ page.content }}
-      <div>
+    <div class="page__body">
+        <div class="rte sticky top-header">{{ page.content }}</div>
         {% if image %}
-          {% render 'image', image: image, use_padding: true, sizes: "100vw (min-width: 768px), 0vw", wrapper_class: 'md:hidden w-full my-15' %}
+          {% render 'image', image: image, use_padding: true, sizes: "100vw, (min-width: 768px) 0vw", wrapper_class: 'mt-10 md:hidden w-full' %}
         {% endif %}
-      </div>
+
     </div>
   </div>
 </div>

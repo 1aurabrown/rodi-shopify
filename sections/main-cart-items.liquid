@@ -120,7 +120,8 @@
                     <div class="mt-4">
                       {% assign new_inventory_quantity = item.variant.inventory_quantity | minus: item.quantity %}
                       {%- if item.variant.inventory_management == 'shopify' and item.variant.quantity_rule.min > new_inventory_quantity and item.variant.inventory_policy == 'continue' -%}
-                          <p><span class="underline">{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</span>{% if item.product.metafields.custom.cart_preorder_text %}: {{ item.product.metafields.custom.cart_preorder_text }}{% endif %}</p>
+                        {% assign preorder_text = product.metafields.custom.cart_preorder_text | default: section.settings.preorder_text %}
+                        <p><span class="underline">{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</span>{%- if preorder_text -%}: {{ preorder_text }}{%- endif -%}</p>
 
                       {%- endif -%}
                     </div>
@@ -358,6 +359,14 @@
 
 {% schema %}
 {
-  "name": "t:sections.main-cart-items.name"
+  "name": "t:sections.main-cart-items.name",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "preorder_text",
+      "label": "Default text for all preorder items.",
+      "default": "Ships in 5-6 weeks"
+    }
+  ]
 }
 {% endschema %}

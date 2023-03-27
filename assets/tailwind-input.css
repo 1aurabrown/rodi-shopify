@@ -10,7 +10,8 @@
     cursor: none;
   }
 
-  button, [role=button] {
+  button,
+  [role=button] {
     cursor: none;
   }
 
@@ -51,17 +52,15 @@
   }
 
   .product-card__image-wrapper .product-card__image:last-child:not(:first-child) {
-    display: none;
+    @apply hidden
   }
 
-  @media screen(hoverable) {
-    .product-card__image-wrapper .product-card__image:last-child:not(:first-child) {
-      @apply block opacity-0 duration-300 z-10
-    }
+  .product-card__image-wrapper .product-card__image:last-child:not(:first-child) {
+    @apply block opacity-0 duration-300 z-10
+  }
 
-    .product-card__image-wrapper:hover .product-card__image:last-child:not(:first-child) {
-      @apply opacity-100
-    }
+  .product-card__image-wrapper:hover .product-card__image:last-child:not(:first-child) {
+    @apply opacity-100
   }
 
 }
@@ -174,7 +173,7 @@
   /* Policy Pages */
   .page__container,
   body .shopify-policy__container {
-    @apply md:grid grid-cols-2 gap-x-gutter-sm md:items-start padding-x max-w-none;
+    @apply md:grid grid-cols-2 gap-x-gutter-sm padding-x max-w-none;
   }
 
   body .shopify-policy__title, body .shopify-policy__body,
@@ -184,7 +183,7 @@
 
   body .shopify-policy__title,
   .page__title {
-    @apply md:sticky md:top-header pt-9 md:mt-0 mb-15 md:mb-0 text-left;
+    @apply md:sticky md:top-header pt-9 md:mt-0 mb-9 md:mb-0 text-left;
   }
 
   body .shopify-policy__title h1,
@@ -197,78 +196,42 @@
     @apply md:mt-0 md:max-w-prose;
   }
 
-  body .shopify-policy__body > :first-child,
-  .page__body > :first-child {
+  body .shopify-policy__body > :first-child {
     @apply md:mt-0
   }
 
-  body .shopify-policy__body a,
-  .page__body a {
+  .rte a {
     @apply text-link underline hover:no-underline;
   }
 
-  body .shopify-policy__body p, body .shopify-policy__body ol, body .shopify-policy__body table,
-  .page__body p, .page__body ol, .page__body table {
-    margin: 1.25em 0;
-  }
-
-  body .shopify-policy__body h1,
-  .page__body h1 {
+  .rte h1 {
     @apply uppercase;
     margin-top: 3em;
   }
 
-  body .shopify-policy__body h2,
-  .page__body h2 {
+  .rte h2 {
     @apply uppercase;
     margin-top: 2em;
   }
 
-  body .shopify-policy__body h3,
-  .page__body h3 {
+  .rte h3 {
     @apply underline;
     margin-top: 1.5em;
   }
 
-  body .shopify-policy__body h4,
-  .page__body h4 {
+  .rte h4 {
     @apply text-sm uppercase;
     margin-top: 2em;
   }
 
 
-  body .shopify-policy__body h5,
-  .page__body h5 {
+  .rte h5 {
     @apply text-sm uppercase;
     margin-top: 2em;
   }
 
-
-  body .shopify-policy__body h6,
-  .page__body h6 {
+  .rte h6 {
     @apply text-sm underline;
     margin-top: 2em;
-  }
-
-  body .shopify-policy__body ul,
-  .page__body ul {
-    margin: .5em 0;
-    margin-left: 1em;
-    list-style: disc outside;
-  }
-  body .shopify-policy__body li,
-  .page__body li {
-    margin-top: .5em;
-  }
-
-
-  body .shopify-policy__body blockquote,
-  .page__body blockquote {
-    margin: .5em 2rem;
-  }
-
-  body .shopify-policy__body p + p,
-  .page__body p + p {
-    margin-top: 0.625em;
   }
 }

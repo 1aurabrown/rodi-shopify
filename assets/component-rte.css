@@ -4,12 +4,16 @@
   display: block;
 }
 
-.rte > p:first-child {
+.rte > :first-child {
   margin-top: 0;
 }
 
-.rte > p:last-child {
+.rte > :last-child {
   margin-bottom: 0;
+}
+
+.rte p, .rte ul, .rte ol, .rte table, .rte blockquote {
+  margin: 0.625em 0;
 }
 
 .rte table {
@@ -28,6 +32,11 @@
   text-decoration: underline;
 }
 
+.rte table td {
+  text-align: left;
+  width: fit-content;
+}
+
 .rte img {
   height: auto;
   max-width: 100%;
@@ -38,10 +47,14 @@
 }
 
 .rte ul {
+  margin: .5em 0;
+  margin-left: 1em;
+  list-style: disc outside;
   padding-left: 2rem;
 }
 
 .rte li {
+  margin-top: .5em;
   list-style: inherit;
 }
 
@@ -50,8 +63,4 @@
 }
 .rte blockquote {
   display: inline-flex;
-}
-
-.rte blockquote > * {
-  margin: -0.5rem 0 -0.5rem 0;
 }
