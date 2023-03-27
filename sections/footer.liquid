@@ -7,9 +7,75 @@
   <!-- Top -->
 
 
-    <!-- Social -->
-    {%- if section.settings.show_social -%}
-      <ul class="space-x-3">
+
+  <div class="flex flex-col-reverse md:flex-row md:justify-between md:items-center">
+    <!-- Newsletter -->
+    {%- if section.settings.newsletter_enable and section.settings.newsletter_list_id -%}
+      <div class="flex flex-col w-full sm:max-w-sm ">
+        {%- if section.settings.newsletter_heading != blank -%}
+          <h2 class="mb-4">{{ section.settings.newsletter_heading | escape }}</h2>
+        {%- endif -%}
+
+        <div id="footer-klaviyo" class="w-full relative"
+          x-data='klaviyo({ listId: {{ section.settings.newsletter_list_id | json }}, source: "footer" })'>
+
+          <form @submit.prevent="submitForm" class="relative w-full border-b border-current">
+            <input
+              type="email"
+              name="email"
+              x-model="email"
+              class="focus-visible:ring-0 focus-visible:ring-offset-0 w-full py-1 pr-8 placeholder placeholder:text-current bg-transparent"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              :autofocus="errors.length > 0"
+              :aria-invalid="errors.length > 0"
+              :aria-describedby="if (errors.length > 0) { 'ContactFooter-error' } else if (success) { 'ContactFooter-success' }"
+              placeholder="{{ section.settings.newsletter_placeholder }}"
+              required
+            />
+
+            <button :disabled='inFlight' type="submit" class="animate-arrow py-1 flex absolute right-0 top-1/2 -translate-y-1/2" aria-label="{{ 'newsletter.button_label' | t }}">
+              {% render 'icon-arrow' %}
+            </button>
+
+          </form>
+
+          <div id="ContactFooter-error"
+          class="x-cloak absolute w-full top-full pt-2 left-0 right-0 transition-opacity duration-200"
+          x-show="error"
+          x-transition:enter-start="opacity-0"
+          x-transition:leave-end="opacity-0">
+            <span x-text="errors.length ? errors.join(' ') : '{{ section.settings.newsletter_error }}'"></span>
+          </div>
+
+          <div id="ContactFooter-success"
+          class="x-cloak absolute w-full top-full pt-2 left-0 right-0 transition-opacity duration-200"
+          x-show="success && !error"
+          x-transition:enter-start="opacity-0"
+          x-transition:leave-end="opacity-0">
+            {{ section.settings.newsletter_success }}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="flex justify-between items-end">
+    <ul class="md:flex md:items-center  leading-body md:space-x-4 list-none">
+      {%- for link in section.settings.menu.links -%}
+        <li class="text-link">
+          <a href="{{ link.url }}" class="text-link whitespace-nowrap">
+            {{ link.title }}
+          </a>
+        </li>
+      {%- endfor -%}
+
+      <!-- Social -->
+      {%- if section.settings.show_social -%}
         {%- if settings.social_pinterest_link != blank -%}
           <li>
             <a href="{{ settings.social_pinterest_link }}" class="text-link" >
@@ -73,77 +139,9 @@
             </a>
           </li>
         {%- endif -%}
-      </ul>
-    {%- endif -%}
+      {%- endif -%}
 
-  <div class="flex flex-col-reverse md:flex-row md:justify-between md:items-center">
-    <!-- Newsletter -->
-    {%- if section.settings.newsletter_enable and section.settings.newsletter_list_id -%}
-      <div class="flex flex-col w-full sm:max-w-sm ">
-        {%- if section.settings.newsletter_heading != blank -%}
-          <h2 class="mb-4">{{ section.settings.newsletter_heading | escape }}</h2>
-        {%- endif -%}
-
-        <div id="footer-klaviyo" class="w-full relative"
-          x-data='klaviyo({ listId: {{ section.settings.newsletter_list_id | json }}, source: "footer" })'>
-
-          <form @submit.prevent="submitForm" class="relative w-full border-b border-current">
-            <input
-              type="email"
-              name="email"
-              x-model="email"
-              class="focus-visible:ring-0 focus-visible:ring-offset-0 w-full py-1 pr-8 placeholder placeholder:text-current bg-transparent"
-              aria-required="true"
-              autocorrect="off"
-              autocapitalize="off"
-              autocomplete="email"
-              :autofocus="errors.length > 0"
-              :aria-invalid="errors.length > 0"
-              :aria-describedby="if (errors.length > 0) { 'ContactFooter-error' } else if (success) { 'ContactFooter-success' }"
-              placeholder="{{ section.settings.newsletter_placeholder }}"
-              required
-            />
-
-            <button :disabled='inFlight' type="submit" class="animate-arrow py-1 flex absolute right-0 top-1/2 -translate-y-1/2" aria-label="{{ 'newsletter.button_label' | t }}">
-              {% render 'icon-arrow' %}
-            </button>
-
-          </form>
-
-          <div id="ContactFooter-error"
-          class="x-cloak absolute w-full top-full pt-2 left-0 right-0 transition-opacity duration-200"
-          x-show="error"
-          x-transition:enter-start="opacity-0"
-          x-transition:leave-end="opacity-0">
-            <span x-text="errors.length ? errors.join(' ') : '{{ section.settings.newsletter_error }}'"></span>
-          </div>
-
-          <div id="ContactFooter-success"
-          class="x-cloak absolute w-full top-full pt-2 left-0 right-0 transition-opacity duration-200"
-          x-show="success && !error"
-          x-transition:enter-start="opacity-0"
-          x-transition:leave-end="opacity-0">
-            {{ section.settings.newsletter_success }}
-          </div>
-        </div>
-      </div>
-    {%- endif -%}
-
-  </div>
-
-  <!-- Bottom -->
-  <div class="flex justify-between items-end">
-    {%- if section.settings.menu != blank -%}
-      <ul class="md:flex md:items-center  leading-body md:space-x-4 list-none">
-        {%- for link in section.settings.menu.links -%}
-          <li class="md:inline-block">
-            <a href="{{ link.url }}" class="text-link whitespace-nowrap">
-              {{ link.title }}
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+    </ul>
 
     <div class="text-right text-sm">&copy; {{ 'now' | date: "%Y" }}&nbsp;<a href={{ routes.root_url }} class="text-link">{{ shop.name }}</a></div>
 

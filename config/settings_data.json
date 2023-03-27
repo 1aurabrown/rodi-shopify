@@ -1,8 +1,9 @@
 {
   "current": {
-    "favicon": "shopify://shop_images/Frame_5.png",
+    "social_instagram_link": "https:\/\/instagram.com\/rodi.jewelry",
+    "favicon": "shopify:\/\/shop_images\/Frame_5.png",
     "show_cart_note": true,
-    "checkout_logo_image": "shopify://shop_images/RODI_LOGO_WHITE_BACKGROUND.jpg",
+    "checkout_logo_image": "shopify:\/\/shop_images\/RODI_LOGO_WHITE_BACKGROUND.jpg",
     "checkout_logo_size": "medium",
     "checkout_body_background_color": "#ffffff",
     "checkout_input_background_color_mode": "transparent",
@@ -40,12 +41,15 @@
       "footer": {
         "type": "footer",
         "settings": {
+          "bg_color": "",
           "newsletter_enable": true,
           "newsletter_placeholder": "Your email",
+          "newsletter_heading": "",
           "newsletter_success": "Lorem ipsum dolor sit amet.",
           "newsletter_error": "There was an error, please try again.",
           "newsletter_list_id": "",
-          "show_social": false
+          "show_social": true,
+          "menu": "footer"
         }
       }
     },
