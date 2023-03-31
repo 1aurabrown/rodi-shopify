@@ -1,12 +1,11 @@
-<link rel="dns-prefetch" href="https://klaviyo.com"crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="dns-prefetch" href="https://mailchimp.com"crossorigin>
 
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 
 <footer class="padding-x pb-5 space-y-5 mt-25 lg:mt-35 {% if section.settings.bg_color != blank %}pt-25 lg:pt-35{% endif %}" {% if section.settings.bg_color != blank %}style="background-color: {{ section.settings.bg_color }}"{% endif %}>
 
   <!-- Top -->
-
-
 
   <div class="flex flex-col-reverse md:flex-row md:justify-between md:items-center">
     <!-- Newsletter -->
@@ -16,47 +15,46 @@
           <h2 class="mb-4">{{ section.settings.newsletter_heading | escape }}</h2>
         {%- endif -%}
 
-        <div id="footer-klaviyo" class="w-full relative"
-          x-data='klaviyo({ listId: {{ section.settings.newsletter_list_id | json }}, source: "footer" })'>
+        <div id="footer-mailchimp" class="w-full relative">
 
-          <form @submit.prevent="submitForm" class="relative w-full border-b border-current">
-            <input
-              type="email"
-              name="email"
-              x-model="email"
-              class="focus-visible:ring-0 focus-visible:ring-offset-0 w-full py-1 pr-8 placeholder placeholder:text-current bg-transparent"
-              aria-required="true"
-              autocorrect="off"
-              autocapitalize="off"
-              autocomplete="email"
-              :autofocus="errors.length > 0"
-              :aria-invalid="errors.length > 0"
-              :aria-describedby="if (errors.length > 0) { 'ContactFooter-error' } else if (success) { 'ContactFooter-success' }"
-              placeholder="{{ section.settings.newsletter_placeholder }}"
-              required
-            />
+          <!-- Begin Mailchimp Signup Form -->
+          <div id="mc_embed_signup">
+            <form target="_blank" action="https://rodi.us21.list-manage.com/subscribe/post?u=2efd6ad20c373228f30c284a2&amp;id=27eb4103b5&amp;f_id=00a8a0e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate relative w-full border-b border-current">
+              <div id="mc_embed_signup_scroll">
 
-            <button :disabled='inFlight' type="submit" class="animate-arrow py-1 flex absolute right-0 top-1/2 -translate-y-1/2" aria-label="{{ 'newsletter.button_label' | t }}">
-              {% render 'icon-arrow' %}
-            </button>
-
-          </form>
-
-          <div id="ContactFooter-error"
-          class="x-cloak absolute w-full top-full pt-2 left-0 right-0 transition-opacity duration-200"
-          x-show="error"
-          x-transition:enter-start="opacity-0"
-          x-transition:leave-end="opacity-0">
-            <span x-text="errors.length ? errors.join(' ') : '{{ section.settings.newsletter_error }}'"></span>
+                <!-- <div class="indicates-required"><span class="asterisk">*</span> indicates required</div> -->
+                <div class="mc-field-group">
+                  <!-- <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+                  </label> -->
+                  <input type="email"
+                  value=""
+                  name="EMAIL"
+                  class="required email focus-visible:ring-0 focus-visible:ring-offset-0 w-full py-1 pr-8 placeholder placeholder:text-current bg-transparent"
+                  id="mce-EMAIL"
+                  required
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  placeholder="{{ section.settings.newsletter_placeholder }}"/>
+                  <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
+                </div>
+                <div id="mce-responses" class="clear">
+                  <div class="response" id="mce-error-response" style="display:none"></div>
+                  <div class="response" id="mce-success-response" style="display:none"></div>
+                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2efd6ad20c373228f30c284a2_27eb4103b5" tabindex="-1" value=""></div>
+                <div class="clear">
+                  <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="animate-arrow py-1 flex absolute right-0 top-1/2 -translate-y-1/2" aria-label="{{ 'newsletter.button_label' | t }}">
+                    {% render 'icon-arrow' %}
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
+          <!--End mc_embed_signup-->
 
-          <div id="ContactFooter-success"
-          class="x-cloak absolute w-full top-full pt-2 left-0 right-0 transition-opacity duration-200"
-          x-show="success && !error"
-          x-transition:enter-start="opacity-0"
-          x-transition:leave-end="opacity-0">
-            {{ section.settings.newsletter_success }}
-          </div>
+
         </div>
       </div>
     {%- endif -%}

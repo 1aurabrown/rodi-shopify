@@ -104,43 +104,6 @@
       }
     </script>
 
-    <script>
-
-      document.addEventListener('alpine:init', () => {
-       Alpine.data('klaviyo', (options = {}) => ({
-          email: '',
-          error: false, // Boolean - is there an error
-          errors: [], // Array of strings describing errors
-          source: options.source || 'web',
-          listId: options.listId || '',
-          success: false,
-          inFlight: false,
-          submitForm() {
-            this.error = false;
-            this.errors = []
-            this.success = false;
-            this.inFlight = true;
-            window.klaviyoSubscribe(this.listId, this.email, {"$fields": "$source", "$source": this.source })
-              .then(response => {
-                this.inFlight = false;
-                if (response.errors.length >= 1) {
-                  this.error = true;
-                  this.errors = response.errors
-                } else if (response.success) {
-                  this.success = true;
-                  var _learnq = window._learnq || [];
-                  _learnq.push(['identify', {
-                    '$email': this.email
-                  }]);
-                }
-              })
-              .catch(response => {
-                this.error = true
-              })
-          }
-        }))      })
-    </script>
-
     {% render 'cursor' %}
 
   </body>
