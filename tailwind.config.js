@@ -74,8 +74,6 @@ module.exports = {
       'black': "#212121",
       'current': 'currentColor',
       'red': '#b3322c',
-      'button': '#FDFBF9',
-      'button-secondary': '#212121'
     },
     fontSize: {
       base: "0.8125rem",

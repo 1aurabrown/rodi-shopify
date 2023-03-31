@@ -97,7 +97,7 @@
   .button::before {
     content: '';
     z-index: -2;
-    @apply border-button-secondary border absolute transition-all duration-200 inset-0 bg-button;
+    @apply border-black border absolute transition-all duration-200 inset-0 bg-white;
   }
 
   .button:hover {
@@ -105,7 +105,24 @@
   }
 
   .button:hover::before {
-    @apply -inset-x-1 md:-inset-x-3 bg-button-secondary border-white;
+    @apply inset-y-[2px] -inset-x-1 md:-inset-x-3 bg-black;
+  }
+
+  .button--reverse {
+    @apply text-white;
+  }
+
+
+  .button--reverse::before {
+    @apply bg-black;
+  }
+
+  .button--reverse:hover {
+    @apply text-black;
+  }
+
+  .button--reverse:hover::before {
+    @apply bg-white;
   }
 
   .text-link {
