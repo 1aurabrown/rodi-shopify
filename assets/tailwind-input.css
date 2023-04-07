@@ -188,37 +188,29 @@
   }
 
   /* Policy Pages */
-  .page__container,
+
   body .shopify-policy__container {
-    @apply md:grid grid-cols-2 gap-x-gutter-sm padding-x max-w-none;
+    @apply padding-x max-w-none sm:max-w-md mt-9;
   }
 
-  body .shopify-policy__title, body .shopify-policy__body,
-  .page__title, .page__body {
-    @apply max-w-none md:pt-9;
+  body .shopify-policy__title {
+    @apply md:top-header py-0 text-left;
   }
 
-  body .shopify-policy__title,
-  .page__title {
-    @apply md:sticky md:top-header pt-9 md:mt-0 mb-9 md:mb-0 text-left;
-  }
-
-  body .shopify-policy__title h1,
-  .page__title h1 {
+  body .shopify-policy__title h1 {
     @apply uppercase;
   }
 
-  body .shopify-policy__body,
-  .page__body {
-    @apply md:mt-0 md:max-w-prose;
-  }
-
-  body .shopify-policy__body > :first-child {
-    @apply md:mt-0
+  body .shopify-policy__body {
+    @apply mt-9
   }
 
   .rte a {
     @apply text-link underline hover:no-underline;
+  }
+
+  .rte p {
+    @apply my-4;
   }
 
   .rte h1 {
@@ -250,5 +242,13 @@
   .rte h6 {
     @apply text-sm underline;
     margin-top: 2em;
+  }
+
+  .rte > :first-child {
+    margin-top: 0;
+  }
+
+  .rte > :last-child {
+    margin-bottom: 0;
   }
 }
