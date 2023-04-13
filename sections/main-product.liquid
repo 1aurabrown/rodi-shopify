@@ -383,7 +383,7 @@
         role="dialog"
         aria-label="{{ block.settings.text }}"
         aria-modal="true"
-        class="product-popup-modal__content"
+        class="product-popup-modal__content {{ block.settings.popup_size }}"
         tabindex="-1"
       >
         <button
@@ -409,7 +409,7 @@
         role="dialog"
         aria-label="{{ variant_block.settings.sizing_text }}"
         aria-modal="true"
-        class="product-popup-modal__content"
+        class="product-popup-modal__content {{ variant_block.settings.popup_size }}"
         tabindex="-1"
       >
         <button
@@ -637,6 +637,22 @@
           "id": "sizing_page",
           "label": "Sizing Page",
           "info": "Sizing page content will be displayed in a modal popup."
+        },
+        {
+          "label": "Popup Size",
+          "type": "select",
+          "id": "popup_size",
+          "default": "small",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
         }
       ]
     },
@@ -897,6 +913,22 @@
           "id": "page",
           "type": "page",
           "label": "t:sections.main-product.blocks.popup.settings.page.label"
+        },
+        {
+          "label": "Popup Size",
+          "type": "select",
+          "id": "popup_size",
+          "default": "small",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
         }
       ]
     },
