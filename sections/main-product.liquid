@@ -91,7 +91,7 @@
                     {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
                       {%- if block.settings.show_preorder -%}
                         {% assign preorder_text = product.metafields.custom.pdp_preorder_text | default: block.settings.preorder_text %}
-                        {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}} {%- if preorder_text -%}: {{ preorder_text }}{%- endif -%}
+                        <u>{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</u> {%- if preorder_text -%}: {{ preorder_text }}{%- endif -%}
                       {%- endif -%}
                     {%- else -%}
                       {%- if block.settings.show_out_of_stock -%}{{- 'products.product.inventory_out_of_stock' | t -}}{%- endif -%}
