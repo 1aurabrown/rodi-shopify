@@ -74,7 +74,7 @@ function cursorEnable(e) {
 }
 
 addEventListener('DOMContentLoaded', (event) => {
-  const cursor = document.getElementById('cursor')
+  const cursor = document.querySelector('body.custom-cursor #cursor')
   if (!cursor) return;
   window.addEventListener('mousemove', updateCursor)
   window.addEventListener('mousedown', clickCursor)

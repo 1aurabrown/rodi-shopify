@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-   * {
+  * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: always;
-    cursor: none;
   }
 
-  button,
-  [role=button] {
+
+  body.custom-cursor *,
+  body.custom-cursor button,
+  body.custom-cursor [role=button] {
     cursor: none;
   }
 
@@ -84,7 +85,7 @@
 
 @layer components {
   .button {
-    @apply relative text-center text-black px-4 py-1 flex items-center justify-center uppercase h-7 w-full transition-colors duration-200;
+    @apply z-0 relative text-center text-black px-4 py-1 flex items-center justify-center uppercase h-7 w-full transition-colors duration-200;
   }
 
   .button:disabled,
@@ -96,7 +97,7 @@
 
   .button::before {
     content: '';
-    z-index: -2;
+    z-index: -1;
     @apply border-black border absolute transition-all duration-200 inset-0 bg-white;
   }
 
