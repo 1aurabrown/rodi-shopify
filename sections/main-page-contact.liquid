@@ -1,33 +1,16 @@
 {{ 'component-rte.css' | asset_url | stylesheet_tag }}
+{% assign image = page.metafields.custom.image.value %}
 
-{% style %}
-  .section-main-page-contact {
-    min-height: var(--screen-less-header);
-  }
-{% endstyle %}
-
-{% comment %}css-purge shopify-challenge__container{% endcomment %}
-
-
-<div>
-  <div class="page__container">
-    <div class="page__title">
-      <h1 class="main-page-title page-title">
+<div class="md:grid md:grid-cols-12 md:gap-gutter-sm md:grid-flow-dense padding-x ">
+  <div class="md:col-span-6{% if image %} md:col-start-7{% endif %}">
+    <div class="sticky top-header pt-9 sm:max-w-md mr-auto">
+      <h1 class="uppercase">
         {{ page.title | escape }}
       </h1>
 
-      {% assign image = page.metafields.custom.image.value %}
+      <div class="rte mt-9">{{ page.content }}</div>
 
-      {% if image %}
-        <div class="hidden md:grid grid-cols-6 col-gap-gutter-sm md:mt-15 lg:mt-25 xl:mt-35 ">
-          {% render 'image', image: image, use_padding: true, sizes: "(min-width: 768px) 50vw, 0vw ", wrapper_class: 'col-span-5' %}
-        </div>
-      {% endif %}
-    </div>
-    <div class="page__body">
-      <div class="rte sticky top-header">
-        {{ page.content }}
-        {%- form 'contact', id: 'ContactForm', class: 'isolate my-10' -%}
+      {%- form 'contact', id: 'ContactForm', class: 'isolate my-10' -%}
 
           {%- if form.posted_successfully? -%}
             <div tabindex="-1" autofocus>{{ 'templates.contact.form.post_success' | t }}</div>
@@ -67,12 +50,11 @@
             <button type="submit" class="button w-full"><span>Send</span></button>
           </div>
         {% endform %}
-      </div>
-
-      {% if image %}
-        {% render 'image', image: image, use_padding: true, sizes: "100vw (min-width: 768px), 0vw", wrapper_class: 'md:hidden w-full my-15' %}
-      {% endif %}
     </div>
   </div>
+  {% if image %}
+    <div class="w-full block mt-9 md:col-span-5 md:col-start-1 row-start-1">
+      {% render 'image', image: image, use_padding: true, sizes: "(min-width: 768px) 50vw, 0vw ", wrapper_class: 'col-span-5' %}
+    </div>
+  {% endif %}
 </div>
-
