@@ -10,6 +10,15 @@ cart-items.is-empty .title-wrapper-with-link,
   display: none;
 }
 
+cart-items {
+  margin-left: 0;
+  margin-right: auto;
+}
+cart-items.is-empty {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .is-empty .cart__empty-text,
 .is-empty .cart__warnings {
   display: block;
