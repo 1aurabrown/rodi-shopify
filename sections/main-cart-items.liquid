@@ -136,7 +136,7 @@
 
                     <div class="mt-2 md:mt-4">
                       {% assign new_inventory_quantity = item.variant.inventory_quantity | minus: item.quantity %}
-                      {%- if item.variant.inventory_management == 'shopify' and item.variant.quantity_rule.min > new_inventory_quantity and item.variant.inventory_policy == 'continue' -%}
+                      {%- if item.variant.inventory_management == 'shopify' and new_inventory_quantity < 0 and item.variant.inventory_policy == 'continue' -%}
                         {% assign preorder_text = item.product.metafields.custom.cart_preorder_text | default: section.settings.preorder_text %}
                         <p><span class="underline">{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</span>{%- if preorder_text -%}: {{ preorder_text }}{%- endif -%}</p>
 
