@@ -10,7 +10,7 @@
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 
-<cart-items class="padding-x max-w-screen-lg mb-15 md:mb-20 {% if cart == empty %}is-empty mx-auto{% else %}mr-auto{% endif %}">
+<cart-items class="padding-x max-w-screen-lg mb-15 md:mb-20 {% if cart == empty %}is-empty{% endif %}">
   <div class="title-wrapper-with-link mt-9 mb-6 md:mb-9 ">
     <h1 class="title uppercase">{{ 'sections.cart.title' | t }}</h1>
   </div>
