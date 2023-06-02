@@ -1090,10 +1090,6 @@ body .shopify-policy__body {
   visibility: visible;
 }
 
-.invisible {
-  visibility: hidden;
-}
-
 .collapse {
   visibility: collapse;
 }
@@ -1203,11 +1199,6 @@ body .shopify-policy__body {
   margin-bottom: 2.5rem;
 }
 
-.my-15 {
-  margin-top: 3.75rem;
-  margin-bottom: 3.75rem;
-}
-
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -1294,6 +1285,10 @@ body .shopify-policy__body {
   margin-top: 1rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -1304,10 +1299,6 @@ body .shopify-policy__body {
 
 .mt-9 {
   margin-top: 2.25rem;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
 }
 
 .block {
@@ -1372,10 +1363,6 @@ body .shopify-policy__body {
 
 .min-h-screen-less-header {
   min-height: var(--screen-less-header);
-}
-
-.min-h-\[77px\] {
-  min-height: 77px;
 }
 
 .w-1\/6 {
@@ -1476,10 +1463,6 @@ body .shopify-policy__body {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -1573,10 +1556,6 @@ body .shopify-policy__body {
 
 .border-b {
   border-bottom-width: 1px;
-}
-
-.border-t {
-  border-top-width: 1px;
 }
 
 .border-black {
@@ -1699,10 +1678,6 @@ body .shopify-policy__body {
 
 .pt-9 {
   padding-top: 2.25rem;
-}
-
-.pb-20 {
-  padding-bottom: 5rem;
 }
 
 .text-center {
@@ -1960,10 +1935,6 @@ body .shopify-policy__body {
     margin-top: 0rem;
   }
 
-  .md\:mt-15 {
-    margin-top: 3.75rem;
-  }
-
   .md\:mt-2 {
     margin-top: 0.5rem;
   }
@@ -1974,14 +1945,6 @@ body .shopify-policy__body {
 
   .md\:mt-9 {
     margin-top: 2.25rem;
-  }
-
-  .md\:ml-5 {
-    margin-left: 1.25rem;
-  }
-
-  .md\:mt-14 {
-    margin-top: 3.5rem;
   }
 
   .md\:block {
@@ -2008,20 +1971,8 @@ body .shopify-policy__body {
     width: 8.75rem;
   }
 
-  .md\:w-1\/2 {
-    width: 50%;
-  }
-
   .md\:flex-1 {
     flex: 1 1 0%;
-  }
-
-  .md\:flex-grow-0 {
-    flex-grow: 0;
-  }
-
-  .md\:grow-0 {
-    flex-grow: 0;
   }
 
   .md\:grid-flow-dense {
@@ -2121,10 +2072,6 @@ body .shopify-policy__body {
     margin-bottom: 8.75rem;
   }
 
-  .lg\:mt-25 {
-    margin-top: 6.25rem;
-  }
-
   .lg\:mt-35 {
     margin-top: 8.75rem;
   }
@@ -2143,10 +2090,6 @@ body .shopify-policy__body {
 }
 
 @media (min-width: 1280px) {
-  .xl\:mt-35 {
-    margin-top: 8.75rem;
-  }
-
   .xl\:px-25 {
     padding-left: 6.25rem;
     padding-right: 6.25rem;
