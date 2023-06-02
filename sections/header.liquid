@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
-<div class="header-wrapper sticky top-0 z-30">
-  <header class="header h-header padding-x py-4 z-20 {% if template == 'index' %}absolute top-0 w-full left-0 right-0{% else %}bg-transparent{% endif %} flex justify-between sm:justify-start items-end">
+<div class="">
+  <header class="header h-header padding-x py-4 z-20 {% if template == 'index' %}{% if section.settings.fullbleed_mobile %}absolute top-0 w-full left-0 right-0 {% unless section.settings.fullbleed_desktop %}md:static{% endunless %}{% elsif section.settings.fullbleed_desktop%}md:absolute md:top-0 md:w-full md:left-0 md:right-0{% endif %}{% else %}bg-transparent{% endif %} flex justify-between sm:justify-start items-end">
 
     {%- if request.page_type == 'index' -%}
       <h1>
@@ -97,6 +97,18 @@
       "type": "image_picker",
       "id": "logo",
       "label": "t:sections.header.settings.logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "fullbleed_desktop",
+      "default": false,
+      "label": "Overlap with homempage image on desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "fullbleed_mobile",
+      "default": false,
+      "label": "Overlap with homempage image on mobile"
     }
   ]
 }
