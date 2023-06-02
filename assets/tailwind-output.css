@@ -1862,6 +1862,26 @@ body .shopify-policy__body {
 }
 
 @media (min-width: 768px) {
+  .md\:static {
+    position: static;
+  }
+
+  .md\:absolute {
+    position: absolute;
+  }
+
+  .md\:left-0 {
+    left: 0rem;
+  }
+
+  .md\:right-0 {
+    right: 0rem;
+  }
+
+  .md\:top-0 {
+    top: 0rem;
+  }
+
   .md\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -1969,6 +1989,10 @@ body .shopify-policy__body {
 
   .md\:w-35 {
     width: 8.75rem;
+  }
+
+  .md\:w-full {
+    width: 100%;
   }
 
   .md\:flex-1 {
