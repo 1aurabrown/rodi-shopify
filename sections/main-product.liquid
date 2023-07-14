@@ -1,4 +1,15 @@
 {% comment %}css-purge shopify-payment-button__button{% endcomment %}
+{% assign selected_variant = product.selected_or_first_available_variant %}
+
+{% if selected_variant.inventory_management == "shopify" and selected_variant.inventory_quantity < 1 and selected_variant.inventory_policy == 'continue' %}
+
+  {% for variant in product.variants %}
+    {% if variant.inventory_quantity > 0 %}
+      {% assign selected_variant = variant %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 <section id="MainProduct-{{ section.id }}" class="section-main-product section-{{ section.id }} mt-9 mb-25 lg:mb-35" data-section="{{ section.id }}">
   {{ 'component-quantity.css' | asset_url | stylesheet_tag }}
@@ -49,6 +60,7 @@
               <div class="no-js-hidden my-4" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price',
                   product: product,
+                  selected_variant: selected_variant,
                   use_variant: true,
                   show_badges: true,
                   price_class: 'price--large'
@@ -57,23 +69,23 @@
               <div {{ block.shopify_attributes }}>
                 {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                 {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="id" value="{{ selected_variant.id }}">
                   {{ form | payment_terms }}
                 {%- endform -%}
               </div>
             {%- when 'inventory' -%}
               <p
-                class="product__inventory my-6 no-js-hidden{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+                class="product__inventory my-6 no-js-hidden{% if selected_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                 {{ block.shopify_attributes }}
                 id="Inventory-{{ section.id }}"
                 role="status"
               >
-                {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
-                  {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
-                    {%- if product.selected_or_first_available_variant.inventory_quantity <= block.settings.inventory_threshold -%}
+                {%- if selected_variant.inventory_management == 'shopify' -%}
+                  {%- if selected_variant.inventory_quantity > 0 -%}
+                    {%- if selected_variant.inventory_quantity <= block.settings.inventory_threshold -%}
                       {%- if block.settings.show_low_stock -%}
                         {%- if block.settings.show_inventory_quantity -%}
-                          {{- 'products.product.inventory_low_stock_show_count' | t: quantity: product.selected_or_first_available_variant.inventory_quantity -}}
+                          {{- 'products.product.inventory_low_stock_show_count' | t: quantity: selected_variant.inventory_quantity -}}
                         {%- else -%}
                           {{- 'products.product.inventory_low_stock' | t -}}
                         {%- endif -%}
@@ -81,14 +93,14 @@
                     {%- else -%}
                       {%- if block.settings.show_in_stock -%}
                         {%- if block.settings.show_inventory_quantity -%}
-                          {{- 'products.product.inventory_in_stock_show_count' | t: quantity: product.selected_or_first_available_variant.inventory_quantity -}}
+                          {{- 'products.product.inventory_in_stock_show_count' | t: quantity: selected_variant.inventory_quantity -}}
                         {%- else -%}
                             {{- 'products.product.inventory_in_stock' | t -}}
                         {%- endif -%}
                       {%- endif -%}
                     {%- endif -%}
                   {%- else -%}
-                    {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+                    {%- if selected_variant.inventory_policy == 'continue' -%}
                       {%- if block.settings.show_preorder -%}
                         {% assign preorder_text = product.metafields.custom.pdp_preorder_text | default: block.settings.preorder_text %}
                         <u>{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}</u> {%- if preorder_text -%}: {{ preorder_text }}{%- endif -%}
@@ -107,12 +119,12 @@
               {%- endif -%}
             {%- when 'sku' -%}
               <p
-                class="product__sku no-js-hidden{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+                class="product__sku no-js-hidden{% if selected_variant.sku.size == 0 %} visibility-hidden{% endif %}"
                 id="Sku-{{ section.id }}"
                 role="status"
                 {{ block.shopify_attributes }}
               >
-                <span class="sr-only">{{ 'products.product.sku' | t }}:</span> {{- product.selected_or_first_available_variant.sku -}}
+                <span class="sr-only">{{ 'products.product.sku' | t }}:</span> {{- selected_variant.sku -}}
               </p>
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
@@ -142,7 +154,7 @@
               >
                 {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
                 {% # theme-check-disable %}
-                {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+                {%- assign cart_qty = cart | item_count_for_variant: selected_variant.id -%}
                 {% # theme-check-enable %}
                 <label class="visually-hidden quantity__label form__label block mb-2" for="Quantity-{{ section.id }}">
                   {{ 'products.product.quantity.label' | t }}
@@ -176,14 +188,14 @@
                     name="quantity"
                     id="Quantity-{{ section.id }}"
                     data-cart-quantity="{{ cart_qty }}"
-                    data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                    min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                    {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                      data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                      max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    data-min="{{ selected_variant.quantity_rule.min }}"
+                    min="{{ selected_variant.quantity_rule.min }}"
+                    {% if selected_variant.quantity_rule.max != null %}
+                      data-max="{{ selected_variant.quantity_rule.max }}"
+                      max="{{ selected_variant.quantity_rule.max }}"
                     {% endif %}
-                    step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                    value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    step="{{ selected_variant.quantity_rule.increment }}"
+                    value="{{ selected_variant.quantity_rule.min }}"
                     form="{{ product_form_id }}"
                   />
                   <button class="quantity__button no-js-hidden" name="plus" type="button">
@@ -194,27 +206,27 @@
                   </button>
                 </quantity-input>
                 <div class="quantity__rules caption no-js-hidden">
-                  {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                  {%- if selected_variant.quantity_rule.increment > 1 -%}
                     <span class="divider">
                       {{-
                         'products.product.quantity.multiples_of'
-                        | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                        | t: quantity: selected_variant.quantity_rule.increment
                       -}}
                     </span>
                   {%- endif -%}
-                  {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                  {%- if selected_variant.quantity_rule.min > 1 -%}
                     <span class="divider">
                       {{-
                         'products.product.quantity.minimum_of'
-                        | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                        | t: quantity: selected_variant.quantity_rule.min
                       -}}
                     </span>
                   {%- endif -%}
-                  {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                  {%- if selected_variant.quantity_rule.max != null -%}
                     <span class="divider">
                       {{-
                         'products.product.quantity.maximum_of'
-                        | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                        | t: quantity: selected_variant.quantity_rule.max
                       -}}
                     </span>
                   {%- endif -%}
@@ -246,9 +258,9 @@
               %}
 
             {%- when 'variant_picker' -%}
-              {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+              {% render 'product-variant-picker', product: product, selected_variant: selected_variant, block: block, product_form_id: product_form_id %}
             {%- when 'buy_buttons' -%}
-              {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: false -%}
+              {%- render 'buy-buttons', block: block, product: product, selected_variant: selected_variant, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: false -%}
             {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}
                 {% liquid
@@ -457,8 +469,8 @@
 
 
   {%- liquid
-    if product.selected_or_first_available_variant.featured_media
-      assign seo_media = product.selected_or_first_available_variant.featured_media
+    if selected_variant.featured_media
+      assign seo_media = selected_variant.featured_media
     else
       assign seo_media = product.featured_media
     endif
@@ -476,8 +488,8 @@
         ],
       {%- endif %}
       "description": {{ product.description | strip_html | json }},
-      {% if product.selected_or_first_available_variant.sku != blank -%}
-        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {% if selected_variant.sku != blank -%}
+        "sku": {{ selected_variant.sku | json }},
       {%- endif %}
       "brand": {
         "@type": "Brand",
