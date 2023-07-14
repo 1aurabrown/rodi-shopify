@@ -1,15 +1,16 @@
 {% comment %}css-purge shopify-payment-button__button{% endcomment %}
-{% assign selected_variant = product.selected_or_first_available_variant %}
-
-{% if selected_variant.inventory_management == "shopify" and selected_variant.inventory_quantity < 1 and selected_variant.inventory_policy == 'continue' %}
-
-  {% for variant in product.variants %}
-    {% if variant.inventory_quantity > 0 %}
-      {% assign selected_variant = variant %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+{% liquid
+  if product.selected_variant
+    assign selected_variant = product.selected_variant
+  else
+    for variant in product.variants
+      if variant.inventory_quantity > 0
+        assign selected_variant = variant
+        break
+      endif
+    endfor
+  endif
+%}
 
 <section id="MainProduct-{{ section.id }}" class="section-main-product section-{{ section.id }} mt-9 mb-25 lg:mb-35" data-section="{{ section.id }}">
   {{ 'component-quantity.css' | asset_url | stylesheet_tag }}
