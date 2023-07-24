@@ -31,7 +31,7 @@
         "type": "footer",
         "settings": {
           "bg_color": "",
-          "newsletter_enable": true,
+          "newsletter_enable": false,
           "newsletter_placeholder": "Your email",
           "newsletter_heading": "",
           "newsletter_success": "Lorem ipsum dolor sit amet.",
