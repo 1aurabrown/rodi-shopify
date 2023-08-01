@@ -47,7 +47,7 @@
           "newsletter_heading": "",
           "newsletter_success": "Lorem ipsum dolor sit amet.",
           "newsletter_error": "There was an error, please try again.",
-          "newsletter_list_id": "",
+          "newsletter_html": "<div class=\"klaviyo-form-VbQ27a\"><\/div>",
           "show_social": true,
           "menu": "footer"
         }

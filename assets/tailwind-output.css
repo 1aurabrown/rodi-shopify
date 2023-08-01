@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.2.7 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -31,6 +31,7 @@
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
 */
 
 html {
@@ -47,6 +48,8 @@ html {
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
 }
 
 /*
@@ -187,6 +190,10 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
+  /* 1 */
+  font-feature-settings: inherit;
+  /* 1 */
+  font-variation-settings: inherit;
   /* 1 */
   font-size: 100%;
   /* 1 */
@@ -335,6 +342,14 @@ ul,
 menu {
   list-style: none;
   margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+
+dialog {
   padding: 0;
 }
 
@@ -577,10 +592,7 @@ main {
   content: '';
   z-index: -1;
   position: absolute;
-  top: 0rem;
-  right: 0rem;
-  bottom: 0rem;
-  left: 0rem;
+  inset: 0rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(33 33 33 / var(--tw-border-opacity));
@@ -783,6 +795,9 @@ body .shopify-policy__body {
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
   --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
@@ -830,6 +845,9 @@ body .shopify-policy__body {
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
   --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
@@ -974,10 +992,7 @@ body .shopify-policy__body {
 
 .\!button::before {
   position: absolute;
-  top: 0rem;
-  right: 0rem;
-  bottom: 0rem;
-  left: 0rem;
+  inset: 0rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(33 33 33 / var(--tw-border-opacity));
@@ -990,10 +1005,7 @@ body .shopify-policy__body {
 
 .button::before {
   position: absolute;
-  top: 0rem;
-  right: 0rem;
-  bottom: 0rem;
-  left: 0rem;
+  inset: 0rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(33 33 33 / var(--tw-border-opacity));
@@ -1111,10 +1123,7 @@ body .shopify-policy__body {
 }
 
 .inset-0 {
-  top: 0rem;
-  right: 0rem;
-  bottom: 0rem;
-  left: 0rem;
+  inset: 0rem;
 }
 
 .left-0 {
@@ -1563,10 +1572,6 @@ body .shopify-policy__body {
   border-color: rgb(33 33 33 / var(--tw-border-opacity));
 }
 
-.border-current {
-  border-color: currentColor;
-}
-
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(253 251 249 / var(--tw-border-opacity));
@@ -1658,10 +1663,6 @@ body .shopify-policy__body {
 
 .pb-thin {
   padding-bottom: .125rem;
-}
-
-.pr-8 {
-  padding-right: 2rem;
 }
 
 .pt-2 {
@@ -1784,14 +1785,6 @@ body .shopify-policy__body {
 
 /*Typography*/
 
-.placeholder\:text-current::-moz-placeholder {
-  color: currentColor;
-}
-
-.placeholder\:text-current::placeholder {
-  color: currentColor;
-}
-
 .autofill\:bg-transparent:-webkit-autofill {
   background-color: transparent;
 }
@@ -1819,18 +1812,8 @@ body .shopify-policy__body {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-.focus-visible\:ring-0:focus-visible {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
 .focus-visible\:ring-inset:focus-visible {
   --tw-ring-inset: inset;
-}
-
-.focus-visible\:ring-offset-0:focus-visible {
-  --tw-ring-offset-width: 0px;
 }
 
 @media (min-width: 640px) {
