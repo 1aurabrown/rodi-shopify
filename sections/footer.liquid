@@ -1,6 +1,3 @@
-<script src="{{ 'mailchimp-form.js' | asset_url }}" defer="defer"></script>
-
-<link rel="dns-prefetch" href="https://mailchimp.com"crossorigin>
 
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 
@@ -15,9 +12,9 @@
           <h2 class="mb-4">{{ section.settings.newsletter_heading | escape }}</h2>
         {%- endif -%}
 
-        <div id="footer-klaviyo" class="w-full relative">
-          {{ section.settings.newsletter_html | json }}
+        <div id="footer-klaviyo" class="w-full relative ">
           {{ section.settings.newsletter_html }}
+          <span class="hidden animate-arrow" id="footer-arrow-wrapper">{% render 'icon-arrow' %}</span>
         </div>
       </div>
     {%- endif -%}
@@ -101,7 +98,6 @@
           </li>
         {%- endif -%}
       {%- endif -%}
-
     </ul>
 
     <div class="text-right text-sm">&copy; {{ 'now' | date: "%Y" }}&nbsp;<a href={{ routes.root_url }} class="text-link">{{ shop.name }}</a></div>
@@ -112,6 +108,24 @@
 
 {% comment %}theme-check-enable UndefinedObject{% endcomment %}
 
+
+{% javascript %}
+  function replaceButton() {
+    setTimeout(function() {
+      const form = document.getElementById('footer-klaviyo');
+      const button = form.querySelector('button');
+      const arrow = document.getElementById('footer-arrow-wrapper');
+      if (!button) {
+        replaceButton()
+        return;
+      }
+      button.innerHTML = '';
+      arrow.classList.remove('hidden')
+      button.appendChild(arrow)
+    }, 100)
+  }
+
+{% endjavascript %}
 
 {% schema %}
 {
