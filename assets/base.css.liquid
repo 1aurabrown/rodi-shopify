@@ -63,6 +63,10 @@ span:not(.keep-empty):empty {
   display: none;
 }
 
+#footer-klaviyo > :empty {
+  display: block;
+}
+
 table:not([class]) {
   table-layout: fixed;
   border-collapse: collapse;
@@ -446,3 +450,45 @@ deferred-media {
   transition-duration: 200ms;
   z-index: 10000000;
 }
+
+#footer-klaviyo * {
+  font-weight: inherit !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  color: inherit !important;
+}
+
+#footer-klaviyo input {
+  height: auto !important;
+  padding: 1px 0 !important;
+  border-width: 0 0 1px 0 !important;
+  border-style: solid !important;
+  box-shadow: none !important;
+}
+
+
+#footer-klaviyo input::-webkit-input-placeholder {
+  font-size: inherit !important;
+}
+
+#footer-klaviyo input::-moz-placeholder {
+  font-size: inherit !important;
+}
+
+#footer-klaviyo input::-ms-placeholder {
+  font-size: inherit !important;
+}
+
+#footer-klaviyo input::placeholder {
+  font-size: inherit !important;
+}
+
+#footer-klaviyo button {
+  padding: 0 !important;
+  position: absolute;
+  right: 0;
+  box-shadow: none !important;
+  width: auto !important;
+  white-space: nowrap;
+}
+
