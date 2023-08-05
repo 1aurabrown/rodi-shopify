@@ -9,7 +9,7 @@
     font-smooth: always;
   }
 
-
+  body.custom-cursor,
   body.custom-cursor *,
   body.custom-cursor button,
   body.custom-cursor [role=button] {
