@@ -111,20 +111,18 @@
 
 {% javascript %}
   function replaceButton() {
-    setTimeout(function() {
-      const form = document.getElementById('footer-klaviyo');
-      const button = form.querySelector('button');
-      const arrow = document.getElementById('footer-arrow-wrapper');
-      if (!button) {
-        replaceButton()
-        return;
-      }
+    const form = document.getElementById('footer-klaviyo');
+    const button = form.querySelector('button');
+    const arrow = document.getElementById('footer-arrow-wrapper');
+    if (button) {
       button.innerHTML = '';
       arrow.classList.remove('hidden')
       button.appendChild(arrow)
-    }, 100)
+    } else {
+      setTimeout(replaceButton, 100)
+    }
   }
-
+  replaceButton();
 {% endjavascript %}
 
 {% schema %}
@@ -132,14 +130,14 @@
   "name": "t:sections.footer.name",
   "settings": [
     {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__1.content",
-      "info": "t:sections.footer.settings.header__1.info"
-    },
-    {
       "type": "color",
       "id": "bg_color",
       "label": "Background Color"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__1.content",
+      "info": "t:sections.footer.settings.header__1.info"
     },
     {
       "type": "checkbox",
@@ -148,43 +146,20 @@
       "label": "t:sections.footer.settings.newsletter_enable.label"
     },
     {
-      "type": "text",
-      "id": "newsletter_placeholder",
-      "default": "Your email",
-      "label": "Newsletter Placeholder"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "label": "t:sections.footer.settings.newsletter_heading.label"
-    },
-    {
-      "type": "textarea",
-      "id": "newsletter_success",
-      "default": "Lorem ipsum dolor sit amet.",
-      "label": "Newsletter Success Message"
-    },
-    {
-      "type": "textarea",
-      "id": "newsletter_error",
-      "default": "There was an error, please try again.",
-      "label": "Newsletter Error Message"
-    },
-    {
       "type": "html",
       "id": "newsletter_html",
       "label": "Klaviyo Form HTML"
     },
     {
       "type": "header",
-      "content": "t:sections.footer.settings.header__2.content",
+      "content": "Social Media Links",
       "info": "t:sections.footer.settings.header__2.info"
     },
     {
       "type": "checkbox",
       "id": "show_social",
       "default": true,
-      "label": "t:sections.footer.settings.show_social.label"
+      "label": "Show social media links"
     },
     {
       "type": "link_list",
