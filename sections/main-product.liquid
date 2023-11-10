@@ -1,8 +1,9 @@
 {% comment %}css-purge shopify-payment-button__button{% endcomment %}
 {% liquid
+  assign selected_variant = product.variants[0]
   if product.selected_variant
     assign selected_variant = product.selected_variant
-  else
+  elsif product.available
     for variant in product.variants
       if variant.inventory_quantity > 0
         assign selected_variant = variant
