@@ -16,6 +16,19 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
+        "blocks": {
+          "1b547029-9d9c-4c82-bda3-a919e8452757": {
+            "type": "announcement",
+            "settings": {
+              "text": "Free shipping & gift wrapping this holiday",
+              "color_scheme": "bg-blue",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1b547029-9d9c-4c82-bda3-a919e8452757"
+        ],
         "settings": {
         }
       },
