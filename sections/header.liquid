@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 <div class="">
-  <header class="header h-header padding-x py-4 z-20 {% if template == 'index' %}{% if section.settings.fullbleed_mobile %}absolute top-0 w-full left-0 right-0 {% unless section.settings.fullbleed_desktop %}md:static{% endunless %}{% elsif section.settings.fullbleed_desktop%}md:absolute md:top-0 md:w-full md:left-0 md:right-0{% endif %}{% else %}bg-transparent{% endif %} flex justify-between sm:justify-start items-end">
+  <header class="header min-h-header padding-x py-4 z-20 {% if template == 'index' %}{% if section.settings.fullbleed_mobile %}absolute top-0 w-full left-0 right-0 {% unless section.settings.fullbleed_desktop %}md:static{% endunless %}{% elsif section.settings.fullbleed_desktop%}md:absolute md:top-0 md:w-full md:left-0 md:right-0{% endif %}{% else %}bg-transparent{% endif %} flex justify-between sm:justify-start">
 
     {%- if request.page_type == 'index' -%}
       <h1>
@@ -13,15 +13,49 @@
       </h1>
     {%- endif -%}
 
-    <div class="ml-8 -mb-thin">
+    <div class="ml-8 mt-4 md:mt-10 -mb-1">
         <nav>
           <ul class="flex space-x-5 sm:space-x-7 justify-end" role="list">
             {%- if section.settings.menu != blank -%}
               {%- for link in section.settings.menu.links -%}
                 <li>
-                  <a title="{{ link.title }}" href="{{ link.url }}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
-                    <span>{{ link.title | escape }}</span>
-                  </a>
+                  {% if link.levels > 0 %}
+                    <details class="relative" ontoggle="console.log('open')">
+                      <summary class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}">{{ link.title | escape }}
+                      </summary>
+                      <div class="pt-2 w-2 overflow-visible">
+                        <ul class="w-fit-content" role="list">
+                          {%- for childlink in link.links -%}
+                            <li>
+                              {% if childlink.levels > 0 %}
+                                <details>
+                                  <summary class="text-link hover:underline uppercase{% if childlink.current or childlink.active %} underline{% endif %}">{{ childlink.title | escape }}
+                                  </summary>
+                                  <div class="pt-2 ml-2">
+                                    {%- for grandchildlink in childlink.links -%}
+                                      <li>
+                                        <a title="{{ grandchildlink.title }}" href="{{ grandchildlink.url }}" class="text-link hover:underline uppercase{% if grandchildlink.current or grandchildlink.active %} underline{% endif %}" {% if grandchildlink.current %}aria-current="page"{% endif %}>
+                                          <span>{{ grandchildlink.title | escape }}</span>
+                                        </a>
+                                      </li>
+                                    {%- endfor %}
+                                  <div>
+                                </details>
+                              {% else %}
+                                <a title="{{ childlink.title }}" href="{{ childlink.url }}" class="text-link hover:underline uppercase{% if childlink.current or childlink.active %} underline{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
+                                  <span>{{ childlink.title | escape }}</span>
+                                </a>
+                              {% endif %}
+                            </li>
+                          {%- endfor %}
+                        </ul>
+                      <div>
+                    </details>
+                  {% else %}
+                    <a title="{{ link.title }}" href="{{ link.url }}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
+                      <span>{{ link.title | escape }}</span>
+                    </a>
+                  {% endif %}
                 </li>
               {%- endfor -%}
             {%- endif -%}
