@@ -25,19 +25,6 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
-        "blocks": {
-          "announcement_VLYJ8Y": {
-            "type": "announcement",
-            "settings": {
-              "text": "For special sizes, rush orders, or other inquiries this holiday season, please reach out at hello@rodi.co",
-              "color_scheme": "bg-blue",
-              "link": ""
-            }
-          }
-        },
-        "block_order": [
-          "announcement_VLYJ8Y"
-        ],
         "settings": {}
       },
       "header": {
