@@ -29,7 +29,7 @@
           "announcement_cHcCan": {
             "type": "announcement",
             "settings": {
-              "text": "All in-stock orders will ship by June 30th",
+              "text": "All in-stock orders will ship by June 30th.",
               "color_scheme": "bg-blue",
               "link": ""
             }
