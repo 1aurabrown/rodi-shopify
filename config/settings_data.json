@@ -25,19 +25,6 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
-        "blocks": {
-          "announcement_cHcCan": {
-            "type": "announcement",
-            "settings": {
-              "text": "All in-stock orders will ship by June 30th.",
-              "color_scheme": "bg-blue",
-              "link": ""
-            }
-          }
-        },
-        "block_order": [
-          "announcement_cHcCan"
-        ],
         "settings": {}
       },
       "header": {
