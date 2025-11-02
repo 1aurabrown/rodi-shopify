@@ -25,7 +25,7 @@
                       <div class="pt-2 w-2 overflow-visible">
                         <ul class="w-fit-content" role="list">
                           {%- for childlink in link.links -%}
-                            <li style="margin-left:24px">>
+                            <li>
                               {% if childlink.levels > 0 %}
                                 <details>
                                   <summary class="text-link hover:underline uppercase{% if childlink.current or childlink.active %} underline{% endif %}">{{ childlink.title | escape }}
