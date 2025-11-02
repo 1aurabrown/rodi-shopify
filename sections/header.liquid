@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="{{ 'section-header.css' | asset_url }}" media="print" onload="this.media='all'">
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 <div class="">
-  <header class="header min-h-header padding-x py-4 z-20 {% if template == 'index' %}{% if section.settings.fullbleed_mobile %}absolute top-0 w-full left-0 right-0 {% unless section.settings.fullbleed_desktop %}md:static{% endunless %}{% elsif section.settings.fullbleed_desktop%}md:absolute md:top-0 md:w-full md:left-0 md:right-0{% endif %}{% else %}bg-transparent{% endif %} flex justify-between sm:justify-start">
-
+  <header class="header min-h-header padding-x py-4 z-20 {% if template == 'index' %}{% if section.settings.fullbleed_mobile %}absolute top-0 w-full left-0 right-0 {% unless section.settings.fullbleed_desktop %}md:static{% endunless %}{% elsif section.settings.fullbleed_desktop%}md:absolute md:top-0 md:w-full md:left-0 md:right-0{% endif %}{% else %}bg-transparent{% endif %} flex items-center justify-start">
     {%- if request.page_type == 'index' -%}
       <h1>
     {%- endif -%}
