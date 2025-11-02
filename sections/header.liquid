@@ -39,7 +39,7 @@
                                         </a>
                                       </li>
                                     {%- endfor %}
-                                  <div>
+                                  </div>
                                 </details>
                               {% else %}
                                 <a title="{{ childlink.title }}" href="{{ childlink.url }}" class="text-link hover:underline uppercase{% if childlink.current or childlink.active %} underline{% endif %}" {% if childlink.current %}aria-current="page"{% endif %}>
@@ -49,7 +49,7 @@
                             </li>
                           {%- endfor %}
                         </ul>
-                      <div>
+                      </div>
                     </details>
                   {% else %}
                     <a title="{{ link.title }}" href="{{ link.url }}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
