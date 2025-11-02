@@ -59,6 +59,7 @@
                 </li>
               {%- endfor -%}
             {%- endif -%}
+            {%- comment -%}
             {%- if shop.customer_accounts_enabled -%}
               <li>
                 <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}" {% if link.current %}aria-current="page"{% endif %}>
@@ -75,7 +76,7 @@
                 </a>
               </li>
             {%- endif -%}
-
+            {%- endcomment -%}
             <li>
               {%- render "cart-button" -%}
             </li>
