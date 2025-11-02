@@ -17,7 +17,7 @@
           <ul class="flex space-x-5 sm:space-x-7" role="list">
             {%- if section.settings.menu != blank -%}
               {%- for link in section.settings.menu.links -%}
-                <li>
+                <li style="margin-left:24px">
                   {% if link.levels > 0 %}
                     <details class="relative" ontoggle="console.log('open')">
                       <summary class="text-link hover:underline uppercase{% if link.current or link.active %} underline{% endif %}">{{ link.title | escape }}
