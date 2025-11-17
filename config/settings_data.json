@@ -25,6 +25,19 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
+        "blocks": {
+          "announcement_AaEadj": {
+            "type": "announcement",
+            "settings": {
+              "text": "All pre-orders must be placed by November 20 for holiday delivery.",
+              "color_scheme": "bg-blue",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement_AaEadj"
+        ],
         "settings": {}
       },
       "header": {
