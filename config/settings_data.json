@@ -25,19 +25,6 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
-        "blocks": {
-          "announcement_AaEadj": {
-            "type": "announcement",
-            "settings": {
-              "text": "Kindly place in-stock orders by December 21 for guaranteed holiday delivery.",
-              "color_scheme": "bg-blue",
-              "link": ""
-            }
-          }
-        },
-        "block_order": [
-          "announcement_AaEadj"
-        ],
         "settings": {}
       },
       "header": {
